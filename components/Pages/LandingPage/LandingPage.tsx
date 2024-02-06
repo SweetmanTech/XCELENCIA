@@ -5,6 +5,7 @@ import VideoPlayer from "./VideoPlayer"
 import MusicPlayer from "./MusicPlayer"
 import ArtworkAlbum from "./ArtworkAlbum"
 import Bundles from "./Bundles"
+import CollectButtons from "./CollectButtons"
 
 const LandingPage = () => (
   <Layout type="base">
@@ -19,6 +20,9 @@ const LandingPage = () => (
         </div>
         <div className="flex justify-center">
           <MusicPlayer />
+        </div>
+        <div className="col-span-2">
+          <CollectButtons />
         </div>
         <div className="col-span-2 flex justify-center">
           <Bundles />
