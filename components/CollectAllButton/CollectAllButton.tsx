@@ -1,5 +1,5 @@
+import { useEthersSigner } from "onchain-magic"
 import { useConnectModal } from "@rainbow-me/rainbowkit"
-import { useEthersSigner } from "@/hooks/useEthersSigner"
 
 const CollectAllButton = () => {
   const signer = useEthersSigner()
