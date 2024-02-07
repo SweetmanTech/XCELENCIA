@@ -11,10 +11,6 @@ module.exports = {
     "./shared/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      white: '#ffffff',
-      black: '#000000',
-    },
     container: {
       center: true,
     },
@@ -32,6 +28,12 @@ module.exports = {
         xl: "1280px",
         "2xl":'1440px',
         "3xl": "1920px",
+      },
+      colors: {
+        white: '#ffffff',
+        black: '#000000',
+        pink: "#4c248b",
+        gray: "#e4e7f0"
       },
     },
     boxShadow: {
