@@ -1,12 +1,17 @@
+import usePrivyCollect from "@/hooks/usePrivyCollect"
 import { usePrivy } from "@privy-io/react-auth"
 
 const CollectAllButton = ({ className = "" }) => {
   const { login, authenticated } = usePrivy()
+  const { collectAll } = usePrivyCollect()
 
   const handleClick = () => {
     if (!authenticated) {
       login()
+      return
     }
+
+    collectAll()
   }
 
   return (
