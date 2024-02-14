@@ -40,7 +40,7 @@ const privyConfig: PrivyClientConfig = {
   appearance: {
     theme: "dark",
     accentColor: "#FFFFFF",
-    logo: "/images/Landing/music.png",
+    logo: "/images/album.png",
   },
   embeddedWallets: {
     createOnLogin: "all-users",

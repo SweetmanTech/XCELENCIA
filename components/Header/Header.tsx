@@ -1,5 +1,5 @@
-import CustomConnectWallet from "@/components/CustomConnectWallet"
 import { useRouter } from "next/router"
+import LoginButton from "../LoginButton"
 
 const Header = () => {
   const { push } = useRouter()
@@ -17,9 +17,7 @@ const Header = () => {
       >
         Imagination
       </button>
-      <div className="px-[24px] py-[10px] bg-gray rounded-full">
-        <CustomConnectWallet />
-      </div>
+      <LoginButton>Connect</LoginButton>
     </nav>
   )
 }
