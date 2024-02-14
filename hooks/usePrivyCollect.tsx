@@ -1,5 +1,4 @@
 import useConnectedWallet from "./useConnectedWallet"
-import useZoraDropData from "./useZoraDropData"
 import { BigNumber } from "ethers"
 import { CHAIN_ID, IS_TESTNET, BASE_MINTER, SEPOLIA_MINTER, MINT_REFERRAL } from "@/lib/consts"
 import { defaultAbiCoder } from "ethers/lib/utils"
@@ -10,11 +9,13 @@ import { toast } from "react-toastify"
 import useZoraFixedPriceSaleStrategy from "./useZoraFixedPriceSaleStrategy"
 import { ZORA_FEE } from "@/lib/consts"
 import handleTxError from "@/lib/handleTxError"
+import { useState } from "react"
 
 const usePrivyCollect = () => {
   const { sendTransaction } = usePrivySendTransaction()
   const { prepare } = usePreparePrivyWallet()
   const { connectedWallet } = useConnectedWallet()
+  const [loading, setLoading] = useState(false)
 
   const { sale } = useZoraFixedPriceSaleStrategy({
     saleConfig: IS_TESTNET ? SEPOLIA_MINTER : BASE_MINTER,
@@ -22,6 +23,7 @@ const usePrivyCollect = () => {
   })
 
   const collectAll = async () => {
+    setLoading(true)
     try {
       if (!prepare()) return
       if (!connectedWallet) return
@@ -41,17 +43,16 @@ const usePrivyCollect = () => {
         "mintWithRewards",
         [IS_TESTNET ? SEPOLIA_MINTER : BASE_MINTER, 1, 1, minterArguments, MINT_REFERRAL],
         value.toHexString(),
-        "XCELENCIA",
-        "COLLECT ALL",
       )
 
       toast.success("collected!")
     } catch (error) {
       handleTxError(error)
     }
+    setLoading(false)
   }
 
-  return { collectAll }
+  return { collectAll, loading }
 }
 
 export default usePrivyCollect
