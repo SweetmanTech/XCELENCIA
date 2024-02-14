@@ -1,5 +1,5 @@
 import { BigNumber } from "ethers"
-import { UnsignedTransactionRequest, useWallets } from "@privy-io/react-auth"
+import { UnsignedTransactionRequest } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
 import useConnectedWallet from "./useConnectedWallet"
 
@@ -30,7 +30,9 @@ const usePrivySendTransaction = () => {
       unsignedTx.gasLimit = gasLimit
     }
 
-    const txReceipt = await signer.sendTransaction(unsignedTx)
+    const tx = await signer.sendTransaction(unsignedTx)
+    const txReceipt = await tx.wait()
+
     return txReceipt
   }
 
