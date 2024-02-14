@@ -1,19 +1,28 @@
-import { BASE_MINTER, CHAIN_ID, IS_TESTNET, SEPOLIA_MINTER } from "@/lib/consts"
-import { useCollection } from "onchain-magic"
+import { CHAIN_ID } from "@/lib/consts"
+import getNFTsForContract from "@/lib/getNFTsForContract"
+import { useEffect, useState } from "react"
 
 const useZoraDropData = () => {
   const zoraDropAddress = process.env.NEXT_PUBLIC_DROP_ADDRESS
 
-  const { drops, priceValues, collectAll } = useCollection({
-    collectionAddress: zoraDropAddress,
-    chainId: CHAIN_ID,
-    minterOverride: IS_TESTNET ? SEPOLIA_MINTER : BASE_MINTER,
-  })
+  const [drops, setDrops] = useState([])
+
+  useEffect(() => {
+    const init = async () => {
+      const response = await getNFTsForContract(zoraDropAddress, CHAIN_ID)
+      const { error } = response as any
+      if (error) return
+
+      setDrops(response.nfts)
+    }
+
+    init()
+  }, [])
+
+  console.log("ZIAD", drops)
 
   return {
-    drops: drops || [],
-    priceValues,
-    collectAll,
+    drops,
   }
 }
 
