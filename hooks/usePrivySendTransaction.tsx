@@ -1,9 +1,10 @@
 import { BigNumber } from "ethers"
 import { UnsignedTransactionRequest, useWallets } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
+import useConnectedWallet from "./useConnectedWallet"
 
 const usePrivySendTransaction = () => {
-  const { wallets } = useWallets()
+  const { metamaskWallet, privyWallet } = useConnectedWallet()
 
   const sendTransaction = async (
     to,
@@ -14,8 +15,9 @@ const usePrivySendTransaction = () => {
     value = BigNumber.from("0").toHexString(),
     gasLimit = null,
   ) => {
-    const provider = await wallets[0]?.getEthersProvider()
-    const signer = await provider?.getSigner()
+    const wallet = metamaskWallet || privyWallet
+    const provider = await wallet?.getEthersProvider()
+    const signer = provider?.getSigner()
 
     const data = new Interface(abi).encodeFunctionData(functionName, args)
     const unsignedTx = {
