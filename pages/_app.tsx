@@ -12,6 +12,7 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi"
 import { goerli, mainnet } from "@wagmi/core/chains"
 import { alchemyProvider } from "wagmi/providers/alchemy"
 import { publicProvider } from "wagmi/providers/public"
+import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import { ThemeProvider } from "../providers/ThemeProvider"
 
 const myChains = [process.env.NEXT_PUBLIC_TESTNET ? goerli : mainnet]
@@ -34,16 +35,30 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 })
 
+const privyConfig: PrivyClientConfig = {
+  loginMethods: ["email", "wallet"],
+  appearance: {
+    theme: "dark",
+    accentColor: "#FFFFFF",
+    logo: "/images/Landing/music.png",
+  },
+  embeddedWallets: {
+    createOnLogin: "all-users",
+  },
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider modalSize="compact" chains={chains}>
-        <ThemeProvider>
-          <SessionProvider>
-            <Component {...pageProps} />
-            <ToastContainer />
-          </SessionProvider>
-        </ThemeProvider>
+        <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
+          <ThemeProvider>
+            <SessionProvider>
+              <Component {...pageProps} />
+              <ToastContainer />
+            </SessionProvider>
+          </ThemeProvider>
+        </PrivyProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   )
