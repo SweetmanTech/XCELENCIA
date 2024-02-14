@@ -1,22 +1,20 @@
-import { useEthersSigner } from "onchain-magic"
-import { useConnectModal } from "@rainbow-me/rainbowkit"
+import { usePrivy } from "@privy-io/react-auth"
 
-const CollectAllButton = () => {
-  const signer = useEthersSigner()
-  const { openConnectModal } = useConnectModal()
+const CollectAllButton = ({ className = "" }) => {
+  const { login, authenticated } = usePrivy()
 
-  const onClick = () => {
-    if (!signer) {
-      openConnectModal()
+  const handleClick = () => {
+    if (!authenticated) {
+      login()
     }
   }
 
   return (
     <button
       type="button"
-      className="text-[18px] font-bold uppercase bg-gray rounded-full
-          px-[20px] py-[10px]"
-      onClick={onClick}
+      onClick={handleClick}
+      className={`text-[18px] font-bold uppercase bg-gray rounded-full
+      px-[20px] py-[10px] ${className}`}
     >
       Collect All
     </button>
