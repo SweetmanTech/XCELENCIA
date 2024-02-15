@@ -26,7 +26,6 @@ const usePrivyCollect = () => {
     setLoading(true)
     try {
       if (!prepare()) return
-      if (!connectedWallet) return
 
       const response = await sale(process.env.NEXT_PUBLIC_DROP_ADDRESS, "1")
       const value = BigNumber.from(response.pricePerToken.toString()).add(ZORA_FEE)

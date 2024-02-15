@@ -4,7 +4,7 @@ import { Interface } from "ethers/lib/utils"
 import useConnectedWallet from "./useConnectedWallet"
 
 const usePrivySendTransaction = () => {
-  const { metamaskWallet, privyWallet } = useConnectedWallet()
+  const { externalWallet, privyWallet } = useConnectedWallet()
 
   const sendTransaction = async (
     to,
@@ -15,7 +15,7 @@ const usePrivySendTransaction = () => {
     value = BigNumber.from("0").toHexString(),
     gasLimit = null,
   ) => {
-    const wallet = metamaskWallet || privyWallet
+    const wallet = externalWallet || privyWallet
     const provider = await wallet?.getEthersProvider()
     const signer = provider?.getSigner()
 

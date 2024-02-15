@@ -19,8 +19,6 @@ const useZoraDropData = () => {
     init()
   }, [])
 
-  console.log("ZIAD", drops)
-
   return {
     drops,
   }

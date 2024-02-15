@@ -3,10 +3,10 @@ import { useWallets } from "@privy-io/react-auth"
 const useConnectedWallet = () => {
   const { wallets } = useWallets()
   const privyWallet = wallets?.find((wallet) => wallet.walletClientType === "privy")
-  const metamaskWallet = wallets?.find((wallet) => wallet.walletClientType === "metamask")
-  const connectedWallet = metamaskWallet?.address || privyWallet?.address
+  const externalWallet = wallets?.find((wallet) => wallet.walletClientType !== "privy")
+  const connectedWallet = externalWallet?.address || privyWallet?.address
 
-  return { connectedWallet, privyWallet, metamaskWallet }
+  return { connectedWallet, privyWallet, externalWallet }
 }
 
 export default useConnectedWallet
