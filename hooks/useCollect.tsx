@@ -10,10 +10,10 @@ const useCollect = () => {
   const { connectedWallet } = useConnectedWallet()
 
   const mintWithRewards = async () => {
-    console.log("SWEETS CONTRACT", zoraCreator1155ImplABI)
     const minterArgs = getEncodedMinterArgs(connectedWallet, "el nino estrello")
     const args = [MINTER_ADDRESS, 1, 1, minterArgs, MINT_REFERRAL_ADDRESS]
-    const valueHex = BigNumber.from("1554000000000000").toHexString()
+    const dummyPrice = "1554000000000000"
+    const valueHex = BigNumber.from(dummyPrice).toHexString()
     try {
       const response = await sendTransaction(
         DROP_ADDRESS,
