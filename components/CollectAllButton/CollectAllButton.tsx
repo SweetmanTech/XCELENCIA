@@ -1,12 +1,16 @@
+import useCollect from "@/hooks/useCollect"
 import { usePrivy } from "@privy-io/react-auth"
 
 const CollectAllButton = ({ className = "" }) => {
   const { login, authenticated } = usePrivy()
+  const { mintWithRewards } = useCollect()
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (!authenticated) {
       login()
+      return
     }
+    await mintWithRewards()
   }
 
   return (
