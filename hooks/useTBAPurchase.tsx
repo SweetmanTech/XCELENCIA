@@ -1,12 +1,11 @@
 import { BigNumber } from "ethers"
-import { createPublicClient, erc721Abi, http, numberToHex, toHex } from "viem"
-import { sepolia } from "viem/chains"
-import { useEffect, useMemo, useState } from "react"
+import { numberToHex } from "viem"
+import { useEffect, useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import { CHAIN_ID, DROP_ADDRESS, MULTICALL3_ADDRESS, PRICE } from "@/lib/consts"
-import useConnectedWallet from "./useConnectedWallet"
 import getTotalSupply from "@/lib/viem/getTotalSupply"
+import { CHAIN_ID, MULTICALL3_ADDRESS, PRICE } from "@/lib/consts"
+import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 
 const useTBAPurchase = () => {
@@ -20,19 +19,14 @@ const useTBAPurchase = () => {
       setTotalSupply(response)
     }
     init()
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const purchase = async (quantity: number) => {
     try {
-      console.log("SWEETS purchasing....")
-
       const price = BigNumber.from(PRICE).mul(quantity).toString()
-      console.log("SWEETS price", price)
       const lastMinted = await getTotalSupply()
       const nextTokenId = (lastMinted + BigInt(1)).toString()
-      console.log("SWEETS nextTokenId", nextTokenId)
       const calls = getMintMulticallCalls(
         nextTokenId,
         connectedWallet as string,
@@ -40,9 +34,6 @@ const useTBAPurchase = () => {
         price,
       ) as any
       const hexValue = numberToHex(BigInt(price))
-      console.log("SWEETS calls", calls)
-      console.log("SWEETS hexValue", hexValue)
-
       const response = await sendTransaction(
         MULTICALL3_ADDRESS,
         CHAIN_ID,
@@ -53,15 +44,9 @@ const useTBAPurchase = () => {
         "Collect the Album",
         "El Nino Estrello",
       )
-
-      //   const tx = await multicallContract.aggregate3Value(calls, {
-      //     value: price,
-      //     gasLimit: 250_000,
-      //   })
-      //   const receipt = await tx.wait()
-      //   return receipt
       return response
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err)
       return false
     }
