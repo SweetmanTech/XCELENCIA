@@ -1,0 +1,130 @@
+[
+  {
+    "type": "error",
+    "name": "AccountCreationFailed",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "event",
+    "name": "ERC6551AccountCreated",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "account",
+        "indexed": false,
+        "internalType": "address"
+      },
+      {
+        "type": "address",
+        "name": "implementation",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "bytes32",
+        "name": "salt",
+        "indexed": false,
+        "internalType": "bytes32"
+      },
+      {
+        "type": "uint256",
+        "name": "chainId",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "type": "address",
+        "name": "tokenContract",
+        "indexed": true,
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "indexed": true,
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [],
+    "anonymous": false
+  },
+  {
+    "type": "function",
+    "name": "account",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "implementation",
+        "internalType": "address"
+      },
+      {
+        "type": "bytes32",
+        "name": "salt",
+        "internalType": "bytes32"
+      },
+      {
+        "type": "uint256",
+        "name": "chainId",
+        "internalType": "uint256"
+      },
+      {
+        "type": "address",
+        "name": "tokenContract",
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "createAccount",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "implementation",
+        "internalType": "address"
+      },
+      {
+        "type": "bytes32",
+        "name": "salt",
+        "internalType": "bytes32"
+      },
+      {
+        "type": "uint256",
+        "name": "chainId",
+        "internalType": "uint256"
+      },
+      {
+        "type": "address",
+        "name": "tokenContract",
+        "internalType": "address"
+      },
+      {
+        "type": "uint256",
+        "name": "tokenId",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  }
+]
