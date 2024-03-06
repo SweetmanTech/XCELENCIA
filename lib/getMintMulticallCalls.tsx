@@ -16,7 +16,6 @@ const getMintMulticallCalls = (
   mintQuantity: number,
   totalPrice: string,
 ) => {
-  // Create data for the createAccount function call
   const createAccountData = new Interface(registryAbi).encodeFunctionData("createAccount", [
     ACCOUNT_PROXY,
     SALT_BYTES,
@@ -26,7 +25,7 @@ const getMintMulticallCalls = (
   ])
   const registryCall = {
     target: REGISTRY_ADDRESS,
-    value: 0, // No ETH being sent in this call
+    value: 0,
     allowFailure: false,
     callData: createAccountData,
   }
