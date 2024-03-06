@@ -8,7 +8,7 @@ import {
   SALT_BYTES,
 } from "@/lib/consts"
 import zoraAbi from "@/lib/abi/zora-erc721-drop.json"
-import registryAbi from "@/lib/abi/ERC6551-registry.json"
+import registryAbi from "@/lib/abi/erc6551-registry.json"
 
 const getMintMulticallCalls = (
   tokenId: string,
