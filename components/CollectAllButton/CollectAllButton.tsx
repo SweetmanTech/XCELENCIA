@@ -1,10 +1,8 @@
-import useCollect from "@/hooks/useCollect"
 import useTBAPurchase from "@/hooks/useTBAPurchase"
 import { usePrivy } from "@privy-io/react-auth"
 
 const CollectAllButton = ({ className = "" }) => {
   const { login, authenticated } = usePrivy()
-  const { mintWithRewards } = useCollect()
   const { purchase } = useTBAPurchase()
 
   const handleClick = async () => {
@@ -13,7 +11,6 @@ const CollectAllButton = ({ className = "" }) => {
       return
     }
     await purchase(1)
-    // await mintWithRewards()
   }
 
   return (
