@@ -1,5 +1,5 @@
 import { BigNumber } from "ethers"
-import { createPublicClient, erc721Abi, http, toHex } from "viem"
+import { createPublicClient, erc721Abi, http, numberToHex, toHex } from "viem"
 import { sepolia } from "viem/chains"
 import { useEffect, useMemo, useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
@@ -33,16 +33,25 @@ const useTBAPurchase = () => {
       const lastMinted = await getTotalSupply()
       const nextTokenId = (lastMinted + BigInt(1)).toString()
       console.log("SWEETS nextTokenId", nextTokenId)
-      const calls = getMintMulticallCalls(nextTokenId, connectedWallet as string, quantity, price)
+      const calls = getMintMulticallCalls(
+        nextTokenId,
+        connectedWallet as string,
+        quantity,
+        price,
+      ) as any
+      const hexValue = numberToHex(BigInt(price))
       console.log("SWEETS calls", calls)
-      const hexValue = price
+      console.log("SWEETS hexValue", hexValue)
+
       const response = await sendTransaction(
         MULTICALL3_ADDRESS,
         CHAIN_ID,
         multicallAbi,
         "aggregate3Value",
-        calls,
-        toHex(price),
+        [calls],
+        hexValue,
+        "Collect the Album",
+        "El Nino Estrello",
       )
 
       //   const tx = await multicallContract.aggregate3Value(calls, {
