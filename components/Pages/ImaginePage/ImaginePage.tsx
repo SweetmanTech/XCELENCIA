@@ -3,7 +3,7 @@ import Content from "@/components/Layout/Content"
 import LoginButton from "@/components/LoginButton"
 import SeoHead from "@/components/SeoHead"
 
-const ImaginationPage = () => (
+const ImaginePage = () => (
   <Layout type="base">
     <SeoHead />
     <Content>
@@ -14,4 +14,4 @@ const ImaginationPage = () => (
   </Layout>
 )
 
-export default ImaginationPage
+export default ImaginePage
