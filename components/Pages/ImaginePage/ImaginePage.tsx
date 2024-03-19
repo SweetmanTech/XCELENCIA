@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout"
 import Content from "@/components/Layout/Content"
-import LoginButton from "@/components/LoginButton"
 import SeoHead from "@/components/SeoHead"
+import LoginButton from "@/components/LoginButton"
 
 const ImaginePage = () => (
   <Layout type="base">
