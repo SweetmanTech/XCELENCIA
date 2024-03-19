@@ -1,3 +1,3 @@
-import ImaginationPage from "./ImaginationPage"
+import ImaginePage from "./ImaginePage"
 
-export default ImaginationPage
+export default ImaginePage

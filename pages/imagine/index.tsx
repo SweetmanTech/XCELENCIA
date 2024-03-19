@@ -1,4 +1,4 @@
-import ImaginePage from "@/components/Pages/ImaginePage/ImaginePage"
+import ImaginePage from "@/components/Pages/ImaginePage"
 
 const Imagine = () => <ImaginePage />
 
