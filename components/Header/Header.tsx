@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import LoginButton from "../LoginButton"
+import SignButton from "../SignButton"
 
 const Header = () => {
   const { push, pathname } = useRouter()
@@ -22,7 +22,7 @@ const Header = () => {
         {isImaginePage && "Home"}
         {isHomePage && "Imagine"}
       </button>
-      <LoginButton>Connect</LoginButton>
+      <SignButton />
     </nav>
   )
 }
