@@ -32,8 +32,8 @@ const useTBAPurchase = () => {
 
   const purchase = async (quantity: number) => {
     try {
-      if (!connectedWallet) return
       if (!prepare()) return
+      if (!connectedWallet) return
 
       setLoading(true)
       const price = BigNumber.from(PRICE).mul(quantity).toString()
