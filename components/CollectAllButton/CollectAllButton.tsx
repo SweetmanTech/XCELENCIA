@@ -1,15 +1,9 @@
 import useTBAPurchase from "@/hooks/useTBAPurchase"
-import { usePrivy } from "@privy-io/react-auth"
 
 const CollectAllButton = ({ className = "" }) => {
-  const { login, authenticated } = usePrivy()
   const { purchase, loading } = useTBAPurchase()
 
   const handleClick = async () => {
-    if (!authenticated) {
-      login()
-      return
-    }
     await purchase(1)
   }
 

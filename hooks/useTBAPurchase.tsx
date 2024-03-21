@@ -10,6 +10,7 @@ import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
+import usePreparePrivyWallet from "./usePreparePrivyWallet"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -18,6 +19,7 @@ const useTBAPurchase = () => {
   const [totalSupply, setTotalSupply] = useState(null)
   const [loading, setLoading] = useState(false)
   const { isLoggedByEmail } = useUserProvider()
+  const { prepare } = usePreparePrivyWallet()
 
   useEffect(() => {
     const init = async () => {
@@ -31,6 +33,8 @@ const useTBAPurchase = () => {
   const purchase = async (quantity: number) => {
     try {
       if (!connectedWallet) return
+      if (!prepare()) return
+
       setLoading(true)
       const price = BigNumber.from(PRICE).mul(quantity).toString()
       const lastMinted = await getTotalSupply()
