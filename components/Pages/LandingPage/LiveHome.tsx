@@ -7,7 +7,7 @@ const LiveHome = () => (
     <div className="w-full h-full flex justify-center items-center">
       <div
         className="flex flex-col 
-      items-center justify-center gap-[20px]"
+        items-center justify-center gap-[20px]"
       >
         <MusicPlayer />
         <CollectButtons />
