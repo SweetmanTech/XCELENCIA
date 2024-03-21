@@ -9,6 +9,7 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import handleTxError from "@/lib/handleTxError"
+import { useUserProvider } from "@/providers/UserProvider"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -16,6 +17,7 @@ const useTBAPurchase = () => {
   const { sendTransaction: sendTxByWallet } = useWalletTransaction()
   const [totalSupply, setTotalSupply] = useState(null)
   const [loading, setLoading] = useState(false)
+  const { isLoggedByEmail } = useUserProvider()
 
   useEffect(() => {
     const init = async () => {
@@ -26,7 +28,7 @@ const useTBAPurchase = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const purchase = async (quantity: number, hasWallet = null) => {
+  const purchase = async (quantity: number) => {
     try {
       setLoading(true)
       const price = BigNumber.from(PRICE).mul(quantity).toString()
@@ -39,7 +41,7 @@ const useTBAPurchase = () => {
         price,
       ) as any
       const hexValue = numberToHex(BigInt(price))
-      if (!hasWallet) {
+      if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,
           CHAIN_ID,
