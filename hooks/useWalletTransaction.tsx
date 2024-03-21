@@ -1,4 +1,4 @@
-import { BigNumber, Contract } from "ethers"
+import { BigNumber, Contract, utils } from "ethers"
 import useConnectedWallet from "./useConnectedWallet"
 import { CHAIN_ID } from "@/lib/consts"
 import usePrivyEthersSigner from "./usePrivyEthersSigner"
@@ -14,21 +14,26 @@ const useWalletTransaction = () => {
     functionName: string,
     args,
     value = BigNumber.from("0").toHexString(),
+    gasLimit = 0,
   ) => {
     try {
       const privyChainId = metamaskWallet.chainId
       if (chainId !== parseInt(privyChainId, 10)) {
         metamaskWallet.switchChain(CHAIN_ID)
       }
-
       const contract = new Contract(to, abi, signer)
       if (signer) {
-        const txReceipt = await contract[functionName](args, {
-          gasLimit: 30000,
+        const data = {
           value,
-        })
-        return txReceipt.transactionHash
+        } as any
+        if (gasLimit) {
+          data.gasLimit = gasLimit
+        }
+        const tx = await contract[functionName](args, data)
+        const txHash = tx.wait()
+        return txHash
       }
+      return { error: true }
     } catch (error) {
       console.log("ZIAD HERE", error)
       return { error }
