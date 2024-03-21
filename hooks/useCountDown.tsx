@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 export enum SCREEN {
   LOADING = "LOADING",
   COUNTDOWN = "COUNTDOWN",
-  COLLECT = "COLLECT"
+  COLLECT = "COLLECT",
 }
 const useCountDown = () => {
   const liveDay = "04 Apr 2024 00:30:00 EST"
@@ -17,7 +17,7 @@ const useCountDown = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       const offset = getTime()
-      setScreenMode(() => offset <= 0 ? SCREEN.COLLECT : SCREEN.COUNTDOWN)
+      setScreenMode(() => (offset <= 0 ? SCREEN.COLLECT : SCREEN.COUNTDOWN))
     }, 1000)
 
     return () => clearInterval(interval)
