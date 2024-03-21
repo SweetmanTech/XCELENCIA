@@ -35,7 +35,6 @@ const useWalletTransaction = () => {
       }
       return { error: true }
     } catch (error) {
-      console.log("ZIAD HERE", error)
       return { error }
     }
   }
