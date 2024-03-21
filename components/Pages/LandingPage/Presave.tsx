@@ -1,7 +1,7 @@
 import Script from "next/script"
 import { useState } from "react"
 
-const CounterDown = () => {
+const Presave = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   return (
     <div className="w-[600px]">
@@ -26,4 +26,4 @@ const CounterDown = () => {
   )
 }
 
-export default CounterDown
+export default Presave
