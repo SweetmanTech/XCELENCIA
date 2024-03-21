@@ -1,3 +1,4 @@
+import Footer from "../Footer"
 import Header from "../Header"
 import { ILayout } from "./types"
 
@@ -6,11 +7,13 @@ const BaseLayout = ({
   backgroundImage = "bg-[url('/images/background.jpg')]",
 }: ILayout) => (
   <div
-    className={`w-full overflow-hidden min-h-screen flex justify-center 
-  bg-cover bg-center ${backgroundImage}`}
+    className={`w-full overflow-hidden min-h-screen 
+    flex flex-col items-center
+    bg-cover bg-center ${backgroundImage}`}
   >
     <Header />
-    {children}
+    <div className="flex flex-grow">{children}</div>
+    <Footer />
   </div>
 )
 
