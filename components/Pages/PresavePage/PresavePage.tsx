@@ -8,7 +8,9 @@ const PresavePage = () => {
   return (
     <Layout type="base">
       <SeoHead />
-      {screenMode === SCREEN.COUNTDOWN && <Presave />}
+      <div className="w-full h-full flex justify-center items-center">
+        {screenMode === SCREEN.COUNTDOWN && <Presave />}
+      </div>
     </Layout>
   )
 }
