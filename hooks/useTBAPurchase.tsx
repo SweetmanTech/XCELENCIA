@@ -8,12 +8,14 @@ import { CHAIN_ID, MULTICALL3_ADDRESS, PRICE } from "@/lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
+import handleTxError from "@/lib/handleTxError"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
   const { sendTransaction: sendTxByPrivy } = usePrivySendTransaction()
   const { sendTransaction: sendTxByWallet } = useWalletTransaction()
   const [totalSupply, setTotalSupply] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const init = async () => {
@@ -26,6 +28,7 @@ const useTBAPurchase = () => {
 
   const purchase = async (quantity: number, hasWallet = null) => {
     try {
+      setLoading(true)
       const price = BigNumber.from(PRICE).mul(quantity).toString()
       const lastMinted = await getTotalSupply()
       const nextTokenId = (lastMinted + BigInt(1)).toString()
@@ -47,18 +50,30 @@ const useTBAPurchase = () => {
           "Collect the Album",
           "El Nino Estrello",
         )
+        setLoading(false)
         return response
       }
 
-      await sendTxByWallet(MULTICALL3_ADDRESS, CHAIN_ID, multicallAbi, "aggregate3Value", calls)
+      const response = await sendTxByWallet(
+        MULTICALL3_ADDRESS,
+        CHAIN_ID,
+        multicallAbi,
+        "aggregate3Value",
+        calls,
+        hexValue,
+      )
+      setLoading(false)
+      return response
     } catch (err) {
+      setLoading(false)
       // eslint-disable-next-line no-console
       console.error(err)
-      return false
+      handleTxError(err)
+      return { error: err }
     }
   }
 
-  return { purchase, totalSupply }
+  return { purchase, totalSupply, loading }
 }
 
 export default useTBAPurchase
