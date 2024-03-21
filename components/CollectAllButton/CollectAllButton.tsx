@@ -23,7 +23,7 @@ const CollectAllButton = ({ className = "" }) => {
       px-[20px] py-[10px] ${className}`}
       disabled={loading}
     >
-      {loading ? "Collecting..." : "Collect All"}
+      {loading ? "Collecting..." : "Collect Album"}
     </button>
   )
 }
