@@ -1,4 +1,4 @@
-import { BigNumber, Contract, utils } from "ethers"
+import { BigNumber, Contract } from "ethers"
 import useConnectedWallet from "./useConnectedWallet"
 import { CHAIN_ID } from "@/lib/consts"
 import usePrivyEthersSigner from "./usePrivyEthersSigner"
@@ -18,8 +18,9 @@ const useWalletTransaction = () => {
   ) => {
     try {
       const privyChainId = metamaskWallet.chainId
-      if (chainId !== parseInt(privyChainId, 10)) {
-        metamaskWallet.switchChain(CHAIN_ID)
+      if (privyChainId !== `eip155:${chainId}`) {
+        await metamaskWallet.switchChain(CHAIN_ID)
+        return
       }
       const contract = new Contract(to, abi, signer)
       if (signer) {
@@ -35,6 +36,7 @@ const useWalletTransaction = () => {
       }
       return { error: true }
     } catch (error) {
+      console.log("ZIAD", error)
       return { error }
     }
   }
