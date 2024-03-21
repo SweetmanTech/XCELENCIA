@@ -7,10 +7,12 @@ import getTotalSupply from "@/lib/viem/getTotalSupply"
 import { CHAIN_ID, MULTICALL3_ADDRESS, PRICE } from "@/lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
+import useWalletTransaction from "./useWalletTransaction"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
-  const { sendTransaction } = usePrivySendTransaction()
+  const { sendTransaction: sendTxByPrivy } = usePrivySendTransaction()
+  const { sendTransaction: sendTxByWallet } = useWalletTransaction()
   const [totalSupply, setTotalSupply] = useState(null)
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const useTBAPurchase = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const purchase = async (quantity: number) => {
+  const purchase = async (quantity: number, hasWallet = null) => {
     try {
       const price = BigNumber.from(PRICE).mul(quantity).toString()
       const lastMinted = await getTotalSupply()
@@ -34,17 +36,21 @@ const useTBAPurchase = () => {
         price,
       ) as any
       const hexValue = numberToHex(BigInt(price))
-      const response = await sendTransaction(
-        MULTICALL3_ADDRESS,
-        CHAIN_ID,
-        multicallAbi,
-        "aggregate3Value",
-        [calls],
-        hexValue,
-        "Collect the Album",
-        "El Nino Estrello",
-      )
-      return response
+      if (!hasWallet) {
+        const response = await sendTxByPrivy(
+          MULTICALL3_ADDRESS,
+          CHAIN_ID,
+          multicallAbi,
+          "aggregate3Value",
+          [calls],
+          hexValue,
+          "Collect the Album",
+          "El Nino Estrello",
+        )
+        return response
+      }
+
+      await sendTxByWallet(MULTICALL3_ADDRESS, CHAIN_ID, multicallAbi, "aggregate3Value", calls)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err)
