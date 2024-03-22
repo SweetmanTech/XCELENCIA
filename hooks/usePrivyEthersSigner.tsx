@@ -2,19 +2,19 @@ import { useEffect, useState } from "react"
 import useConnectedWallet from "./useConnectedWallet"
 
 const usePrivyEthersSigner = () => {
-  const { metamaskWallet } = useConnectedWallet()
+  const { externalWallet } = useConnectedWallet()
   const [signer, setSigner] = useState(null)
 
   useEffect(() => {
     const init = async () => {
-      const provider = await metamaskWallet.getEthersProvider()
+      const provider = await externalWallet.getEthersProvider()
       const ethSigner = provider.getSigner()
       setSigner(ethSigner)
     }
 
-    if (!metamaskWallet) return
+    if (!externalWallet) return
     init()
-  }, [metamaskWallet])
+  }, [externalWallet])
 
   return { signer }
 }

@@ -1,5 +1,5 @@
-import LandingPage from "../components/Pages/LandingPage"
+import PresavePage from "@/components/Pages/PresavePage"
 
-const Landing = () => <LandingPage />
+const Presave = () => <PresavePage />
 
-export default Landing
+export default Presave
