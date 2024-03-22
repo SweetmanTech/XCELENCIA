@@ -20,7 +20,6 @@ const useWalletTransaction = () => {
     try {
       const privyChainId = externalWallet.chainId
       if (privyChainId !== `eip155:${chainId}`) {
-        console.log("ZIAD HERE")
         await externalWallet.switchChain(CHAIN_ID)
         return
       }
@@ -38,7 +37,7 @@ const useWalletTransaction = () => {
       }
       return { error: true }
     } catch (error) {
-      console.log("ZIAD HERE", error)
+      console.log(error)
       return { error }
     }
   }
