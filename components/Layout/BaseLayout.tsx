@@ -8,12 +8,12 @@ const BaseLayout = ({
 }: ILayout) => {
   const { pathname } = useRouter()
   const isApril4 = pathname.includes("april4")
-  
+
   return (
     <div
-    className={`w-full overflow-hidden min-h-screen flex justify-center 
+      className={`w-full overflow-hidden min-h-screen flex justify-center 
   bg-cover bg-center ${backgroundImage}`}
-  >
+    >
       {isApril4 && <Header />}
       {children}
     </div>
