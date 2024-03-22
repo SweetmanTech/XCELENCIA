@@ -2,8 +2,8 @@ import { useRouter } from "next/router"
 import SignButton from "../SignButton"
 
 const Header = () => {
-  const { push } = useRouter()
   const itemClasses = "text-white text-[24px] font-semibold"
+  const { push } = useRouter()
 
   return (
     <nav

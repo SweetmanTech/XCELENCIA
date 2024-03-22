@@ -1,10 +1,10 @@
-import { BigNumber, Contract, utils } from "ethers"
+import { BigNumber, Contract } from "ethers"
 import useConnectedWallet from "./useConnectedWallet"
 import { CHAIN_ID } from "@/lib/consts"
 import usePrivyEthersSigner from "./usePrivyEthersSigner"
 
 const useWalletTransaction = () => {
-  const { metamaskWallet } = useConnectedWallet()
+  const { externalWallet } = useConnectedWallet()
   const { signer } = usePrivyEthersSigner()
 
   const sendTransaction = async (
@@ -16,10 +16,12 @@ const useWalletTransaction = () => {
     value = BigNumber.from("0").toHexString(),
     gasLimit = 0,
   ) => {
+    if (!externalWallet) return
     try {
-      const privyChainId = metamaskWallet.chainId
-      if (chainId !== parseInt(privyChainId, 10)) {
-        metamaskWallet.switchChain(CHAIN_ID)
+      const privyChainId = externalWallet.chainId
+      if (privyChainId !== `eip155:${chainId}`) {
+        await externalWallet.switchChain(CHAIN_ID)
+        return
       }
       const contract = new Contract(to, abi, signer)
       if (signer) {
@@ -35,6 +37,7 @@ const useWalletTransaction = () => {
       }
       return { error: true }
     } catch (error) {
+      console.log(error)
       return { error }
     }
   }
