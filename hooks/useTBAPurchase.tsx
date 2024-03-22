@@ -74,7 +74,7 @@ const useTBAPurchase = () => {
     } catch (err) {
       setLoading(false)
       // eslint-disable-next-line no-console
-      console.error(err, "ZIAD")
+      console.error(err)
       handleTxError(err)
       return { error: err }
     }
