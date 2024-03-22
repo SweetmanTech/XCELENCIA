@@ -16,24 +16,28 @@ const usePrivySendTransaction = () => {
     description = "",
     gasLimit = null,
   ) => {
-    const data = new Interface(abi).encodeFunctionData(functionName, args)
-    const unsignedTx = {
-      to,
-      chainId,
-      data,
-      value,
-    } as UnsignedTransactionRequest
-    if (gasLimit) {
-      unsignedTx.gasLimit = gasLimit
-    }
+    try {
+      const data = new Interface(abi).encodeFunctionData(functionName, args)
+      const unsignedTx = {
+        to,
+        chainId,
+        data,
+        value,
+      } as UnsignedTransactionRequest
+      if (gasLimit) {
+        unsignedTx.gasLimit = gasLimit
+      }
 
-    const uiConfig = {
-      header: title,
-      description,
-      buttonText: "Sign",
+      const uiConfig = {
+        header: title,
+        description,
+        buttonText: "Sign",
+      }
+      const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
+      return txReceipt.transactionHash
+    } catch (error) {
+      return { error }
     }
-    const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
-    return txReceipt.transactionHash
   }
 
   return {
