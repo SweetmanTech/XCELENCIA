@@ -4,7 +4,7 @@ import { CHAIN_ID } from "@/lib/consts"
 import usePrivyEthersSigner from "./usePrivyEthersSigner"
 
 const useWalletTransaction = () => {
-  const { metamaskWallet } = useConnectedWallet()
+  const { externalWallet } = useConnectedWallet()
   const { signer } = usePrivyEthersSigner()
 
   const sendTransaction = async (
@@ -16,10 +16,12 @@ const useWalletTransaction = () => {
     value = BigNumber.from("0").toHexString(),
     gasLimit = 0,
   ) => {
+    if (!externalWallet) return
     try {
-      const privyChainId = metamaskWallet.chainId
+      const privyChainId = externalWallet.chainId
       if (privyChainId !== `eip155:${chainId}`) {
-        await metamaskWallet.switchChain(CHAIN_ID)
+        console.log("ZIAD HERE")
+        await externalWallet.switchChain(CHAIN_ID)
         return
       }
       const contract = new Contract(to, abi, signer)
@@ -36,6 +38,7 @@ const useWalletTransaction = () => {
       }
       return { error: true }
     } catch (error) {
+      console.log("ZIAD HERE", error)
       return { error }
     }
   }
