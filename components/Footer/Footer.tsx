@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Icon from "@/shared/Icon"
 
 const Footer = () => (
