@@ -24,7 +24,7 @@
     "typeRoots": ["./node_modules/@types"],
     "incremental": true
   },
-  "include": ["**/**.ts", "**/**.tsx", "**/**.js", "components/Pages/LandingPage/CounterDown.tsx"],
+  "include": ["**/**.ts", "**/**.tsx", "**/**.js"],
   "exclude": ["/node_modules"],
   "types": ["node"]
 }

@@ -1,13 +1,14 @@
-import useCountDown, { SCREEN } from "@/hooks/useCountDown"
+import { useRouter } from "next/router"
 import Header from "../Header"
 import { ILayout } from "./types"
 
 const BaseLayout = ({ children }: ILayout) => {
-  const { screenMode } = useCountDown()
+  const { pathname } = useRouter()
 
+  const isApril4 = pathname.includes("april4")
   return (
     <div className="w-full overflow-hidden bg-pink min-h-screen flex justify-center">
-      {screenMode === SCREEN.COLLECT && <Header />}
+      {isApril4 && <Header />}
       {children}
     </div>
   )
