@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import Header from "../Header"
 import { ILayout } from "./types"
+import Footer from "../Footer"
 
 const BaseLayout = ({
   children,
@@ -11,11 +12,13 @@ const BaseLayout = ({
 
   return (
     <div
-      className={`w-full overflow-hidden min-h-screen flex justify-center 
-  bg-cover bg-center ${backgroundImage}`}
+      className={`w-full overflow-hidden min-h-screen 
+      flex flex-col items-center
+      bg-cover bg-center ${backgroundImage}`}
     >
       {isApril4 && <Header />}
-      {children}
+      <div className="flex flex-grow">{children}</div>
+      <Footer />
     </div>
   )
 }
