@@ -17,9 +17,10 @@ const SignButton = ({ className = "" }) => {
       type="button"
       onClick={handleClick}
       className={`text-[18px] font-bold uppercase bg-gray rounded-full
-      px-[10px] py-[10px] ${className}`}
+      text-uppercase
+      px-[20px] py-[10px] ${className}`}
     >
-      {authenticated ? "Logout" : "Connect"}
+      {authenticated ? "Sign Out" : "Sign In"}
     </button>
   )
 }
