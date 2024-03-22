@@ -7,8 +7,6 @@ import { SessionProvider } from "next-auth/react"
 import React from "react"
 
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
-import Script from "next/script"
-import UserProvider from "@/providers/UserProvider"
 import { ThemeProvider } from "../providers/ThemeProvider"
 
 const privyConfig: PrivyClientConfig = {
@@ -26,15 +24,12 @@ const privyConfig: PrivyClientConfig = {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
-      <UserProvider>
-        <ThemeProvider>
-          <SessionProvider>
-            <Script src="https://embed.laylo.com/laylo-sdk.js" strategy="afterInteractive" />
-            <Component {...pageProps} />
-            <ToastContainer />
-          </SessionProvider>
-        </ThemeProvider>
-      </UserProvider>
+      <ThemeProvider>
+        <SessionProvider>
+          <Component {...pageProps} />
+          <ToastContainer />
+        </SessionProvider>
+      </ThemeProvider>
     </PrivyProvider>
   )
 }
