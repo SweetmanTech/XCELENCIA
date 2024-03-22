@@ -4,12 +4,12 @@ import SignButton from "../SignButton"
 const Header = () => {
   const { push, pathname } = useRouter()
 
-  const isImaginePage = pathname.includes("/imagine")
-  const isHomePage = pathname.includes("/home") || pathname === "/"
+  const isImaginePage = pathname.includes("/april4/imagine")
+  const isHomePage = pathname.includes("/april4/home") || pathname === "/april4"
 
   const onClick = () => {
-    if (isHomePage) push("/imagine")
-    if (isImaginePage) push("/")
+    if (isHomePage) push("/april4/imagine")
+    if (isImaginePage) push("/april4")
   }
 
   return (
