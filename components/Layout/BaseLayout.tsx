@@ -17,7 +17,7 @@ const BaseLayout = ({
       bg-cover bg-center ${backgroundImage}`}
     >
       {isApril4 && <Header />}
-      <div className="flex flex-grow">{children}</div>
+      <div className="flex flex-grow mt-[150px]">{children}</div>
       <Footer />
     </div>
   )
