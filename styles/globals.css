@@ -6,7 +6,10 @@
 	font-family: 'MADE Outer Sans Bold';
 	src: url('/fonts/MADE Outer Sans Bold.otf');
 }
-
+@font-face {
+	font-family: 'copihue-w05-semi-bold-italic';
+	src: url('/fonts/copihue-w05-semi-bold-italic.otf');
+}
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
