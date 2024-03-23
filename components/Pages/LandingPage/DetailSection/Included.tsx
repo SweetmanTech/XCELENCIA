@@ -1,7 +1,8 @@
+import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import DescriptionItem from "./DescriptionItem"
 
 const Included = () => (
-  <div className="text-[white] text-[26px]">
+  <FadeInWhenVisible className="text-[white] text-[26px]">
     Included
     <div>
       <DescriptionItem>15 songs as collectibles</DescriptionItem>
@@ -13,7 +14,7 @@ const Included = () => (
       <DescriptionItem>High Q downloads</DescriptionItem>
       <DescriptionItem>Discount code for merch store</DescriptionItem>
     </div>
-  </div>
+  </FadeInWhenVisible>
 )
 
 export default Included

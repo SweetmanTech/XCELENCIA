@@ -1,7 +1,8 @@
+import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import DescriptionItem from "./DescriptionItem"
 
 const WhyCollect = () => (
-  <div className="mt-[24px] text-[white] text-[26px]">
+  <FadeInWhenVisible className="mt-[24px] text-[white] text-[26px]">
     Why Collect?
     <div>
       <DescriptionItem>Support indie music</DescriptionItem>
@@ -12,7 +13,7 @@ const WhyCollect = () => (
       </DescriptionItem>
       <DescriptionItem>Your support will let me finish the trilogy</DescriptionItem>
     </div>
-  </div>
+  </FadeInWhenVisible>
 )
 
 export default WhyCollect

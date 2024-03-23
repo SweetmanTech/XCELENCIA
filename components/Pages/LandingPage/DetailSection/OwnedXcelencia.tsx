@@ -5,7 +5,7 @@ const OwnedXcelencia = () => (
     <p className="pl-[40px] text-[25px] font-hedvig font-bold text-[white]">
       El niño estrelló - Fan Edition
     </p>
-    <div className="mt-[30px] flex gap-[15px]">
+    <div className="mt-[30px] flex flex-col items-center gap-[15px] md:flex-row">
       <div>
         <Media
           link="/images/album.png"
@@ -19,7 +19,7 @@ const OwnedXcelencia = () => (
         <Media
           link="/images/bundles1.png"
           blurLink="/images/bunldes.png"
-          containerClasses="w-full aspect-[286/397] w-[286px]"
+          containerClasses="aspect-[286/397] w-[286px]"
         />
       </div>
     </div>
