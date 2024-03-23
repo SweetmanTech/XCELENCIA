@@ -1,5 +1,4 @@
 import CollectAllButton from "@/components/CollectAllButton"
-import CrossmintButton from "@/components/CrossmintButton"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import SoundCollectButton from "./CollectAllButton"
 
@@ -10,7 +9,6 @@ const CollectButtons = () => (
   >
     <CollectAllButton />
     <SoundCollectButton />
-    <CrossmintButton />
   </FadeInWhenVisible>
 )
 
