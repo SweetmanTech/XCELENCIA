@@ -1,3 +1,3 @@
-import WhatNext from "./WhatNext";
+import WhatNext from "./WhatNext"
 
 export default WhatNext
