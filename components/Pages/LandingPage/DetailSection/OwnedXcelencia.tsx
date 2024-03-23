@@ -1,4 +1,5 @@
 import ClipSpan from "@/components/ClipSpan"
+import Icon from "@/shared/Icon"
 import Media from "@/shared/Media"
 
 const OwnedXcelencia = () => (
@@ -14,7 +15,10 @@ const OwnedXcelencia = () => (
           containerClasses="aspect-[1/1] w-[300px]"
         />
         <p className="text-white font-madeoutersans_bold text-[30px]">ENE #420</p>
-        <ClipSpan>OWNED BY FAN.ETH</ClipSpan>
+        <div className="flex gap-[10px] items-center">
+          <Icon name="wallet" size={30} raw />
+          <ClipSpan>OWNED BY FAN.ETH</ClipSpan>
+        </div>
       </div>
       <div className="mt-[80px]">
         <Media
