@@ -17,7 +17,8 @@ module.exports = {
     extend: {
       fontFamily: {
         hedvig: ["Hedvig Regular", "sans-serif"],
-        madeoutersans_bold: ["MADE Outer Sans Bold", "sans-serif"]
+        madeoutersans_bold: ["MADE Outer Sans Bold", "sans-serif"],
+        copihuew05semi_bold_italic: ["copihue-w05-semi-bold-italic", "sans-serif"]
       },
       backgroundImage: {
         gradient_1: 'linear-gradient(270deg, rgba(255, 68, 43, 1) -0.02%, rgba(255, 106, 43, 1) 100.01%)',
