@@ -1,3 +1,4 @@
+import ClipSpan from "@/components/ClipSpan"
 import Media from "@/shared/Media"
 
 const OwnedXcelencia = () => (
@@ -12,8 +13,8 @@ const OwnedXcelencia = () => (
           blurLink="/images/bunldes.png"
           containerClasses="aspect-[1/1] w-[300px]"
         />
-        <p className="text-white text-[30px]">ENE #420</p>
-        <div>OWNED BY FAN.ETH</div>
+        <p className="text-white font-madeoutersans_bold text-[30px]">ENE #420</p>
+        <ClipSpan>OWNED BY FAN.ETH</ClipSpan>
       </div>
       <div className="mt-[80px]">
         <Media

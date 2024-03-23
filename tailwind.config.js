@@ -16,7 +16,11 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        hedvig: ["Hedvig Regular", "sans-serif"]
+        hedvig: ["Hedvig Regular", "sans-serif"],
+        madeoutersans_bold: ["MADE Outer Sans Bold", "sans-serif"]
+      },
+      backgroundImage: {
+        gradient_1: 'linear-gradient(270deg, rgba(255, 68, 43, 1) -0.02%, rgba(255, 106, 43, 1) 100.01%)',
       },
       screens: {
         ios : '320px',
