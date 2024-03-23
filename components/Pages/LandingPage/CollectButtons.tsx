@@ -1,6 +1,6 @@
 import CollectAllButton from "@/components/CollectAllButton"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
-import SoundCollectButton from "./CollectAllButton"
+import SoundCollectButton from "./SoundCollectButton"
 
 const CollectButtons = () => (
   <FadeInWhenVisible
