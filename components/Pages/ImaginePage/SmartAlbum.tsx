@@ -1,7 +1,7 @@
 import Media from "@/shared/Media"
 
 const SmartAlbum = () => (
-  <div className="grid grid-cols-2 gap-[30px]">
+  <div className="grid grid-cols-1 xs:grid-cols-2 gap-[30px]">
     <Media
       link="/images/album_1.png"
       blurLink="/images/bunldes.png"

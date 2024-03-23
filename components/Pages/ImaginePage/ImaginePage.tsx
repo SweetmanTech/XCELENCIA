@@ -9,14 +9,18 @@ const ImaginePage = () => (
     <SeoHead />
     <Content>
       <div className="w-full">
-        <div className="w-full text-white pl-[100px] text-[40px] text-[white] font-poppins_italic">
+        <div className="w-full text-white 
+        lg:pl-[100px] 
+        text-[40px] text-[white] 
+        lg:text-left text-center
+        font-poppins_italic ">
           your smart album contains:
         </div>
-        <div className="w-full grid grid-cols-2 mt-[50px]">
-          <div className="flex justify-start mt-[10px] pl-[150px]">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 mt-[50px] gap-[50px]">
+          <div className="flex justify-center lg:justify-start mt-[10px] lg:pl-[150px]">
             <MusicPlayer />
           </div>
-          <div className="w-full flex justify-start">
+          <div className="w-full flex justify-center lg:justify-start">
             <SmartAlbum />
           </div>
         </div>
