@@ -4,7 +4,10 @@ import Media from "@/shared/Media"
 
 const OwnedXcelencia = () => (
   <>
-    <p className="pl-[40px] text-[25px] font-hedvig font-bold text-[white]">
+    <p
+      className="md:pl-[40px] text-[25px] font-hedvig font-bold text-[white]
+    text-center md:text-left"
+    >
       El niño estrelló - Fan Edition
     </p>
     <div className="mt-[30px] flex flex-col items-center gap-[15px] md:flex-row">
