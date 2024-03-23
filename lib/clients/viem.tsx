@@ -1,4 +1,4 @@
-import { Chain, Client, createPublicClient, http } from "viem"
+import { Chain, PublicClient, createPublicClient, http } from "viem"
 import {
   editionV1PublicActions,
   editionV2PublicActionsCreate,
@@ -12,15 +12,15 @@ export const RPC_URL = `https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT
 
 export const getPublicClient = (chainId: number) => {
   const chain = getViemNetwork(chainId)
-  const publicClient = createPublicClient({
+  let publicClient = createPublicClient({
     chain: chain as Chain,
     transport: http(RPC_URL),
-  })
-    .extend(soundEditionVersionPublicActions)
-    .extend(editionV1PublicActions as any)
-    .extend(editionV2PublicActionsCreate as Client)
-    .extend(editionV2PublicActionsInfo)
-    .extend(editionV2PublicActionsMint)
-    .extend(soundEditionVersionPublicActions)
-  return publicClient
+  }) as any
+  publicClient = publicClient.extend(soundEditionVersionPublicActions)
+  publicClient = publicClient.extend(editionV1PublicActions)
+  publicClient = publicClient.extend(editionV2PublicActionsCreate)
+  publicClient = publicClient.extend(editionV2PublicActionsInfo)
+  publicClient = publicClient.extend(editionV2PublicActionsMint)
+  publicClient = publicClient.extend(soundEditionVersionPublicActions)
+  return publicClient as PublicClient
 }
