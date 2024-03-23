@@ -1,7 +1,8 @@
+import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import Media from "@/shared/Media"
 
 const SmartAlbum = () => (
-  <div className="grid grid-cols-1 xs:grid-cols-2 gap-[30px]">
+  <FadeInWhenVisible className="grid grid-cols-1 xs:grid-cols-2 gap-[30px]">
     <Media
       link="/images/album_1.png"
       blurLink="/images/bunldes.png"
@@ -22,7 +23,7 @@ const SmartAlbum = () => (
       blurLink="/images/bunldes.png"
       containerClasses="aspect-[1/1] w-[200px]"
     />
-  </div>
+  </FadeInWhenVisible>
 )
 
 export default SmartAlbum
