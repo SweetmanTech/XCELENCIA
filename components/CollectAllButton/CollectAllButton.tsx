@@ -1,3 +1,4 @@
+import useCollectedCheck from "@/hooks/useCollectedCheck"
 import useSoundXYZCollect from "@/hooks/useCollectSound"
 import useTBAPurchase from "@/hooks/useTBAPurchase"
 import { useState } from "react"
@@ -12,16 +13,25 @@ const CollectAllButton = ({ className = "" }) => {
   const { purchase, loading: loadingZora } = useTBAPurchase()
   const { loading: loadingXYZ, collectSoundXYZ } = useSoundXYZCollect()
   const loading = loadingXYZ || loadingZora
+  const { isCollectedOnZora, isCollectedSoundXYZ, collectedCheck } = useCollectedCheck()
   const [collectStatus, setCollectStatus] = useState(COLLECT_STATUS.ZORA)
 
   const handleClick = async () => {
-    const resZora = await purchase(1)
-    if (!resZora || resZora?.error) {
-      return
+    if (!isCollectedOnZora) {
+      setCollectStatus(COLLECT_STATUS.ZORA)
+      const resZora = await purchase(1)
+      if (!resZora || resZora?.error) {
+        return
+      }
+      await collectedCheck()
     }
-    const resSound = await collectSoundXYZ()
-    if (!resSound || resSound?.error) {
-      return
+    if (!isCollectedSoundXYZ) {
+      setCollectStatus(COLLECT_STATUS.SOUND)
+      const resSound = await collectSoundXYZ()
+      if (!resSound || resSound?.error) {
+        return
+      }
+      await collectedCheck()
     }
   }
 
