@@ -7,7 +7,7 @@ const Included = () => (
     <div>
       <DescriptionItem>15 songs as collectibles</DescriptionItem>
       <DescriptionItem>Each with their own unique cover art</DescriptionItem>
-      <DescriptionItem>interactive music player</DescriptionItem>
+      <DescriptionItem>Interactive music player</DescriptionItem>
       <DescriptionItem>Liner notes</DescriptionItem>
       <DescriptionItem>Journey video</DescriptionItem>
       <DescriptionItem>Claim 1 unique experience</DescriptionItem>
