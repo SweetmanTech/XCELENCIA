@@ -37,7 +37,8 @@ const useWalletTransaction = () => {
       }
       return { error: true }
     } catch (error) {
-      console.log(error)
+      // eslint-disable-next-line no-console
+      console.error(error)
       return { error }
     }
   }
