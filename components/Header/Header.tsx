@@ -3,7 +3,9 @@ import SignButton from "../SignButton"
 
 const Header = () => {
   const itemClasses = "text-white text-[24px] font-semibold"
-  const { push } = useRouter()
+  const { push, pathname } = useRouter()
+
+  const isApril4 = pathname.includes("/april4")
 
   return (
     <nav
@@ -12,10 +14,18 @@ const Header = () => {
             px-[40px] py-[20px]"
     >
       <div className="flex gap-x-[20px] items-center">
-        <button className={itemClasses} onClick={() => push("/")} type="button">
+        <button
+          className={itemClasses}
+          onClick={() => push(isApril4 ? "/april4" : "/")}
+          type="button"
+        >
           Home
         </button>
-        <button className={itemClasses} onClick={() => push("/imagine")} type="button">
+        <button
+          className={itemClasses}
+          onClick={() => push(isApril4 ? "/april4/imagine" : "/imagine")}
+          type="button"
+        >
           Imagination
         </button>
       </div>
