@@ -10,31 +10,35 @@ const useSoundXYZCollect = () => {
   const [loading, setLoaindg] = useState(false)
 
   const collectSoundXYZ = async () => {
-    const privyChainId = externalWallet.chainId
-    if (privyChainId !== `eip155:${SOUNDXYZ_CHAIN.id}`) {
-      await externalWallet.switchChain(SOUNDXYZ_CHAIN.id)
-      return
+    try {
+      const privyChainId = externalWallet.chainId
+      if (privyChainId !== `eip155:${SOUNDXYZ_CHAIN.id}`) {
+        await externalWallet.switchChain(SOUNDXYZ_CHAIN.id)
+        return
+      }
+      setLoaindg(true)
+      const publicClient = getPublicClient(SOUNDXYZ_CHAIN.id)
+      const anyPublicClient = publicClient as any
+
+      const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
+        editionAddress: SPOTIFY_DROP_ADDRESS,
+      })
+
+      const mintParams = await anyPublicClient.editionV2.mintParameters({
+        account: externalWallet.address,
+        chain: SOUNDXYZ_CHAIN,
+        schedule: mintSchedules.activeSchedules[0],
+        quantity: 1,
+        editionAddress: SPOTIFY_DROP_ADDRESS,
+        mintTo: externalWallet.address,
+      })
+      const anyWallet = walletClient as any
+      const hash = await anyWallet.editionV2.mint(mintParams.mint)
+      setLoaindg(true)
+      return hash
+    } catch(error) {
+      return {error}
     }
-    setLoaindg(true)
-    const publicClient = getPublicClient(SOUNDXYZ_CHAIN.id)
-    const anyPublicClient = publicClient as any
-
-    const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
-      editionAddress: SPOTIFY_DROP_ADDRESS,
-    })
-
-    const mintParams = await anyPublicClient.editionV2.mintParameters({
-      account: externalWallet.address,
-      chain: SOUNDXYZ_CHAIN,
-      schedule: mintSchedules.activeSchedules[0],
-      quantity: 1,
-      editionAddress: SPOTIFY_DROP_ADDRESS,
-      mintTo: externalWallet.address,
-    })
-    const anyWallet = walletClient as any
-    const hash = await anyWallet.editionV2.mint(mintParams.mint)
-    setLoaindg(true)
-    return hash
   }
 
   return {
