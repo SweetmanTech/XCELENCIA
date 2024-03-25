@@ -6,14 +6,14 @@ import getBalanceOf from "@/lib/getBalanceOf"
 
 const useCollectedCheck = () => {
   const [isCollectedOnZora, setIsCollectedOnZora] = useState(false)
-  const { isLoggedByEmail } = useUserProvider()
+  const { isLoggedByEmail, isAuthenticated } = useUserProvider()
   const { connectedWallet, externalWallet } = useConnectedWallet()
   const [isCollectedSoundXYZ, setIsCollectedSoundXYZ] = useState(false)
 
   const collectedCheck = useCallback(async () => {
-    if (!isLoggedByEmail && !connectedWallet && !externalWallet?.address) return
-
+    if (!isAuthenticated) return
     const walletAddress = isLoggedByEmail ? connectedWallet : externalWallet?.address
+    if (!walletAddress) return
 
     const dropsOnZora = await getBalanceOf(walletAddress, CHAIN_ID, DROP_ADDRESS)
     if (dropsOnZora > 0) setIsCollectedOnZora(true)

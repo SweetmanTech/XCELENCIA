@@ -33,8 +33,8 @@ const useTBAPurchase = () => {
   const purchase = async (quantity: number) => {
     try {
       if (!prepare()) return
-      if (isLoggedByEmail && !connectedWallet) return
-      if (!isLoggedByEmail && !externalWallet) return
+      const mintReceipt = isLoggedByEmail ? connectedWallet : externalWallet?.address
+      if (!mintReceipt) return
 
       setLoading(true)
       const price = BigNumber.from(PRICE).mul(quantity).toString()
@@ -42,7 +42,7 @@ const useTBAPurchase = () => {
       const nextTokenId = (lastMinted + BigInt(1)).toString()
       const calls = getMintMulticallCalls(
         nextTokenId,
-        isLoggedByEmail ? (connectedWallet as string) : externalWallet?.address,
+        mintReceipt as string,
         quantity,
         price,
       ) as any
