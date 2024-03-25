@@ -34,10 +34,11 @@ const useSoundXYZCollect = () => {
       })
       const anyWallet = walletClient as any
       const hash = await anyWallet.editionV2.mint(mintParams.mint)
-      setLoaindg(true)
+      setLoaindg(false)
       return hash
-    } catch(error) {
-      return {error}
+    } catch (error) {
+      setLoaindg(false)
+      return { error }
     }
   }
 
