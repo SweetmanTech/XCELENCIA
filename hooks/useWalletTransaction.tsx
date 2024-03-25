@@ -35,7 +35,7 @@ const useWalletTransaction = () => {
         const txHash = tx.wait()
         return txHash
       }
-      return { error: true }
+      return
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
