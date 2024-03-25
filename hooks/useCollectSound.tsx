@@ -3,20 +3,20 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivyWalletClient from "./usePrivyWalletClient"
 import { getPublicClient } from "@/lib/clients"
 import { useState } from "react"
-import { usePrivy } from "@privy-io/react-auth"
 
 const useSoundXYZCollect = () => {
-  const { walletClient } = usePrivyWalletClient()
-  const { externalWallet } = useConnectedWallet()
+  const { walletClient } = usePrivyWalletClient(SOUNDXYZ_CHAIN)
+  const { wallet, connectedWallet } = useConnectedWallet()
   const [loading, setLoaindg] = useState(false)
 
   const collectSoundXYZ = async () => {
     try {
-      const privyChainId = externalWallet.chainId
+      const privyChainId = wallet?.chainId
       if (privyChainId !== `eip155:${SOUNDXYZ_CHAIN.id}`) {
-        await externalWallet.switchChain(SOUNDXYZ_CHAIN.id)
+        await wallet?.switchChain(SOUNDXYZ_CHAIN.id)
         return
       }
+      if (!connectedWallet) return
 
       setLoaindg(true)
       const publicClient = getPublicClient(SOUNDXYZ_CHAIN.id)
@@ -27,12 +27,12 @@ const useSoundXYZCollect = () => {
       })
 
       const mintParams = await anyPublicClient.editionV2.mintParameters({
-        account: externalWallet.address,
+        account: connectedWallet,
         chain: SOUNDXYZ_CHAIN,
         schedule: mintSchedules.activeSchedules[0],
         quantity: 1,
         editionAddress: SPOTIFY_DROP_ADDRESS,
-        mintTo: externalWallet.address,
+        mintTo: connectedWallet,
       })
       const anyWallet = walletClient as any
       const hash = await anyWallet.editionV2.mint(mintParams.mint)

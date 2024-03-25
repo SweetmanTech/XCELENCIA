@@ -13,7 +13,7 @@ import { useUserProvider } from "@/providers/UserProvider"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
 
 const useTBAPurchase = () => {
-  const { connectedWallet, externalWallet } = useConnectedWallet()
+  const { connectedWallet } = useConnectedWallet()
   const { sendTransaction: sendTxByPrivy } = usePrivySendTransaction()
   const { sendTransaction: sendTxByWallet } = useWalletTransaction()
   const [totalSupply, setTotalSupply] = useState(null)
@@ -33,8 +33,7 @@ const useTBAPurchase = () => {
   const purchase = async (quantity: number) => {
     try {
       if (!prepare()) return
-      const mintReceipt = isLoggedByEmail ? connectedWallet : externalWallet?.address
-      if (!mintReceipt) return
+      if (!connectedWallet) return
 
       setLoading(true)
       const price = BigNumber.from(PRICE).mul(quantity).toString()
@@ -42,7 +41,7 @@ const useTBAPurchase = () => {
       const nextTokenId = (lastMinted + BigInt(1)).toString()
       const calls = getMintMulticallCalls(
         nextTokenId,
-        mintReceipt as string,
+        connectedWallet as string,
         quantity,
         price,
       ) as any
