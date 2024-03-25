@@ -3,6 +3,7 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivyWalletClient from "./usePrivyWalletClient"
 import { getPublicClient } from "@/lib/clients"
 import { useState } from "react"
+import { usePrivy } from "@privy-io/react-auth"
 
 const useSoundXYZCollect = () => {
   const { walletClient } = usePrivyWalletClient()
@@ -16,6 +17,7 @@ const useSoundXYZCollect = () => {
         await externalWallet.switchChain(SOUNDXYZ_CHAIN.id)
         return
       }
+
       setLoaindg(true)
       const publicClient = getPublicClient(SOUNDXYZ_CHAIN.id)
       const anyPublicClient = publicClient as any

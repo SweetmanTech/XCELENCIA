@@ -1,6 +1,8 @@
 import useCollectedCheck from "@/hooks/useCollectedCheck"
 import useSoundXYZCollect from "@/hooks/useCollectSound"
 import useTBAPurchase from "@/hooks/useTBAPurchase"
+import { useUserProvider } from "@/providers/UserProvider"
+import { usePrivy } from "@privy-io/react-auth"
 import { useState } from "react"
 
 export enum COLLECT_STATUS {
@@ -15,8 +17,15 @@ const CollectAllButton = ({ className = "" }) => {
   const loading = loadingXYZ || loadingZora
   const { isCollectedOnZora, isCollectedSoundXYZ, collectedCheck } = useCollectedCheck()
   const [collectStatus, setCollectStatus] = useState(COLLECT_STATUS.ZORA)
+  const { isAuthenticated } = useUserProvider()
+  const { login } = usePrivy()
 
   const handleClick = async () => {
+    if (!isAuthenticated) {
+      login()
+      return
+    }
+
     if (!isCollectedOnZora) {
       setCollectStatus(COLLECT_STATUS.ZORA)
       const resZora = await purchase(1)
