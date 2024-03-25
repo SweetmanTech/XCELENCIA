@@ -7,7 +7,7 @@ import { useState } from "react"
 const useSoundXYZCollect = () => {
   const { walletClient } = usePrivyWalletClient(SOUNDXYZ_CHAIN)
   const { wallet, connectedWallet } = useConnectedWallet()
-  const [loading, setLoaindg] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const collectSoundXYZ = async () => {
     try {
@@ -18,7 +18,7 @@ const useSoundXYZCollect = () => {
       }
       if (!connectedWallet) return
 
-      setLoaindg(true)
+      setLoading(true)
       const publicClient = getPublicClient(SOUNDXYZ_CHAIN.id)
       const anyPublicClient = publicClient as any
 
@@ -36,10 +36,10 @@ const useSoundXYZCollect = () => {
       })
       const anyWallet = walletClient as any
       const hash = await anyWallet.editionV2.mint(mintParams.mint)
-      setLoaindg(false)
+      setLoading(false)
       return hash
     } catch (error) {
-      setLoaindg(false)
+      setLoading(false)
       return { error }
     }
   }
