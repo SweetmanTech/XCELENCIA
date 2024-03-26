@@ -3,7 +3,7 @@ import { numberToHex } from "viem"
 import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE, ZORA_FEE } from "@/lib/consts"
+import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE, SOUND_PRICE } from "@/lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
@@ -28,7 +28,7 @@ const useTBAPurchase = () => {
 
       setLoading(true)
       const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(zoraQuantity)
-      const soundTotalPrice = BigNumber.from("0").mul(soundQuantity).add(ZORA_FEE)
+      const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(soundQuantity)
       const totalPrice = zoraTotalPrice.add(soundTotalPrice).toHexString()
       const zoraNextTokenId = await getZoraNextTokenId()
       const soundNextTokenId = await getSoundNextTokenId()
