@@ -29,7 +29,7 @@ const getMintMulticallCalls = (
     allowFailure: false,
     callData: createAccountData,
   }
-  const comment = "XCELENCIA - ERC6551 smart wallet 🪄"
+  const comment = "XCELENCIA - ERC6551 smart album 🪄"
 
   const mintData = new Interface(zoraAbi).encodeFunctionData("mintWithRewards", [
     mintRecipient,
