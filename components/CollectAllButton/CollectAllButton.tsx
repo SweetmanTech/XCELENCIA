@@ -1,11 +1,5 @@
 import useTBAPurchase from "@/hooks/useTBAPurchase"
 
-export enum COLLECT_STATUS {
-  ZORA = "ZORA",
-  SOUND = "SOUND.XYZ",
-  CATALOG = "CATALOG",
-}
-
 const CollectAllButton = ({ className = "" }) => {
   const { purchase, loading } = useTBAPurchase()
 
