@@ -30,7 +30,7 @@ const useTBAPurchase = () => {
       const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
       const zoraNextTokenId = await getZoraNextTokenId()
       const zoraQuantity = 1
-      const calls = getMintMulticallCalls(
+      const tbaCalls = getMintMulticallCalls(
         zoraNextTokenId,
         connectedWallet as string,
         zoraQuantity,
@@ -41,14 +41,14 @@ const useTBAPurchase = () => {
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
       const totalPrice = zoraTotalPrice.add(soundMintCallValue)
       const hexValue = totalPrice.toHexString()
-
+      const calls = [...tbaCalls, soundMintCall]
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,
           CHAIN_ID,
           multicallAbi,
           "aggregate3Value",
-          [calls, soundMintCall],
+          calls,
           hexValue,
           "Collect the Album",
           "El Nino Estrello",
@@ -62,7 +62,7 @@ const useTBAPurchase = () => {
         CHAIN_ID,
         multicallAbi,
         "aggregate3Value",
-        [...calls, soundMintCall],
+        calls,
         hexValue,
       )
       setLoading(false)
