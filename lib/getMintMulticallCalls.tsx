@@ -1,50 +1,19 @@
-import { Interface } from "ethers/lib/utils"
-import {
-  ACCOUNT_PROXY,
-  CHAIN_ID,
-  DROP_ADDRESS,
-  MINT_REFERRAL_ADDRESS,
-  REGISTRY_ADDRESS,
-  SALT_BYTES,
-} from "@/lib/consts"
-import zoraAbi from "@/lib/abi/zora-erc721-drop.json"
-import registryAbi from "@/lib/abi/erc6551-registry.json"
+import { DROP_ADDRESS } from "@/lib/consts"
+import getRegistryEncodedData from "./getRegistryEncodedData"
+import getRegistryCall from "./getRegistryCall"
+import getZoraMintCall from "./getZoraMintCall"
 
 const getMintMulticallCalls = (
-  tokenId: string,
+  zoraNextTokenId: string,
   mintRecipient: string,
-  mintQuantity: number,
-  totalPrice: string,
+  zoraQuantity: number,
+  zoraTotalPrice: string,
 ) => {
-  const createAccountData = new Interface(registryAbi).encodeFunctionData("createAccount", [
-    ACCOUNT_PROXY,
-    SALT_BYTES,
-    CHAIN_ID,
-    DROP_ADDRESS,
-    tokenId,
-  ])
-  const registryCall = {
-    target: REGISTRY_ADDRESS,
-    value: 0,
-    allowFailure: false,
-    callData: createAccountData,
-  }
-  const comment = "XCELENCIA - ERC6551 smart album 🪄"
+  const zoraCreateAccountData = getRegistryEncodedData(DROP_ADDRESS, zoraNextTokenId)
+  const zoraRegistryCall = getRegistryCall(zoraCreateAccountData)
+  const zoraMintCall = getZoraMintCall(mintRecipient, zoraQuantity, zoraTotalPrice)
 
-  const mintData = new Interface(zoraAbi).encodeFunctionData("mintWithRewards", [
-    mintRecipient,
-    mintQuantity,
-    comment,
-    MINT_REFERRAL_ADDRESS,
-  ])
-  const mintCall = {
-    target: DROP_ADDRESS,
-    value: totalPrice,
-    allowFailure: false,
-    callData: mintData,
-  }
-
-  const calls = [mintCall, registryCall]
+  const calls = [zoraMintCall, zoraRegistryCall]
   return calls
 }
 

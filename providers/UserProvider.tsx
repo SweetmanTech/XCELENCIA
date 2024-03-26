@@ -5,9 +5,9 @@ const UserContext = createContext(null)
 
 const UserProvider = ({ children }) => {
   const [privyEmail, setPrivyEmail] = useState(null)
-  const { user } = usePrivy()
-
+  const { user, authenticated, ready } = usePrivy()
   const isLoggedByEmail = privyEmail ? true : false
+  const isAuthenticated = authenticated && ready
 
   useEffect(() => {
     if (user?.email?.address) {
@@ -22,8 +22,9 @@ const UserProvider = ({ children }) => {
     () => ({
       privyEmail,
       isLoggedByEmail,
+      isAuthenticated
     }),
-    [privyEmail, isLoggedByEmail],
+    [privyEmail, isLoggedByEmail, isAuthenticated],
   )
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
