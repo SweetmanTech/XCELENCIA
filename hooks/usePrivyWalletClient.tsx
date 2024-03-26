@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { WalletClient, createWalletClient, custom } from "viem"
-import { editionV2WalletActionsMint } from "@soundxyz/sdk"
 import useConnectedWallet from "./useConnectedWallet"
+import { editionV2WalletActionsCreate, editionV2WalletActionsMint } from "@soundxyz/sdk"
 
 const usePrivyWalletClient = (chain) => {
   const { connectedWallet, wallet } = useConnectedWallet()
@@ -14,7 +14,9 @@ const usePrivyWalletClient = (chain) => {
         chain,
         account: connectedWallet as `0x${string}`,
         transport: custom(provider),
-      }).extend(editionV2WalletActionsMint)
+      })
+        .extend(editionV2WalletActionsCreate)
+        .extend(editionV2WalletActionsMint)
       setWalletClient(response)
     }
 
