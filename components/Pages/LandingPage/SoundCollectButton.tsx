@@ -5,7 +5,7 @@ import { getPublicClient } from "@/lib/clients"
 import { CHAIN, CHAIN_ID } from "@/lib/consts"
 
 const SoundCollectButton = ({ className = "" }) => {
-  const { walletClient } = usePrivyWalletClient()
+  const { walletClient } = usePrivyWalletClient(CHAIN)
   const { externalWallet } = useConnectedWallet()
   const { loading } = useTBAPurchase()
 

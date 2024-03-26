@@ -20,7 +20,7 @@ const getMintMulticallCalls = (
   const zoraMintCall = getZoraMintCall(mintRecipient, zoraQuantity, zoraTotalPrice)
   const soundMintCall = getSoundMintCall(mintRecipient, soundQuantity, soundTotalPrice)
 
-  const calls = [zoraMintCall, zoraRegistryCall]
+  const calls = [zoraMintCall, zoraRegistryCall, soundRegistryCall, soundMintCall]
   return calls
 }
 
