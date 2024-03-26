@@ -1,10 +1,16 @@
 import useTBAPurchase from "@/hooks/useTBAPurchase"
 
+export enum COLLECT_STATUS {
+  ZORA = "ZORA",
+  SOUND = "SOUND.XYZ",
+  CATALOG = "CATALOG",
+}
+
 const CollectAllButton = ({ className = "" }) => {
   const { purchase, loading } = useTBAPurchase()
 
   const handleClick = async () => {
-    await purchase(1)
+    await purchase(1, 13)
   }
 
   return (
@@ -15,7 +21,7 @@ const CollectAllButton = ({ className = "" }) => {
       px-[20px] py-[10px] ${className}`}
       disabled={loading}
     >
-      {loading ? "Collecting..." : "Collect Album"}
+      {loading ? `Collecting...` : "Collect Album"}
     </button>
   )
 }

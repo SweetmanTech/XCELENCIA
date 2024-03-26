@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+	font-family: 'MADE Outer Sans Bold';
+	src: url('/fonts/MADE Outer Sans Bold.otf');
+}
+@font-face {
+	font-family: 'copihue-w05-semi-bold-italic';
+	src: url('/fonts/copihue-w05-semi-bold-italic.otf');
+}
+@font-face {
+	font-family: 'Poppins-Italic';
+	src: url('/fonts/Poppins-Italic.ttf');
+}
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
