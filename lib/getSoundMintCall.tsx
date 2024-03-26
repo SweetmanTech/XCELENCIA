@@ -1,5 +1,4 @@
 import { Interface } from "ethers/lib/utils"
-import superminterAbi from "@/lib/abi/superminter.json"
 import { CHAIN, CHAIN_ID, SPOTIFY_DROP_ADDRESS } from "./consts"
 import { getPublicClient } from "./clients"
 
@@ -18,8 +17,8 @@ const getSoundMintCall = async (mintRecipient) => {
     editionAddress: SPOTIFY_DROP_ADDRESS,
     mintTo: mintRecipient,
   })
-  const { args, functionName, address: SUPERMINTER, value } = mintParams.mint.input
-  const soundMintDataV2 = new Interface(superminterAbi).encodeFunctionData(functionName, args)
+  const { args, functionName, address: SUPERMINTER, value, abi } = mintParams.mint.input
+  const soundMintDataV2 = new Interface(abi).encodeFunctionData(functionName, args)
 
   return {
     target: SUPERMINTER,
