@@ -1,4 +1,4 @@
-import { base, sepolia } from "viem/chains"
+import { base, baseSepolia } from "viem/chains"
 
 export const SEO_TITLE = "XCELENCIA"
 export const SEO_DESCRIPTION = "el niño estrella"
@@ -6,12 +6,12 @@ export const SEO_IMAGE = "/images/logo.png"
 export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_ADDRESS
 export const SPOTIFY_DROP_ADDRESS = process.env.NEXT_PUBLIC_SPOTIFY_DROP_ADDRESS
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
-export const CHAIN = IS_TESTNET ? sepolia : sepolia
-export const SOUNDXYZ_CHAIN = base
+export const CHAIN = IS_TESTNET ? baseSepolia : base
 export const CHAIN_ID = CHAIN.id
 export const MINTER_ADDRESS = process.env.NEXT_PUBLIC_MINTER
 export const MINT_REFERRAL_ADDRESS = process.env.NEXT_PUBLIC_REFERRAL
-export const PRICE = "22977000000000000"
+export const ZORA_PRICE = "22977000000000000"
+export const ZORA_FEE = "777000000000000"
 
 // Tokenbound
 export const MULTICALL3_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"

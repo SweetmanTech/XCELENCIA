@@ -1,51 +1,48 @@
 import { BigNumber } from "ethers"
 import { numberToHex } from "viem"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import getTotalSupply from "@/lib/viem/getTotalSupply"
-import { CHAIN_ID, MULTICALL3_ADDRESS, PRICE } from "@/lib/consts"
+import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE, ZORA_FEE } from "@/lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
+import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
+import getSoundNextTokenId from "@/lib/getSoundNextTokenId"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
   const { sendTransaction: sendTxByPrivy } = usePrivySendTransaction()
   const { sendTransaction: sendTxByWallet } = useWalletTransaction()
-  const [totalSupply, setTotalSupply] = useState(null)
   const [loading, setLoading] = useState(false)
   const { isLoggedByEmail } = useUserProvider()
   const { prepare } = usePreparePrivyWallet()
 
-  useEffect(() => {
-    const init = async () => {
-      const response = await getTotalSupply()
-      setTotalSupply(response)
-    }
-    init()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const purchase = async (quantity: number) => {
+  const purchase = async (zoraQuantity: number, soundQuantity: number) => {
     try {
       if (!prepare()) return
       if (!connectedWallet) return
 
       setLoading(true)
-      const price = BigNumber.from(PRICE).mul(quantity).toString()
-      const lastMinted = await getTotalSupply()
-      const nextTokenId = (lastMinted + BigInt(1)).toString()
+      const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(zoraQuantity)
+      const soundTotalPrice = BigNumber.from("0").mul(soundQuantity).add(ZORA_FEE)
+      const totalPrice = zoraTotalPrice.add(soundTotalPrice).toHexString()
+      const zoraNextTokenId = await getZoraNextTokenId()
+      const soundNextTokenId = await getSoundNextTokenId()
       const calls = getMintMulticallCalls(
-        nextTokenId,
+        zoraNextTokenId,
+        soundNextTokenId,
         connectedWallet as string,
-        quantity,
-        price,
+        zoraQuantity,
+        soundQuantity,
+        zoraTotalPrice.toString(),
+        soundTotalPrice.toString(),
       ) as any
-      const hexValue = numberToHex(BigInt(price))
+
+      const hexValue = numberToHex(BigInt(totalPrice))
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,
@@ -74,13 +71,13 @@ const useTBAPurchase = () => {
     } catch (err) {
       setLoading(false)
       // eslint-disable-next-line no-console
-      console.error(err)
+      console.error(err, "ZIAD")
       handleTxError(err)
       return { error: err }
     }
   }
 
-  return { purchase, totalSupply, loading }
+  return { purchase, loading }
 }
 
 export default useTBAPurchase

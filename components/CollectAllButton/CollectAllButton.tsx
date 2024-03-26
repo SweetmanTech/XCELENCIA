@@ -1,9 +1,4 @@
-import useCollectedCheck from "@/hooks/useCollectedCheck"
-import useSoundXYZCollect from "@/hooks/useCollectSound"
 import useTBAPurchase from "@/hooks/useTBAPurchase"
-import { useUserProvider } from "@/providers/UserProvider"
-import { usePrivy } from "@privy-io/react-auth"
-import { useState } from "react"
 
 export enum COLLECT_STATUS {
   ZORA = "ZORA",
@@ -12,36 +7,10 @@ export enum COLLECT_STATUS {
 }
 
 const CollectAllButton = ({ className = "" }) => {
-  const { purchase, loading: loadingZora } = useTBAPurchase()
-  const { loading: loadingXYZ, collectSoundXYZ } = useSoundXYZCollect()
-  const loading = loadingXYZ || loadingZora
-  const { isCollectedOnZora, isCollectedSoundXYZ, collectedCheck } = useCollectedCheck()
-  const [collectStatus, setCollectStatus] = useState(COLLECT_STATUS.ZORA)
-  const { isAuthenticated } = useUserProvider()
-  const { login } = usePrivy()
+  const { purchase, loading } = useTBAPurchase()
 
   const handleClick = async () => {
-    if (!isAuthenticated) {
-      login()
-      return
-    }
-
-    if (!isCollectedOnZora) {
-      setCollectStatus(COLLECT_STATUS.ZORA)
-      const resZora = await purchase(1)
-      if (!resZora || resZora?.error) {
-        return
-      }
-      await collectedCheck()
-    }
-    if (!isCollectedSoundXYZ) {
-      setCollectStatus(COLLECT_STATUS.SOUND)
-      const resSound = await collectSoundXYZ()
-      if (!resSound || resSound?.error) {
-        return
-      }
-      await collectedCheck()
-    }
+    await purchase(1, 13)
   }
 
   return (
@@ -52,7 +21,7 @@ const CollectAllButton = ({ className = "" }) => {
       px-[20px] py-[10px] ${className}`}
       disabled={loading}
     >
-      {loading ? `Collecting on ${collectStatus}...` : "Collect Album"}
+      {loading ? `Collecting...` : "Collect Album"}
     </button>
   )
 }
