@@ -21,6 +21,5 @@ export const getPublicClient = (chainId: number) => {
   publicClient = publicClient.extend(editionV2PublicActionsCreate)
   publicClient = publicClient.extend(editionV2PublicActionsInfo)
   publicClient = publicClient.extend(editionV2PublicActionsMint)
-  publicClient = publicClient.extend(soundEditionVersionPublicActions)
   return publicClient as PublicClient
 }

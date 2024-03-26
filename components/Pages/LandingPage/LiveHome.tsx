@@ -1,6 +1,8 @@
 import Content from "@/components/Layout/Content"
 import MusicPlayer from "./MusicPlayer"
 import CollectButtons from "./CollectButtons"
+import DetailSection from "./DetailSection/DetailSection"
+import WhatNext from "./WhatNext"
 
 const LiveHome = () => (
   <Content>
@@ -11,6 +13,8 @@ const LiveHome = () => (
       >
         <MusicPlayer />
         <CollectButtons />
+        <DetailSection />
+        <WhatNext />
       </div>
     </div>
   </Content>
