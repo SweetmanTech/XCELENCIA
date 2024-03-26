@@ -41,12 +41,12 @@ const CreateSoundEditionButton = ({ className = "" }) => {
           },
         ],
       })
-      console.log("ZIAD", hash)
       setLoading(false)
+      // eslint-disable-next-line consistent-return
       return hash
     } catch (error) {
-      console.log("ZIAD HERE", error)
       setLoading(false)
+      // eslint-disable-next-line consistent-return
       return { error }
     }
   }
