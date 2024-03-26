@@ -1,4 +1,4 @@
-import { DROP_ADDRESS, SPOTIFY_DROP_ADDRESS } from "@/lib/consts"
+import { DROP_ADDRESS } from "@/lib/consts"
 import getRegistryEncodedData from "./getRegistryEncodedData"
 import getRegistryCall from "./getRegistryCall"
 import getZoraMintCall from "./getZoraMintCall"
