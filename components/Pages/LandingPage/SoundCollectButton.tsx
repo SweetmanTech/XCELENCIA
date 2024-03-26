@@ -14,11 +14,9 @@ const SoundCollectButton = ({ className = "" }) => {
       const SPOTIFY = "0xBB1b8eeC5F326d90304F679a7469184c92A1adea"
       const publicClient = getPublicClient(CHAIN_ID)
       const anyPublicClient = publicClient as any
-
       const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
         editionAddress: SPOTIFY,
       })
-
       const mintParams = await anyPublicClient.editionV2.mintParameters({
         account: externalWallet.address,
         chain: CHAIN,
@@ -27,7 +25,6 @@ const SoundCollectButton = ({ className = "" }) => {
         editionAddress: SPOTIFY,
         mintTo: externalWallet.address,
       })
-      console.log("SWEETS mintParams", mintParams)
       const anyWallet = walletClient as any
       const hash = await anyWallet.editionV2.mint(mintParams.mint)
       return hash

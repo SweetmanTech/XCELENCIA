@@ -1,18 +1,17 @@
 import { BigNumber } from "ethers"
-import { numberToHex } from "viem"
 import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
 import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE, SOUND_PRICE } from "@/lib/consts"
-import useConnectedWallet from "./useConnectedWallet"
-import usePrivySendTransaction from "./usePrivySendTransaction"
-import useWalletTransaction from "./useWalletTransaction"
 import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
-import usePreparePrivyWallet from "./usePreparePrivyWallet"
 import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
 import getSoundMintCall from "@/lib/getSoundMintCall"
 import getAccount from "@/lib/tokenbound/getAccount"
+import useConnectedWallet from "./useConnectedWallet"
+import usePrivySendTransaction from "./usePrivySendTransaction"
+import useWalletTransaction from "./useWalletTransaction"
+import usePreparePrivyWallet from "./usePreparePrivyWallet"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -22,15 +21,14 @@ const useTBAPurchase = () => {
   const { isLoggedByEmail } = useUserProvider()
   const { prepare } = usePreparePrivyWallet()
 
-  const purchase = async (zoraQuantity: number, soundQuantity: number) => {
+  const purchase = async (zoraQuantity: number) => {
     try {
-      if (!prepare()) return
-      if (!connectedWallet) return
+      if (!prepare()) return false
+      if (!connectedWallet) return false
 
       setLoading(true)
       const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
       const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(1)
-      console.log("SWEETS soundTotalPrice", soundTotalPrice)
       const totalPrice = zoraTotalPrice.add(soundTotalPrice)
       const zoraNextTokenId = await getZoraNextTokenId()
       const calls = getMintMulticallCalls(
@@ -39,17 +37,9 @@ const useTBAPurchase = () => {
         zoraQuantity,
         zoraTotalPrice.toString(),
       ) as any
-      console.log("SWEETS CALLS", calls)
       const tba = getAccount(zoraNextTokenId)
-      console.log("SWEETS tba", tba)
-
       const soundMintCall = await getSoundMintCall(tba)
-      console.log("SWEETS soundMintCall", soundMintCall)
-
-      console.log("SWEETS totalPrice", totalPrice)
-
       const hexValue = totalPrice.toHexString()
-      console.log("SWEETS totalPrice", hexValue)
 
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
