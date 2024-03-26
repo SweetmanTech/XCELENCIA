@@ -1,6 +1,5 @@
 import CollectAllButton from "@/components/CollectAllButton"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
-import SoundCollectButton from "./SoundCollectButton"
 
 const CollectButtons = () => (
   <FadeInWhenVisible
@@ -8,7 +7,6 @@ const CollectButtons = () => (
   gap-y-[15px] md:gap-y-0 md:gap-x-[10px]"
   >
     <CollectAllButton />
-    <SoundCollectButton />
   </FadeInWhenVisible>
 )
 
