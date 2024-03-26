@@ -5,5 +5,5 @@ import { CHAIN_ID } from "../consts"
 const publicClient = getPublicClient(CHAIN_ID)
 export const tokenboundPublicClient = new TokenboundClient({
   publicClient: publicClient as any,
-  chainId: CHAIN_ID,
+  chainId: 5,
 })
