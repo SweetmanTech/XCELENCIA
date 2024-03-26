@@ -1,17 +1,17 @@
 import { BigNumber } from "ethers"
-import { numberToHex } from "viem"
 import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE, SOUND_PRICE } from "@/lib/consts"
+import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE } from "@/lib/consts"
+import handleTxError from "@/lib/handleTxError"
+import { useUserProvider } from "@/providers/UserProvider"
+import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
+import getSoundMintCall from "@/lib/getSoundMintCall"
+import getAccount from "@/lib/tokenbound/getAccount"
 import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
-import handleTxError from "@/lib/handleTxError"
-import { useUserProvider } from "@/providers/UserProvider"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
-import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
-import getSoundNextTokenId from "@/lib/getSoundNextTokenId"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -21,35 +21,34 @@ const useTBAPurchase = () => {
   const { isLoggedByEmail } = useUserProvider()
   const { prepare } = usePreparePrivyWallet()
 
-  const purchase = async (zoraQuantity: number, soundQuantity: number) => {
+  const purchase = async () => {
     try {
-      if (!prepare()) return
-      if (!connectedWallet) return
+      if (!prepare()) return false
+      if (!connectedWallet) return false
 
       setLoading(true)
-      const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(zoraQuantity)
-      const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(soundQuantity)
-      const totalPrice = zoraTotalPrice.add(soundTotalPrice).toHexString()
+      const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
       const zoraNextTokenId = await getZoraNextTokenId()
-      const soundNextTokenId = await getSoundNextTokenId()
-      const calls = getMintMulticallCalls(
+      const zoraQuantity = 1
+      const tbaCalls = getMintMulticallCalls(
         zoraNextTokenId,
-        soundNextTokenId,
         connectedWallet as string,
         zoraQuantity,
-        soundQuantity,
         zoraTotalPrice.toString(),
-        soundTotalPrice.toString(),
       ) as any
-
-      const hexValue = numberToHex(BigInt(totalPrice))
+      const tba = getAccount(zoraNextTokenId)
+      const soundMintCall = await getSoundMintCall(tba)
+      const soundMintCallValue = BigNumber.from(soundMintCall.value)
+      const totalPrice = zoraTotalPrice.add(soundMintCallValue)
+      const hexValue = totalPrice.toHexString()
+      const calls = [...tbaCalls, soundMintCall]
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,
           CHAIN_ID,
           multicallAbi,
           "aggregate3Value",
-          [calls],
+          calls,
           hexValue,
           "Collect the Album",
           "El Nino Estrello",
@@ -70,8 +69,6 @@ const useTBAPurchase = () => {
       return response
     } catch (err) {
       setLoading(false)
-      // eslint-disable-next-line no-console
-      console.error(err, "ZIAD")
       handleTxError(err)
       return { error: err }
     }
