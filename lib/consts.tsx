@@ -1,4 +1,4 @@
-import { base, baseSepolia, sepolia } from "viem/chains"
+import { baseSepolia, sepolia } from "viem/chains"
 
 export const SEO_TITLE = "XCELENCIA"
 export const SEO_DESCRIPTION = "el niño estrella"

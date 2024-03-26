@@ -30,9 +30,9 @@ const SoundCollectButton = ({ className = "" }) => {
       const anyWallet = walletClient as any
       const hash = await anyWallet.editionV2.mint(mintParams.mint)
       return hash
-      } catch(error) {
-        console.log("ZIAD ERROR", error)
-      }
+    } catch (error) {
+      return { error }
+    }
   }
 
   return (
