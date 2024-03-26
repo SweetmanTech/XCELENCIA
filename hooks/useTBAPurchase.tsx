@@ -12,6 +12,7 @@ import { useUserProvider } from "@/providers/UserProvider"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
 import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
 import getSoundMintCall from "@/lib/getSoundMintCall"
+import getAccount from "@/lib/tokenbound/getAccount"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -39,7 +40,10 @@ const useTBAPurchase = () => {
         zoraTotalPrice.toString(),
       ) as any
       console.log("SWEETS CALLS", calls)
-      const soundMintCall = await getSoundMintCall(connectedWallet, soundQuantity, soundTotalPrice)
+      const tba = getAccount(zoraNextTokenId)
+      console.log("SWEETS tba", tba)
+
+      const soundMintCall = await getSoundMintCall(tba)
       console.log("SWEETS soundMintCall", soundMintCall)
 
       console.log("SWEETS totalPrice", totalPrice)
@@ -47,20 +51,20 @@ const useTBAPurchase = () => {
       const hexValue = totalPrice.toHexString()
       console.log("SWEETS totalPrice", hexValue)
 
-      // if (isLoggedByEmail) {
-      //   const response = await sendTxByPrivy(
-      //     MULTICALL3_ADDRESS,
-      //     CHAIN_ID,
-      //     multicallAbi,
-      //     "aggregate3Value",
-      //     [calls, soundMintCall],
-      //     hexValue,
-      //     "Collect the Album",
-      //     "El Nino Estrello",
-      //   )
-      //   setLoading(false)
-      //   return response
-      // }
+      if (isLoggedByEmail) {
+        const response = await sendTxByPrivy(
+          MULTICALL3_ADDRESS,
+          CHAIN_ID,
+          multicallAbi,
+          "aggregate3Value",
+          [calls, soundMintCall],
+          hexValue,
+          "Collect the Album",
+          "El Nino Estrello",
+        )
+        setLoading(false)
+        return response
+      }
 
       const response = await sendTxByWallet(
         MULTICALL3_ADDRESS,
