@@ -27,6 +27,7 @@ const SoundCollectButton = ({ className = "" }) => {
         editionAddress: SPOTIFY,
         mintTo: externalWallet.address,
       })
+      console.log("SWEETS mintParams", mintParams)
       const anyWallet = walletClient as any
       const hash = await anyWallet.editionV2.mint(mintParams.mint)
       return hash

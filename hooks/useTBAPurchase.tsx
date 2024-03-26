@@ -11,7 +11,7 @@ import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
 import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
-import getSoundNextTokenId from "@/lib/getSoundNextTokenId"
+import getSoundMintCall from "@/lib/getSoundMintCall"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -27,43 +27,47 @@ const useTBAPurchase = () => {
       if (!connectedWallet) return
 
       setLoading(true)
-      const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(zoraQuantity)
-      const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(soundQuantity)
-      const totalPrice = zoraTotalPrice.add(soundTotalPrice).toHexString()
+      const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
+      const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(1)
+      console.log("SWEETS soundTotalPrice", soundTotalPrice)
+      const totalPrice = zoraTotalPrice.add(soundTotalPrice)
       const zoraNextTokenId = await getZoraNextTokenId()
-      const soundNextTokenId = await getSoundNextTokenId()
       const calls = getMintMulticallCalls(
         zoraNextTokenId,
-        soundNextTokenId,
         connectedWallet as string,
         zoraQuantity,
-        soundQuantity,
         zoraTotalPrice.toString(),
-        soundTotalPrice.toString(),
       ) as any
+      console.log("SWEETS CALLS", calls)
+      const soundMintCall = await getSoundMintCall(connectedWallet, soundQuantity, soundTotalPrice)
+      console.log("SWEETS soundMintCall", soundMintCall)
 
-      const hexValue = numberToHex(BigInt(totalPrice))
-      if (isLoggedByEmail) {
-        const response = await sendTxByPrivy(
-          MULTICALL3_ADDRESS,
-          CHAIN_ID,
-          multicallAbi,
-          "aggregate3Value",
-          [calls],
-          hexValue,
-          "Collect the Album",
-          "El Nino Estrello",
-        )
-        setLoading(false)
-        return response
-      }
+      console.log("SWEETS totalPrice", totalPrice)
+
+      const hexValue = totalPrice.toHexString()
+      console.log("SWEETS totalPrice", hexValue)
+
+      // if (isLoggedByEmail) {
+      //   const response = await sendTxByPrivy(
+      //     MULTICALL3_ADDRESS,
+      //     CHAIN_ID,
+      //     multicallAbi,
+      //     "aggregate3Value",
+      //     [calls, soundMintCall],
+      //     hexValue,
+      //     "Collect the Album",
+      //     "El Nino Estrello",
+      //   )
+      //   setLoading(false)
+      //   return response
+      // }
 
       const response = await sendTxByWallet(
         MULTICALL3_ADDRESS,
         CHAIN_ID,
         multicallAbi,
         "aggregate3Value",
-        calls,
+        [...calls, soundMintCall],
         hexValue,
       )
       setLoading(false)
