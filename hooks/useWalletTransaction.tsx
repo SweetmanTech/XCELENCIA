@@ -4,7 +4,7 @@ import { CHAIN_ID } from "@/lib/consts"
 import usePrivyEthersSigner from "./usePrivyEthersSigner"
 
 const useWalletTransaction = () => {
-  const { externalWallet } = useConnectedWallet()
+  const { wallet } = useConnectedWallet()
   const { signer } = usePrivyEthersSigner()
 
   const sendTransaction = async (
@@ -16,11 +16,11 @@ const useWalletTransaction = () => {
     value = BigNumber.from("0").toHexString(),
     gasLimit = 0,
   ) => {
-    if (!externalWallet) return
+    if (!wallet) return
     try {
-      const privyChainId = externalWallet.chainId
+      const privyChainId = wallet.chainId
       if (privyChainId !== `eip155:${chainId}`) {
-        await externalWallet.switchChain(CHAIN_ID)
+        await wallet.switchChain(CHAIN_ID)
         return
       }
       const contract = new Contract(to, abi, signer)
@@ -35,9 +35,10 @@ const useWalletTransaction = () => {
         const txHash = tx.wait()
         return txHash
       }
-      return { error: true }
+      return
     } catch (error) {
-      console.log(error)
+      // eslint-disable-next-line no-console
+      console.error(error)
       return { error }
     }
   }
