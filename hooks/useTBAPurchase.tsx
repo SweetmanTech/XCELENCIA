@@ -28,8 +28,6 @@ const useTBAPurchase = () => {
 
       setLoading(true)
       const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
-      const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(1)
-      const totalPrice = zoraTotalPrice.add(soundTotalPrice)
       const zoraNextTokenId = await getZoraNextTokenId()
       const zoraQuantity = 1
       const calls = getMintMulticallCalls(
@@ -40,6 +38,8 @@ const useTBAPurchase = () => {
       ) as any
       const tba = getAccount(zoraNextTokenId)
       const soundMintCall = await getSoundMintCall(tba)
+      const soundMintCallValue = BigNumber.from(soundMintCall.value)
+      const totalPrice = zoraTotalPrice.add(soundMintCallValue)
       const hexValue = totalPrice.toHexString()
 
       if (isLoggedByEmail) {
@@ -69,8 +69,6 @@ const useTBAPurchase = () => {
       return response
     } catch (err) {
       setLoading(false)
-      // eslint-disable-next-line no-console
-      console.error(err, "ZIAD")
       handleTxError(err)
       return { error: err }
     }
