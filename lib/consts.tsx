@@ -1,4 +1,4 @@
-import { baseSepolia, sepolia } from "viem/chains"
+import { baseSepolia } from "viem/chains"
 
 export const SEO_TITLE = "XCELENCIA"
 export const SEO_DESCRIPTION = "el niño estrella"
@@ -6,7 +6,7 @@ export const SEO_IMAGE = "/images/logo.png"
 export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_ADDRESS
 export const SPOTIFY_DROP_ADDRESS = "0xBB1b8eeC5F326d90304F679a7469184c92A1adea"
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
-export const CHAIN = IS_TESTNET ? baseSepolia : sepolia
+export const CHAIN = IS_TESTNET ? baseSepolia : baseSepolia
 export const CHAIN_ID = CHAIN.id
 export const MINTER_ADDRESS = process.env.NEXT_PUBLIC_MINTER
 export const MINT_REFERRAL_ADDRESS = process.env.NEXT_PUBLIC_REFERRAL
