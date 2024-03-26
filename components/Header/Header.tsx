@@ -2,15 +2,10 @@ import { useRouter } from "next/router"
 import SignButton from "../SignButton"
 
 const Header = () => {
+  const itemClasses = "text-white text-[24px] font-semibold"
   const { push, pathname } = useRouter()
 
-  const isImaginePage = pathname.includes("/april4/imagine")
-  const isHomePage = pathname.includes("/april4/home") || pathname === "/april4"
-
-  const onClick = () => {
-    if (isHomePage) push("/april4/imagine")
-    if (isImaginePage) push("/april4")
-  }
+  const isApril4 = pathname.includes("/april4")
 
   return (
     <nav
@@ -18,10 +13,22 @@ const Header = () => {
             flex items-center justify-between z-[1000]
             px-[40px] py-[20px]"
     >
-      <button className="text-white text-[24px] font-semibold" onClick={onClick} type="button">
-        {isImaginePage && "Home"}
-        {isHomePage && "Imagine"}
-      </button>
+      <div className="flex gap-x-[20px] items-center">
+        <button
+          className={itemClasses}
+          onClick={() => push(isApril4 ? "/april4" : "/")}
+          type="button"
+        >
+          Home
+        </button>
+        <button
+          className={itemClasses}
+          onClick={() => push(isApril4 ? "/april4/imagine" : "/imagine")}
+          type="button"
+        >
+          Imagination
+        </button>
+      </div>
       <SignButton />
     </nav>
   )

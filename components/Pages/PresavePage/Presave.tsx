@@ -19,7 +19,7 @@ const Presave = () => {
           src="https://embed.laylo.com?dropId=d6tew&color=FF7300&minimal=false&theme=light"
           allow="web-share"
           allowTransparency
-          className="h-[100%] w-[100%]"
+          className="w-[100%]"
         />
       )}
     </div>
