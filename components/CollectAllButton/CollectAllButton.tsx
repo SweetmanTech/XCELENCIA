@@ -10,7 +10,7 @@ const CollectAllButton = ({ className = "" }) => {
   const { purchase, loading } = useTBAPurchase()
 
   const handleClick = async () => {
-    await purchase(1)
+    await purchase()
   }
 
   return (

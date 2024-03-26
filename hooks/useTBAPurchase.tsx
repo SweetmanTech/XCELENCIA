@@ -21,7 +21,7 @@ const useTBAPurchase = () => {
   const { isLoggedByEmail } = useUserProvider()
   const { prepare } = usePreparePrivyWallet()
 
-  const purchase = async (zoraQuantity: number) => {
+  const purchase = async () => {
     try {
       if (!prepare()) return false
       if (!connectedWallet) return false
@@ -31,6 +31,7 @@ const useTBAPurchase = () => {
       const soundTotalPrice = BigNumber.from(SOUND_PRICE).mul(1)
       const totalPrice = zoraTotalPrice.add(soundTotalPrice)
       const zoraNextTokenId = await getZoraNextTokenId()
+      const zoraQuantity = 1
       const calls = getMintMulticallCalls(
         zoraNextTokenId,
         connectedWallet as string,
