@@ -10,25 +10,29 @@ const SoundCollectButton = ({ className = "" }) => {
   const { loading } = useTBAPurchase()
 
   const handleClick = async () => {
-    const SPOTIFY = "0xdE88522Dc78a6cc99C1CfF060d8BC744291E159a"
-    const publicClient = getPublicClient(CHAIN_ID)
-    const anyPublicClient = publicClient as any
+    try {
+      const SPOTIFY = "0xBB1b8eeC5F326d90304F679a7469184c92A1adea"
+      const publicClient = getPublicClient(CHAIN_ID)
+      const anyPublicClient = publicClient as any
 
-    const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
-      editionAddress: SPOTIFY,
-    })
+      const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
+        editionAddress: SPOTIFY,
+      })
 
-    const mintParams = await anyPublicClient.editionV2.mintParameters({
-      account: externalWallet.address,
-      chain: CHAIN,
-      schedule: mintSchedules.activeSchedules[0],
-      quantity: 1,
-      editionAddress: SPOTIFY,
-      mintTo: externalWallet.address,
-    })
-    const anyWallet = walletClient as any
-    const hash = await anyWallet.editionV2.mint(mintParams.mint)
-    return hash
+      const mintParams = await anyPublicClient.editionV2.mintParameters({
+        account: externalWallet.address,
+        chain: CHAIN,
+        schedule: mintSchedules.activeSchedules[0],
+        quantity: 1,
+        editionAddress: SPOTIFY,
+        mintTo: externalWallet.address,
+      })
+      const anyWallet = walletClient as any
+      const hash = await anyWallet.editionV2.mint(mintParams.mint)
+      return hash
+      } catch(error) {
+        console.log("ZIAD ERROR", error)
+      }
   }
 
   return (

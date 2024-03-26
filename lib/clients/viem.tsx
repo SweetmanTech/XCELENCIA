@@ -7,10 +7,10 @@ import {
   soundEditionVersionPublicActions,
 } from "@soundxyz/sdk"
 import getViemNetwork from "../viem/getViemNetwork"
-
-export const RPC_URL = `https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`
+import getAlchemyRpcUrl from "../alchemy/getAlchemyRpcUrl"
 
 export const getPublicClient = (chainId: number) => {
+  const RPC_URL = getAlchemyRpcUrl(chainId)
   const chain = getViemNetwork(chainId)
   let publicClient = createPublicClient({
     chain: chain as Chain,
