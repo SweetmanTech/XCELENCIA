@@ -16,12 +16,12 @@ const useWalletTransaction = () => {
     value = BigNumber.from("0").toHexString(),
     gasLimit = 0,
   ) => {
-    if (!wallet) return
+    if (!wallet) return false
     try {
       const privyChainId = wallet.chainId
       if (privyChainId !== `eip155:${chainId}`) {
         await wallet.switchChain(CHAIN_ID)
-        return
+        return false
       }
       const contract = new Contract(to, abi, signer)
       if (signer) {
@@ -35,11 +35,11 @@ const useWalletTransaction = () => {
         const txHash = tx.wait()
         return txHash
       }
-      return
+      return false
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
-      return { error }
+      return false
     }
   }
 

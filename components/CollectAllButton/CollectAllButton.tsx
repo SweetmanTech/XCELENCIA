@@ -1,10 +1,14 @@
 import useTBAPurchase from "@/hooks/useTBAPurchase"
+import { useCollectionProvider } from "@/providers/CollectionProvider"
 
 const CollectAllButton = ({ className = "" }) => {
   const { purchase, loading } = useTBAPurchase()
+  const { checkCollected } = useCollectionProvider()
 
   const handleClick = async () => {
-    await purchase()
+    const response = await purchase()
+    if (!response) return
+    await checkCollected()
   }
 
   return (
