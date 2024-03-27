@@ -8,6 +8,7 @@ import React from "react"
 
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import UserProvider from "@/providers/UserProvider"
+import CollectionProvider from "@/providers/CollectionProvider"
 import { ThemeProvider } from "../providers/ThemeProvider"
 
 const privyConfig: PrivyClientConfig = {
@@ -26,12 +27,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
       <UserProvider>
-        <ThemeProvider>
-          <SessionProvider>
-            <Component {...pageProps} />
-            <ToastContainer />
-          </SessionProvider>
-        </ThemeProvider>
+        <CollectionProvider>
+          <ThemeProvider>
+            <SessionProvider>
+              <Component {...pageProps} />
+              <ToastContainer />
+            </SessionProvider>
+          </ThemeProvider>
+        </CollectionProvider>
       </UserProvider>
     </PrivyProvider>
   )
