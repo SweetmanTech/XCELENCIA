@@ -36,7 +36,9 @@ const usePrivySendTransaction = () => {
       const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
       return txReceipt.transactionHash
     } catch (error) {
-      return { error }
+      // eslint-disable-next-line no-console
+      console.log(error)
+      return false
     }
   }
 
