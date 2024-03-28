@@ -23,9 +23,16 @@ const CosignButton = () => {
     const tba = getAccount(zoraNextTokenId)
 
     const contract = new Contract(CATALOGCOSIGN_ADDRESS, cosignAbi, signer)
-    const tx = await contract.purchaseToken(BigNumber.from(CATALOG_ID).toBigInt(), 1, tba, tba, {
-      value: BigNumber.from(tokenPrice).toString(),
-    })
+    const tx = await contract.purchaseTokenForRecipient(
+      BigNumber.from(CATALOG_ID).toBigInt(),
+      1,
+      tba,
+      "0xcfbf34d385ea2d5eb947063b67ea226dcda3dc38",
+      "0xcfbf34d385ea2d5eb947063b67ea226dcda3dc38",
+      {
+        value: BigNumber.from(tokenPrice).toString(),
+      },
+    )
 
     const receipt = await tx.wait()
 

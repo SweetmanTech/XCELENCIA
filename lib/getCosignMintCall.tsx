@@ -1,16 +1,17 @@
 import { Interface } from "ethers/lib/utils"
 import cosignAbi from "@/lib/abi/catalog-cosign.json"
 import { BigNumber } from "ethers"
-import { CATALOGCOSIGN_ADDRESS, CATALOG_ID } from "./consts"
+import { CATALOGCOSIGN_ADDRESS, CATALOG_ID, CATALOG_REFERRAL } from "./consts"
 import getCosignPrice from "./getCosignPrice"
 
 const getCosignMintCall = async (mintRecipient) => {
   const tokenPrice = await getCosignPrice()
-  const cosignMintData = new Interface(cosignAbi).encodeFunctionData("purchaseToken", [
+  const cosignMintData = new Interface(cosignAbi).encodeFunctionData("purchaseTokenForRecipient", [
     BigNumber.from(CATALOG_ID).toBigInt(),
     1,
     mintRecipient,
-    mintRecipient,
+    CATALOG_REFERRAL,
+    CATALOG_REFERRAL,
   ])
 
   return {
