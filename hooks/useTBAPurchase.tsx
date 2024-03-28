@@ -42,11 +42,12 @@ const useTBAPurchase = () => {
       const soundMintCall = await getSoundMintCall(tba, soundQuantity)
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
       const cosignMintCall = await getCosignMintCall(tba)
-      const totalPrice = zoraTotalPrice
-        .add(soundMintCallValue)
-        .add(cosignMintCall.value as BigNumber)
+      const cosignMintValue = BigNumber.from(cosignMintCall.value)
+      const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
+
       const hexValue = totalPrice.toHexString()
       const calls = [...tbaCalls, soundMintCall, cosignMintCall]
+
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,
