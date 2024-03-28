@@ -48,7 +48,7 @@ const useTBAPurchase = () => {
       const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
 
       const hexValue = totalPrice.toHexString()
-      const calls = [soundMintCall, cosignMintCall, ...tbaCalls, tbaInitializationCall]
+      const calls = [...tbaCalls, tbaInitializationCall, soundMintCall, cosignMintCall]
 
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
