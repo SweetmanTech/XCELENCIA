@@ -1,6 +1,7 @@
 import { BigNumber } from "ethers"
 import { UnsignedTransactionRequest, usePrivy } from "@privy-io/react-auth"
 import { Interface } from "ethers/lib/utils"
+import handleTxError from "@/lib/handleTxError"
 
 const usePrivySendTransaction = () => {
   const { sendTransaction: privySendTransaction } = usePrivy()
@@ -36,8 +37,7 @@ const usePrivySendTransaction = () => {
       const txReceipt = await privySendTransaction(unsignedTx, uiConfig)
       return txReceipt.transactionHash
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error)
+      handleTxError(error)
       return false
     }
   }
