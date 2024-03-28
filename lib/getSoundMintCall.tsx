@@ -3,7 +3,7 @@ import { CHAIN, CHAIN_ID, SPOTIFY_DROP_ADDRESS } from "./consts"
 import { getPublicClient } from "./clients"
 import handleTxError from "./handleTxError"
 
-const getSoundMintCall = async (mintRecipient, quantity) => {
+const getSoundMintCall = async (mintRecipient) => {
   try {
     const publicClient = getPublicClient(CHAIN_ID)
     const anyPublicClient = publicClient as any
@@ -15,7 +15,7 @@ const getSoundMintCall = async (mintRecipient, quantity) => {
       account: mintRecipient,
       chain: CHAIN,
       schedule: mintSchedules.activeSchedules[0],
-      quantity,
+      quantity: 1,
       editionAddress: SPOTIFY_DROP_ADDRESS,
       mintTo: mintRecipient,
     })
