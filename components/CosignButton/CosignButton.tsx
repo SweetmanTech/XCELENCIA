@@ -1,33 +1,40 @@
 import usePrivyEthersSigner from "@/hooks/usePrivyEthersSigner"
-import { CATALOGCOSIGN_ADDRESS, CATALOG_PRICE } from "@/lib/consts"
+import { CATALOGCOSIGN_ADDRESS, CATALOG_ID, CHAIN_ID } from "@/lib/consts"
 import { BigNumber, Contract } from "ethers"
 import { useState } from "react"
-import catalogAbi from '@/lib/abi/catalog-cosign.json'
+import { getPublicClient } from "@/lib/clients"
+import cosignAbi from "@/lib/abi/catalog-cosign.json"
+import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
+import getAccount from "@/lib/tokenbound/getAccount"
 
 const CosignButton = () => {
-    const [loading, setLoading] = useState(false)
-    const {signer} = usePrivyEthersSigner()
-    const handleClick = async () => {
-        setLoading(true)
-        const contract = new Contract(CATALOGCOSIGN_ADDRESS, catalogAbi, signer)
-        const tx = await contract.purchaseToken(
-            BigNumber.from("93966592039570463393654395010869194129977790080740116793321399200171658575873").toBigInt(),
-            1,
-            "0x51027631B9DEF86e088C33368eC4E3A4BE0aD264",
-            "0x51027631B9DEF86e088C33368eC4E3A4BE0aD264",
-            {
-                value: BigNumber.from(CATALOG_PRICE).toString()
-            }
-        )
+  const [loading, setLoading] = useState(false)
+  const { signer } = usePrivyEthersSigner()
+  const handleClick = async () => {
+    setLoading(true)
+    const publicClient = getPublicClient(CHAIN_ID)
+    const tokenPrice = await publicClient.readContract({
+      address: CATALOGCOSIGN_ADDRESS as `0x${string}`,
+      abi: cosignAbi,
+      functionName: "tokenPrice",
+    })
 
-        const receipt = await tx.wait()
+    const zoraNextTokenId = await getZoraNextTokenId()
+    const tba = getAccount(zoraNextTokenId)
 
-        return receipt
-        setLoading(false)
-    }
+    const contract = new Contract(CATALOGCOSIGN_ADDRESS, cosignAbi, signer)
+    const tx = await contract.purchaseToken(BigNumber.from(CATALOG_ID).toBigInt(), 1, tba, tba, {
+      value: BigNumber.from(tokenPrice).toString(),
+    })
 
-    return (
-        <button
+    const receipt = await tx.wait()
+
+    setLoading(false)
+    return receipt
+  }
+
+  return (
+    <button
       type="button"
       onClick={handleClick}
       className={`text-[18px] font-bold uppercase bg-gray rounded-full
@@ -36,7 +43,7 @@ const CosignButton = () => {
     >
       {loading ? `Loading...` : "Cosign"}
     </button>
-    )
+  )
 }
 
 export default CosignButton
