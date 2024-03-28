@@ -2,7 +2,7 @@ import { Interface } from "ethers/lib/utils"
 import { CHAIN, CHAIN_ID, SPOTIFY_DROP_ADDRESS } from "./consts"
 import { getPublicClient } from "./clients"
 
-const getSoundMintCall = async (mintRecipient) => {
+const getSoundMintCall = async (mintRecipient, quantity) => {
   const publicClient = getPublicClient(CHAIN_ID)
   const anyPublicClient = publicClient as any
 
@@ -13,7 +13,7 @@ const getSoundMintCall = async (mintRecipient) => {
     account: mintRecipient,
     chain: CHAIN,
     schedule: mintSchedules.activeSchedules[0],
-    quantity: 1,
+    quantity,
     editionAddress: SPOTIFY_DROP_ADDRESS,
     mintTo: mintRecipient,
   })

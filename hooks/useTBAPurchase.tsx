@@ -12,6 +12,7 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
+import getCosignMintCall from "@/lib/getCosignMintCall"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -37,11 +38,15 @@ const useTBAPurchase = () => {
         zoraTotalPrice.toString(),
       ) as any
       const tba = getAccount(zoraNextTokenId)
-      const soundMintCall = await getSoundMintCall(tba)
+      const soundQuantity = 1
+      const soundMintCall = await getSoundMintCall(tba, soundQuantity)
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
-      const totalPrice = zoraTotalPrice.add(soundMintCallValue)
+      const cosignMintCall = await getCosignMintCall(tba)
+      const totalPrice = zoraTotalPrice
+        .add(soundMintCallValue)
+        .add(cosignMintCall.value as BigNumber)
       const hexValue = totalPrice.toHexString()
-      const calls = [...tbaCalls, soundMintCall]
+      const calls = [...tbaCalls, soundMintCall, cosignMintCall]
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,

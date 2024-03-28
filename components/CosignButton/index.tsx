@@ -1,3 +1,3 @@
-import CosignButton from "./CosignButton";
+import CosignButton from "./CosignButton"
 
 export default CosignButton
