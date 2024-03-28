@@ -1,14 +1,17 @@
 import useTBAPurchase from "@/hooks/useTBAPurchase"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
+import { useRouter } from "next/router"
 
 const CollectAllButton = ({ className = "" }) => {
   const { purchase, loading } = useTBAPurchase()
   const { checkCollected } = useCollectionProvider()
+  const { push } = useRouter()
 
   const handleClick = async () => {
     const response = await purchase()
     if (!response) return
     await checkCollected()
+    push("/april4/imagine")
   }
 
   return (
