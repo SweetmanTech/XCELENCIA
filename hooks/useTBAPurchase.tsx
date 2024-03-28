@@ -2,7 +2,7 @@ import { BigNumber } from "ethers"
 import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE } from "@/lib/consts"
+import { CATALOG_PRICE, CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE } from "@/lib/consts"
 import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
 import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
@@ -40,15 +40,14 @@ const useTBAPurchase = () => {
       ) as any
       const tba = getAccount(zoraNextTokenId)
       const tbaInitializationCall = getTBAInitializeCall(tba)
-      const soundQuantity = 1
-      const soundMintCall = await getSoundMintCall(tba, soundQuantity)
+      const soundMintCall = await getSoundMintCall(tba)
       if (!soundMintCall) {
         setLoading(false)
         return false
       }
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
       const cosignMintCall = await getCosignMintCall(tba)
-      const cosignMintValue = BigNumber.from(cosignMintCall.value)
+      const cosignMintValue = BigNumber.from(CATALOG_PRICE)
       const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
 
       const hexValue = totalPrice.toHexString()
