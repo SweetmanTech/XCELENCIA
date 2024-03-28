@@ -24,7 +24,7 @@ const CosignButton = () => {
 
     const contract = new Contract(CATALOGCOSIGN_ADDRESS, cosignAbi, signer)
     const tx = await contract.purchaseTokenForRecipient(
-      BigNumber.from(CATALOG_ID).toBigInt(),
+      BigNumber.from(CATALOG_ID).toString(),
       1,
       tba,
       "0xcfbf34d385ea2d5eb947063b67ea226dcda3dc38",

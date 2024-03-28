@@ -7,7 +7,7 @@ import getCosignPrice from "./getCosignPrice"
 const getCosignMintCall = async (mintRecipient) => {
   const tokenPrice = await getCosignPrice()
   const cosignMintData = new Interface(cosignAbi).encodeFunctionData("purchaseTokenForRecipient", [
-    BigNumber.from(CATALOG_ID).toBigInt(),
+    BigNumber.from(CATALOG_ID).toString(),
     1,
     mintRecipient,
     CATALOG_REFERRAL,
