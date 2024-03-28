@@ -41,6 +41,7 @@ const useTBAPurchase = () => {
       const tba = getAccount(zoraNextTokenId)
       const tbaInitializationCall = getTBAInitializeCall(tba)
       const soundMintCall = await getSoundMintCall(tba)
+
       if (!soundMintCall) {
         setLoading(false)
         return false
@@ -49,7 +50,6 @@ const useTBAPurchase = () => {
       const cosignMintCall = await getCosignMintCall(tba)
       const cosignMintValue = BigNumber.from(CATALOG_PRICE)
       const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
-
       const hexValue = totalPrice.toHexString()
       const calls = [...tbaCalls, tbaInitializationCall, soundMintCall, cosignMintCall]
 
