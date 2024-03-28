@@ -12,7 +12,7 @@ const useCheckCollected = () => {
     const zoraTotalOwned = (await getBalanceOf(DROP_ADDRESS, connectedWallet)) as any
     const { error: zoraError } = zoraTotalOwned
     if (!zoraError && zoraTotalOwned >= 1) setIsCollectedZora(true)
-  }, [])
+  }, [connectedWallet])
 
   useEffect(() => {
     checkCollected()
