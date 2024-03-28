@@ -47,7 +47,7 @@ const useTBAPurchase = () => {
         return false
       }
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
-      const cosignMintCall = await getCosignMintCall(tba)
+      const cosignMintCall = getCosignMintCall(tba)
       const cosignMintValue = BigNumber.from(CATALOG_PRICE)
       const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
       const hexValue = totalPrice.toHexString()
