@@ -1,4 +1,5 @@
 import CollectAllButton from "@/components/CollectAllButton"
+import CosignButton from "@/components/CosignButton"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 
 const CollectButtons = () => (
@@ -7,6 +8,7 @@ const CollectButtons = () => (
   gap-y-[15px] md:gap-y-0 md:gap-x-[10px]"
   >
     <CollectAllButton />
+    <CosignButton />
   </FadeInWhenVisible>
 )
 
