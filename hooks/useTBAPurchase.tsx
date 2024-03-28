@@ -39,7 +39,7 @@ const useTBAPurchase = () => {
         zoraTotalPrice.toString(),
       ) as any
       const tba = getAccount(zoraNextTokenId)
-      const tbaInitializationCall = await getTBAInitializeCall(tba)
+      const tbaInitializationCall = getTBAInitializeCall(tba)
       const soundQuantity = 1
       const soundMintCall = await getSoundMintCall(tba, soundQuantity)
       if (!soundMintCall) {
