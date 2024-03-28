@@ -8,7 +8,10 @@ const useCheckCollected = () => {
   const { connectedWallet } = useConnectedWallet()
 
   const checkCollected = useCallback(async () => {
-    if (!connectedWallet) return
+    if (!connectedWallet) {
+      setIsCollectedZora(false)
+      return
+    }
     const zoraTotalOwned = (await getBalanceOf(DROP_ADDRESS, connectedWallet)) as any
     const { error: zoraError } = zoraTotalOwned
     if (!zoraError && zoraTotalOwned >= 1) setIsCollectedZora(true)
