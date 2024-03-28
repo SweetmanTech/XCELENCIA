@@ -10,6 +10,7 @@ const getZoraMintCall = (mintRecipient, mintQuantity, totalPrice) => {
     comment,
     MINT_REFERRAL_ADDRESS,
   ])
+
   return {
     target: DROP_ADDRESS,
     value: totalPrice,

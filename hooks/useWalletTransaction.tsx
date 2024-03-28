@@ -2,6 +2,7 @@ import { BigNumber, Contract } from "ethers"
 import useConnectedWallet from "./useConnectedWallet"
 import { CHAIN_ID } from "@/lib/consts"
 import usePrivyEthersSigner from "./usePrivyEthersSigner"
+import handleTxError from "@/lib/handleTxError"
 
 const useWalletTransaction = () => {
   const { wallet } = useConnectedWallet()
@@ -37,8 +38,7 @@ const useWalletTransaction = () => {
       }
       return false
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
+      handleTxError(error)
       return false
     }
   }
