@@ -42,6 +42,10 @@ const useTBAPurchase = () => {
       const tbaInitializationCall = await getTBAInitializeCall(tba)
       const soundQuantity = 1
       const soundMintCall = await getSoundMintCall(tba, soundQuantity)
+      if (!soundMintCall) {
+        setLoading(false)
+        return false
+      }
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
       const cosignMintCall = await getCosignMintCall(tba)
       const cosignMintValue = BigNumber.from(cosignMintCall.value)
