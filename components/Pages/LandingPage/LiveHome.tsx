@@ -1,8 +1,8 @@
 import Content from "@/components/Layout/Content"
-import MusicPlayer from "./MusicPlayer"
 import CollectButtons from "./CollectButtons"
 import DetailSection from "./DetailSection/DetailSection"
 import WhatNext from "./WhatNext"
+import AlbumImage from "./AlbumImage"
 
 const LiveHome = () => (
   <Content>
@@ -11,7 +11,7 @@ const LiveHome = () => (
         className="flex flex-col 
         items-center justify-center gap-[20px]"
       >
-        <MusicPlayer />
+        <AlbumImage />
         <CollectButtons />
         <DetailSection />
         <WhatNext />

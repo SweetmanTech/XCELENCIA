@@ -2,7 +2,7 @@ import { BigNumber } from "ethers"
 import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import { CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE } from "@/lib/consts"
+import { CATALOG_PRICE, CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE } from "@/lib/consts"
 import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
 import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
@@ -12,6 +12,8 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
+import getCosignMintCall from "@/lib/getCosignMintCall"
+import getTBAInitializeCall from "@/lib/getTBAInitializeCall"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -37,11 +39,20 @@ const useTBAPurchase = () => {
         zoraTotalPrice.toString(),
       ) as any
       const tba = getAccount(zoraNextTokenId)
+      const tbaInitializationCall = getTBAInitializeCall(tba)
       const soundMintCall = await getSoundMintCall(tba)
+
+      if (!soundMintCall) {
+        setLoading(false)
+        return false
+      }
       const soundMintCallValue = BigNumber.from(soundMintCall.value)
-      const totalPrice = zoraTotalPrice.add(soundMintCallValue)
+      const cosignMintCall = getCosignMintCall(tba)
+      const cosignMintValue = BigNumber.from(CATALOG_PRICE)
+      const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
       const hexValue = totalPrice.toHexString()
-      const calls = [...tbaCalls, soundMintCall]
+      const calls = [...tbaCalls, tbaInitializationCall, soundMintCall, cosignMintCall]
+
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
           MULTICALL3_ADDRESS,
