@@ -7,14 +7,12 @@ import {
   soundEditionVersionPublicActions,
 } from "@soundxyz/sdk"
 import getViemNetwork from "../viem/getViemNetwork"
-import getAlchemyRpcUrl from "../alchemy/getAlchemyRpcUrl"
 
 export const getPublicClient = (chainId: number) => {
-  const RPC_URL = getAlchemyRpcUrl(chainId)
   const chain = getViemNetwork(chainId)
   let publicClient = createPublicClient({
     chain: chain as Chain,
-    transport: http(RPC_URL),
+    transport: http(),
   }) as any
   publicClient = publicClient.extend(soundEditionVersionPublicActions)
   publicClient = publicClient.extend(editionV1PublicActions)
