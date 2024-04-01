@@ -1,4 +1,4 @@
-import relayCallApi from "./relay/relayCallApi"
+import relayCallApi from "../relay/relayCallApi"
 
 const getSoundBridgeTx = async ({ destinationChainId, originChainId, user, txs }: any) => {
   const response = await relayCallApi({ destinationChainId, originChainId, user, txs })
