@@ -6,6 +6,7 @@ export const SEO_IMAGE = "/images/logo.png"
 export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_ADDRESS
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
 export const SPOTIFY_DROP_ADDRESS = "0x4506313D4C8aF2f880EB4e7AFa22000D8FaB70bB"
+export const SOUND_SEPOLIA_DROP_ADDRESS = "0x7c5eab814ee40e31a5c5d655ef46a855a97d738b"
 export const CHAIN = IS_TESTNET ? baseSepolia : baseSepolia
 export const CHAIN_ID = CHAIN.id
 export const MINTER_ADDRESS = process.env.NEXT_PUBLIC_MINTER

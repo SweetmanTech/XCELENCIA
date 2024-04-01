@@ -1,26 +1,32 @@
-import { Interface } from "ethers/lib/utils"
-import { CHAIN, CHAIN_ID, SPOTIFY_DROP_ADDRESS } from "./consts"
-import { getPublicClient } from "./clients"
-import handleTxError from "./handleTxError"
+import { encodeFunctionData } from "viem"
+import { getPublicClient } from "../clients"
+import handleTxError from "../handleTxError"
+import getViemNetwork from "../viem/getViemNetwork"
 
-const getSoundMintCall = async (mintRecipient) => {
+const getSoundMintCall = async (
+  mintRecipient: `0x${string}`,
+  chainId: number,
+  collectionAddress: `0x${string}`,
+) => {
   try {
-    const publicClient = getPublicClient(CHAIN_ID)
+    const publicClient = getPublicClient(chainId)
     const anyPublicClient = publicClient as any
 
     const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
-      editionAddress: SPOTIFY_DROP_ADDRESS,
+      editionAddress: collectionAddress,
     })
+
     const mintParams = await anyPublicClient.editionV2.mintParameters({
       account: mintRecipient,
-      chain: CHAIN,
+      chain: getViemNetwork(chainId),
       schedule: mintSchedules.activeSchedules[0],
       quantity: 1,
-      editionAddress: SPOTIFY_DROP_ADDRESS,
+      editionAddress: collectionAddress,
       mintTo: mintRecipient,
     })
+
     const { args, functionName, address: SUPERMINTER, value, abi } = mintParams.mint.input
-    const soundMintDataV2 = new Interface(abi).encodeFunctionData(functionName, args)
+    const soundMintDataV2 = encodeFunctionData({ abi, functionName, args })
 
     return {
       target: SUPERMINTER,
