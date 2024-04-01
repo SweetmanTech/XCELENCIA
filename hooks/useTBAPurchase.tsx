@@ -1,19 +1,13 @@
-import { BigNumber } from "ethers"
 import { useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
-import getMintMulticallCalls from "@/lib/getMintMulticallCalls"
-import { CATALOG_PRICE, CHAIN_ID, MULTICALL3_ADDRESS, ZORA_PRICE } from "@/lib/consts"
+import { CHAIN_ID, MULTICALL3_ADDRESS } from "@/lib/consts"
 import handleTxError from "@/lib/handleTxError"
 import { useUserProvider } from "@/providers/UserProvider"
-import getZoraNextTokenId from "@/lib/getZoraNextTokenId"
-import getSoundMintCall from "@/lib/getSoundMintCall"
-import getAccount from "@/lib/tokenbound/getAccount"
+import getPreparedMulticalls from "@/lib/getPreparedMulticalls"
 import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
-import getCosignMintCall from "@/lib/getCosignMintCall"
-import getTBAInitializeCall from "@/lib/getTBAInitializeCall"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -29,29 +23,12 @@ const useTBAPurchase = () => {
       if (!connectedWallet) return false
 
       setLoading(true)
-      const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
-      const zoraNextTokenId = await getZoraNextTokenId()
-      const zoraQuantity = 1
-      const tbaCalls = getMintMulticallCalls(
-        zoraNextTokenId,
-        connectedWallet as string,
-        zoraQuantity,
-        zoraTotalPrice.toString(),
-      ) as any
-      const tba = getAccount(zoraNextTokenId)
-      const tbaInitializationCall = getTBAInitializeCall(tba)
-      const soundMintCall = await getSoundMintCall(tba)
-
-      if (!soundMintCall) {
+      const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
+      if (!prepared) {
         setLoading(false)
         return false
       }
-      const soundMintCallValue = BigNumber.from(soundMintCall.value)
-      const cosignMintCall = getCosignMintCall(tba)
-      const cosignMintValue = BigNumber.from(CATALOG_PRICE)
-      const totalPrice = soundMintCallValue.add(cosignMintValue).add(zoraTotalPrice)
-      const hexValue = totalPrice.toHexString()
-      const calls = [...tbaCalls, tbaInitializationCall, soundMintCall, cosignMintCall]
+      const { calls, hexValue } = prepared
 
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
