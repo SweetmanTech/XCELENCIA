@@ -13,8 +13,6 @@ const relayCallApi = async ({ destinationChainId, originChainId, user, txs }: an
 
   try {
     const response = await fetch("https://api.testnets.relay.link/execute/call", options)
-    console.log("SWEETS response", response)
-
     const data = await response.json()
     return data
   } catch (error) {
