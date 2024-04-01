@@ -1,3 +1,5 @@
+import { RELAY_URL } from "../consts"
+
 const relayCallApi = async ({ destinationChainId, originChainId, user, txs }: any) => {
   const options = {
     method: "POST",
@@ -12,7 +14,7 @@ const relayCallApi = async ({ destinationChainId, originChainId, user, txs }: an
   }
 
   try {
-    const response = await fetch("https://api.testnets.relay.link/execute/call", options)
+    const response = await fetch(RELAY_URL, options)
     const data = await response.json()
     return data
   } catch (error) {
