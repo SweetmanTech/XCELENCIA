@@ -50,11 +50,11 @@ const useTBAPurchase = () => {
       const tba = getAccount(zoraNextTokenId)
       const tbaInitializationCall = getTBAInitializeCall(tba)
       const soundMintCall = await getSoundMintCall(tba, CHAIN_ID, SPOTIFY_DROP_ADDRESS)
-      const soundSepoliaMintCall = await getSoundMintCall(
+      const soundSepoliaMintCall = (await getSoundMintCall(
         tba,
         sepolia.id,
         SOUND_SEPOLIA_DROP_ADDRESS,
-      )
+      )) as any
 
       if (!soundMintCall) {
         setLoading(false)
