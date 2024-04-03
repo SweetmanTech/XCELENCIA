@@ -1,12 +1,12 @@
 import { BigNumber } from "ethers"
-import { CATALOG_PRICE, CHAIN_ID, SPOTIFY_DROP_ADDRESS, ZORA_PRICE } from "./consts"
+import { CATALOG_PRICE, ZORA_PRICE } from "./consts"
 import getCosignMintCall from "./getCosignMintCall"
 import getAccount from "./tokenbound/getAccount"
 import getTBAInitializeCall from "./getTBAInitializeCall"
-import getSoundMintCall from "./sound/getSoundMintCall"
 import getZoraNextTokenId from "./getZoraNextTokenId"
 import getMintMulticallCalls from "./getMintMulticallCalls"
-import getSoundInterstellarMintCall from "./sound/getSoundInterstellarMintCall"
+import getZoraMintVideoCall from "./getZoraMintVideoCall"
+import getAllSoundCalls from "./sound/getAllSoundCalls"
 
 const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const zoraTotalPrice = BigNumber.from(ZORA_PRICE).mul(1)
@@ -20,31 +20,30 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   ) as any
   const tba = getAccount(zoraNextTokenId)
   const tbaInitializationCall = getTBAInitializeCall(tba)
-  const soundMintCall = await getSoundMintCall(tba, CHAIN_ID, SPOTIFY_DROP_ADDRESS)
-
-  if (!soundMintCall) {
+  const soundRaw = await getAllSoundCalls(tba, signingAddress)
+  if (!soundRaw) {
     return false
   }
-
-  const interstellarMintCall = await getSoundInterstellarMintCall(tba, signingAddress)
-
-  const soundMintCallValue = BigNumber.from(soundMintCall.value)
+  const { calls: soundCalls, value: soundValue } = soundRaw
+  const soundMintCallValue = BigNumber.from(soundValue)
   const cosignMintCall = getCosignMintCall(tba)
+  const zoraMintVideoCall = getZoraMintVideoCall(tba)
   const cosignMintValue = BigNumber.from(CATALOG_PRICE)
-  const soundBridgeValue = BigNumber.from(interstellarMintCall.value)
+  const zoraMintVideoValue = BigNumber.from(zoraMintVideoCall.value)
   const totalPrice = soundMintCallValue
     .add(cosignMintValue)
+    .add(zoraMintVideoValue)
     .add(zoraTotalPrice)
-    .add(soundBridgeValue)
   const hexValue = totalPrice.toHexString()
   const calls = [
     ...tbaCalls,
     tbaInitializationCall,
-    soundMintCall,
+    ...soundCalls,
     cosignMintCall,
-    interstellarMintCall,
+    zoraMintVideoCall,
   ]
-  return { hexValue, calls }
+  const response = { hexValue, calls }
+  return response
 }
 
 export default getPreparedMulticalls
