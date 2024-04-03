@@ -48,7 +48,6 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
     interstellarMintCall,
   ]
   const response = { hexValue, calls }
-  console.log("SWEETS ADD ZORA TO THESE RETURN VALUES", response)
   return response
 }
 
