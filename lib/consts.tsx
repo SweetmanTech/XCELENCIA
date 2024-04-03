@@ -37,6 +37,11 @@ export const SOUND_BASE_SEPOLIA_TRACKLIST = [
   "0xdbb470d0d695e7d4377873fe3ffba91460bc17af",
   "0x9dc88d492f6b6fb7a380c3314de61509cf8fa30e",
 ]
+export const SOUND_SEPOLIA_TRACKLIST = [
+  SOUND_SEPOLIA_DROP_ADDRESS,
+  "0xf0e6a58d97c7dc72e46121fa9c0c3a001f2c9767",
+  "0x5a4bdbc0ff1a605242ddceeb3cdb4158e94fe909",
+] as `0x${string}`[]
 
 // Zora
 export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_ADDRESS
