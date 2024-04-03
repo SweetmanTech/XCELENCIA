@@ -3382,20 +3382,15 @@
   resolved "https://registry.yarnpkg.com/@xobotyi/scrollbar-width/-/scrollbar-width-1.9.5.tgz#80224a6919272f405b87913ca13b92929bdf3c4d"
   integrity sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==
 
-"@zoralabs/1155-deployments@^0.0.13":
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/@zoralabs/1155-deployments/-/1155-deployments-0.0.13.tgz#db98cc26e6781d07b55cbe2a443f0edfc5875fb4"
-  integrity sha512-jC8nx3qQGbCGuE4ynBlYYV/VfyhrIAG+k3x0l2yCtEXIiW6oAECM6iZzzPLRcmIiIO3xoC4y70iwVddqzLR3QQ==
-  dependencies:
-    "@zoralabs/zora-1155-contracts" "*"
-    ds-test "https://github.com/dapphub/ds-test#cd98eff28324bfac652e63a239a60632a761790b"
-    forge-std "https://github.com/foundry-rs/forge-std#705263c95892a906d7af65f0f73ce8a4a0c80b80"
-    solmate "6.1.0"
-
 "@zoralabs/openzeppelin-contracts-upgradeable@4.8.4":
   version "4.8.4"
   resolved "https://registry.yarnpkg.com/@zoralabs/openzeppelin-contracts-upgradeable/-/openzeppelin-contracts-upgradeable-4.8.4.tgz#130b69cd5ff70b1f67da11fe53fe8b2323464b84"
   integrity sha512-5vhL88tz00Gv2+NUhLdYBRqb9RRekfyQAodXTQxJU2LYxxy6jr1mPycTZempQ1kmw5wIwFbSIoYzpaxOx6UK6Q==
+
+"@zoralabs/protocol-deployments@*":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@zoralabs/protocol-deployments/-/protocol-deployments-0.1.4.tgz#48b66d38254c40d147abd37455f0796f8c34e155"
+  integrity sha512-Lobtbe8+qUAhbnhOn6rESmIm3T1sjCBj4onXquGmBGD9oezeQBpIwzZEzx7slpkT5Z2Y5WQqIzaP1LYZzzwtvQ==
 
 "@zoralabs/protocol-deployments@^0.0.12":
   version "0.0.12"
@@ -3419,6 +3414,15 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@zoralabs/protocol-rewards/-/protocol-rewards-1.2.1.tgz#fe7f011748b036a1a3c8f3b43811307794d1c89a"
   integrity sha512-Jf2aIHhyAsybCCv1byV5uP/YiwA/ZB3zTywDO6d15796Bf58zzC3D1ptKuh+z1Nba3dU2Hzqz0K7EEQOjoq+1A==
+
+"@zoralabs/protocol-sdk@^0.5.7":
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/@zoralabs/protocol-sdk/-/protocol-sdk-0.5.7.tgz#7f69397bb9336a41fc1c0a386f439740f660edc1"
+  integrity sha512-wBpS5J3SiHielHaShTH4gpboRrsN/kgVbCbWK/cqWCQxvLwC7Bf7buYamD76/HGJ6Ac63GixFmB9YxZWnkUdPg==
+  dependencies:
+    "@zoralabs/protocol-deployments" "*"
+    abitype "^0.10.3"
+    vite "4.5.0"
 
 "@zoralabs/universal-minter@^0.2.14":
   version "0.2.16"
@@ -3502,6 +3506,11 @@ abitype@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/abitype/-/abitype-1.0.0.tgz#237176dace81d90d018bebf3a45cb42f2a2d9e97"
   integrity sha512-NMeMah//6bJ56H5XRj8QCV4AwuW6hB6zqz2LnhhLdcWVQOsXki6/Pn3APeqxCma62nXIcmZWdu1DlHWS74umVQ==
+
+abitype@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/abitype/-/abitype-0.10.3.tgz#27ce7a7cdb9a80ccd732a3f3cf1ce6ff05266fce"
+  integrity sha512-tRN+7XIa7J9xugdbRzFv/95ka5ivR/sRe01eiWvM0HWWjHuigSZEACgKa0sj4wGuekTDtghCx+5Izk/cOi78pQ==
 
 abitype@^0.8.7:
   version "0.8.11"
@@ -10920,6 +10929,17 @@ vite-node@0.30.1:
     pathe "^1.1.0"
     picocolors "^1.0.0"
     vite "^3.0.0 || ^4.0.0"
+
+vite@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.5.0.tgz#ec406295b4167ac3bc23e26f9c8ff559287cff26"
+  integrity sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw==
+  dependencies:
+    esbuild "^0.18.10"
+    postcss "^8.4.27"
+    rollup "^3.27.1"
+  optionalDependencies:
+    fsevents "~2.3.2"
 
 "vite@^3.0.0 || ^4.0.0", vite@^4.1.4:
   version "4.5.2"
