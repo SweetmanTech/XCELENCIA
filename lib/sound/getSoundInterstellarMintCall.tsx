@@ -6,11 +6,12 @@ import getSoundMintCall from "./getSoundMintCall"
 const getSoundInterstellarMintCall = async (
   recipient: `0x${string}`,
   signingAddress: `0x${string}`,
+  editionAddress: `0x${string}`,
 ) => {
   const soundSepoliaMintCall = (await getSoundMintCall(
     recipient,
     sepolia.id,
-    SOUND_SEPOLIA_DROP_ADDRESS,
+    editionAddress,
   )) as any
   const bridgeCalls = await getSoundBridgeTx({
     destinationChainId: sepolia.id,
