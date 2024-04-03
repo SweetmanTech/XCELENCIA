@@ -1,5 +1,5 @@
 import { sepolia } from "viem/chains"
-import { CHAIN_ID, SOUND_SEPOLIA_DROP_ADDRESS } from "../consts"
+import { CHAIN_ID } from "../consts"
 import getSoundBridgeTx from "./getSoundBridgeTx"
 import getSoundMintCall from "./getSoundMintCall"
 
