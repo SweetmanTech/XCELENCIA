@@ -25,8 +25,6 @@ const getSoundInterstellarMintCall = async (
     })),
   })
 
-  console.log("SWEETS BRIDGE CALLS", bridgeCalls)
-
   return bridgeCalls
 }
 
