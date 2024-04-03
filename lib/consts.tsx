@@ -1,22 +1,14 @@
 import { baseSepolia } from "viem/chains"
 
+// General
 export const SEO_TITLE = "XCELENCIA"
 export const SEO_DESCRIPTION = "el niño estrella"
 export const SEO_IMAGE = "/images/logo.png"
-export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_ADDRESS
+
+// Networks
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
-export const SPOTIFY_DROP_ADDRESS = "0x4506313D4C8aF2f880EB4e7AFa22000D8FaB70bB"
-export const SOUND_SEPOLIA_DROP_ADDRESS = "0x7c5eab814ee40e31a5c5d655ef46a855a97d738b"
 export const CHAIN = IS_TESTNET ? baseSepolia : baseSepolia
 export const CHAIN_ID = CHAIN.id
-export const MINTER_ADDRESS = process.env.NEXT_PUBLIC_MINTER
-export const MINT_REFERRAL_ADDRESS = process.env.NEXT_PUBLIC_REFERRAL
-export const ZORA_PRICE = "777000000000000"
-export const CATALOGCOSIGN_ADDRESS = "0xA9d06704e872C868be343C8DDBb2B412d17dea6c"
-export const CATALOG_ID =
-  "5319329821006713189457368775898122609838495559285808490438434687907532899470"
-export const CATALOG_REFERRAL = "0xcfbf34d385ea2d5eb947063b67ea226dcda3dc38"
-export const CATALOG_PRICE = "1000000000000000"
 
 // Tokenbound
 export const MULTICALL3_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11"
@@ -28,3 +20,22 @@ export const SALT_BYTES = "0x000000000000000000000000000000000000000000000000000
 
 // Relay
 export const RELAY_URL = "https://api.testnets.relay.link/execute/call"
+
+// Sound
+export const SPOTIFY_DROP_ADDRESS = "0x4506313D4C8aF2f880EB4e7AFa22000D8FaB70bB"
+export const SOUND_SEPOLIA_DROP_ADDRESS = "0x7c5eab814ee40e31a5c5d655ef46a855a97d738b"
+
+// Zora
+export const DROP_ADDRESS = process.env.NEXT_PUBLIC_DROP_ADDRESS
+export const ZORA_VIDEO = "0x78aeF8d0bdbA272F34d86bF6B8ba96aa54584932"
+export const ZORA_FIXED_PRICE_SALE_STRATEGY = "0xd34872BE0cdb6b09d45FCa067B07f04a1A9aE1aE"
+export const ZORA_PRICE = "777000000000000"
+export const COMMENT = "XCELENCIA - ERC6551 smart album 🪄"
+export const MINT_REFERRAL_ADDRESS = process.env.NEXT_PUBLIC_REFERRAL as `0x${string}`
+
+// Catalog
+export const CATALOGCOSIGN_ADDRESS = "0xA9d06704e872C868be343C8DDBb2B412d17dea6c"
+export const CATALOG_ID =
+  "5319329821006713189457368775898122609838495559285808490438434687907532899470"
+export const CATALOG_REFERRAL = "0xcfbf34d385ea2d5eb947063b67ea226dcda3dc38"
+export const CATALOG_PRICE = "1000000000000000"
