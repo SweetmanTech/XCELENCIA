@@ -1,5 +1,5 @@
 import { zoraCreator1155ImplABI as abi } from "@zoralabs/protocol-deployments"
-import { encodeAbiParameters, encodeFunctionData, encodePacked, parseAbiParameters } from "viem"
+import { encodeAbiParameters, encodeFunctionData, parseAbiParameters } from "viem"
 import {
   COMMENT,
   MINT_REFERRAL_ADDRESS,
@@ -11,14 +11,10 @@ import {
 const getZoraMintVideoCall = (mintRecipient) => {
   const tokenId = BigInt(1)
   const quantity = BigInt(1)
-  console.log("SWEETS mintRecipient", mintRecipient)
-  // const minterArguments = encodePacked(["address"], [mintRecipient])
   const minterArguments = encodeAbiParameters(parseAbiParameters("address x, string y"), [
     mintRecipient,
     COMMENT,
   ])
-  console.log("SWEETS minterArguments", minterArguments)
-  // console.log("SWEETS encodedData", encodedData)
   const mintData = encodeFunctionData({
     abi,
     functionName: "mintWithRewards",
