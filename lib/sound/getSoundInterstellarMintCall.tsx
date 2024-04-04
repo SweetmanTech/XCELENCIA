@@ -7,7 +7,6 @@ const getSoundInterstellarMintCall = async (
   signingAddress: `0x${string}`,
   editionAddresses: `0x${string}`[],
 ) => {
-  console.log("SWEETS editionAddresses", editionAddresses)
   const mintCallsPromises = editionAddresses.map((editionAddress) =>
     getSoundMintCall(recipient, INTERSTELLAR_CHAIN_ID, editionAddress),
   )

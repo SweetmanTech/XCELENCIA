@@ -17,7 +17,6 @@ const getSoundMintCall = async (
     })
     const { activeSchedules } = mintSchedules
     const schedule = activeSchedules[activeSchedules.length > 1 ? 1 : 0]
-    console.log("SWEETS MINT SCHEDULES", schedule)
 
     const mintParams = await anyPublicClient.editionV2.mintParameters({
       account: mintRecipient,
