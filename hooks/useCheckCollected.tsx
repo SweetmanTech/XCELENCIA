@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
-import useConnectedWallet from "./useConnectedWallet"
 import getBalanceOf from "@/lib/getBalanceOf"
 import { DROP_ADDRESS } from "@/lib/consts"
+import useConnectedWallet from "./useConnectedWallet"
 
 const useCheckCollected = () => {
   const [isCollectedZora, setIsCollectedZora] = useState(false)
@@ -13,6 +13,7 @@ const useCheckCollected = () => {
       return
     }
     const zoraTotalOwned = (await getBalanceOf(DROP_ADDRESS, connectedWallet)) as any
+    console.log("SWEETS zoraTotalOwned", zoraTotalOwned)
     const { error: zoraError } = zoraTotalOwned
     if (!zoraError && zoraTotalOwned >= 1) setIsCollectedZora(true)
   }, [connectedWallet])
