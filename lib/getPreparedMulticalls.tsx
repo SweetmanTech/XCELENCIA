@@ -12,10 +12,8 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const zoraTotalPrice = BigNumber.from(ZORA_PRICE)
   const zoraNextTokenId = await getZoraNextTokenId()
   const zoraQuantity = 1
-
   const tbaCalls = getMintMulticallCalls(
     zoraNextTokenId,
-    signingAddress,
     zoraQuantity,
     zoraTotalPrice.toString(),
   ) as any

@@ -15,11 +15,13 @@ const getSoundMintCall = async (
     const mintSchedules = await anyPublicClient.editionV2.mintSchedules({
       editionAddress: collectionAddress,
     })
+    const { activeSchedules } = mintSchedules
+    const schedule = activeSchedules[activeSchedules.length > 1 ? 1 : 0]
 
     const mintParams = await anyPublicClient.editionV2.mintParameters({
       account: mintRecipient,
       chain: getViemNetwork(chainId),
-      schedule: mintSchedules.activeSchedules[0],
+      schedule,
       quantity: 1,
       editionAddress: collectionAddress,
       mintTo: mintRecipient,
