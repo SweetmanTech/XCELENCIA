@@ -4,8 +4,8 @@ import Media from "@/shared/Media"
 const ArtworkAlbum = () => (
   <FadeInWhenVisible>
     <Media
-      link="/images/album.png"
-      blurLink="/images/album.png"
+      link="/images/album.jpg"
+      blurLink="/images/album.jpg"
       containerClasses="w-[325px] h-[326px]"
     />
   </FadeInWhenVisible>
