@@ -24,7 +24,6 @@ const useTBAPurchase = () => {
 
       setLoading(true)
       const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
-      console.log("sweets prepared", prepared)
       if (!prepared) {
         setLoading(false)
         return false
