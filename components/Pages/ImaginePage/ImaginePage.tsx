@@ -8,7 +8,7 @@ import MusicPlayer from "../LandingPage/MusicPlayer"
 
 const ImaginePage = () => {
   const { isCollectedZora } = useCollectionProvider()
-  console.log("SWEETS isCollectedZora", isCollectedZora)
+
   return (
     <Layout type="base">
       <SeoHead />
