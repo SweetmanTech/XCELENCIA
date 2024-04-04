@@ -11,7 +11,7 @@ const CollectAllButton = ({ className = "" }) => {
     const response = await purchase()
     if (!response) return
     await checkCollected()
-    push("/april4/imagine")
+    push("/imagine")
   }
 
   return (
