@@ -59,7 +59,7 @@ export const SOUND_INTERSTELLAR_TRACKLIST = IS_TESTNET
     ] as `0x${string}`[]) // sepolia testnet
   : ([
       "0x60dcb74e687357308a54e905118c21f0199ceada", // Cancun FT. Tarot
-      // "0xd179a77ecf429e2d9f7e65d8b055ac1a40394706", // Las Nike - not buyable
+      // "0xd179a77ecf429e2d9f7e65d8b055ac1a40394706", // Las Nike - sale ended
       "0xd1e31904865c9d38040Cef595677dC127537B296", // Eleven
     ] as `0x${string}`[]) // optimism mainnet
 
