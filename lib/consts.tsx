@@ -59,7 +59,7 @@ export const SOUND_INTERSTELLAR_TRACKLIST = IS_TESTNET
     ] as `0x${string}`[]) // sepolia testnet
   : ([
       "0x60dcb74e687357308a54e905118c21f0199ceada", // Cancun FT. Tarot
-      "0xd179a77ecf429e2d9f7e65d8b055ac1a40394706", // Las Nike
+      // "0xd179a77ecf429e2d9f7e65d8b055ac1a40394706", // Las Nike - not buyable
       "0xd1e31904865c9d38040Cef595677dC127537B296", // Eleven
     ] as `0x${string}`[]) // optimism mainnet
 
@@ -71,7 +71,9 @@ export const DROP_ADDRESS = IS_TESTNET
 export const ZORA_VIDEO = IS_TESTNET
   ? "0x78aeF8d0bdbA272F34d86bF6B8ba96aa54584932" // base sepolia testnet
   : "0x5ed5214bad1ed909a13cbc8fd5539e2e09c21b48" // base mainnet
-export const ZORA_FIXED_PRICE_SALE_STRATEGY = "0xd34872BE0cdb6b09d45FCa067B07f04a1A9aE1aE"
+export const ZORA_FIXED_PRICE_SALE_STRATEGY = IS_TESTNET
+  ? "0xd34872BE0cdb6b09d45FCa067B07f04a1A9aE1aE" // base sepolia
+  : "0x04E2516A2c207E84a1839755675dfd8eF6302F0a" // base mainnet
 export const ZORA_PRICE = "777000000000000"
 export const COMMENT = "XCELENCIA - ERC6551 smart album 🪄"
 // TODO: CHANGE TO 0xSPLIT ADDRESS

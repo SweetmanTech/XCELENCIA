@@ -1,13 +1,11 @@
 import { Interface } from "ethers/lib/utils"
 import zoraAbi from "@/lib/abi/zora-erc721-drop.json"
-import { COMMENT, DROP_ADDRESS, MINT_REFERRAL_ADDRESS } from "./consts"
+import { COMMENT, DROP_ADDRESS } from "./consts"
 
-const getZoraMintCall = (mintRecipient, mintQuantity, totalPrice) => {
-  const zoraMintData = new Interface(zoraAbi).encodeFunctionData("mintWithRewards", [
-    mintRecipient,
+const getZoraMintCall = (mintQuantity, totalPrice) => {
+  const zoraMintData = new Interface(zoraAbi).encodeFunctionData("purchaseWithComment", [
     mintQuantity,
     COMMENT,
-    MINT_REFERRAL_ADDRESS,
   ])
 
   return {

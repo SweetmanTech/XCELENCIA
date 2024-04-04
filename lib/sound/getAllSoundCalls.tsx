@@ -15,6 +15,7 @@ const getAllSoundCalls = async (recipient, signingAddress) => {
 
   try {
     const allCalls = await Promise.all([...basePromises, interstellarPromise])
+
     const validCalls = allCalls.filter((call) => call)
     if (!validCalls.length) {
       return false
