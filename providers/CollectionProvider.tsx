@@ -8,7 +8,7 @@ const CollectionProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
-        ...collectedData
+      ...collectedData,
     }),
     [collectedData],
   )

@@ -1,4 +1,4 @@
-import { erc20Abi } from "viem"
+import { erc721Abi } from "viem"
 import { getPublicClient } from "./clients"
 import { CHAIN_ID } from "./consts"
 
@@ -7,7 +7,7 @@ const getBalanceOf = async (dropAddress, owner) => {
     const publicClient = getPublicClient(CHAIN_ID)
     const balanceOf = await publicClient.readContract({
       address: dropAddress as `0x${string}`,
-      abi: erc20Abi,
+      abi: erc721Abi,
       functionName: "balanceOf",
       args: [owner],
     })

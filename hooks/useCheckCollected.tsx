@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
-import useConnectedWallet from "./useConnectedWallet"
 import getBalanceOf from "@/lib/getBalanceOf"
 import { DROP_ADDRESS } from "@/lib/consts"
+import useConnectedWallet from "./useConnectedWallet"
 
 const useCheckCollected = () => {
   const [isCollectedZora, setIsCollectedZora] = useState(false)
