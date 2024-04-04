@@ -1,16 +1,16 @@
-import { CHAIN_ID, SOUND_BASE_SEPOLIA_TRACKLIST, SOUND_SEPOLIA_TRACKLIST } from "../consts"
+import { CHAIN_ID, SOUND_TRACKLIST, SOUND_INTERSTELLAR_TRACKLIST } from "../consts"
 import getSoundInterstellarMintCall from "./getSoundInterstellarMintCall"
 import getSoundMintCall from "./getSoundMintCall"
 
 const getAllSoundCalls = async (recipient, signingAddress) => {
-  const basePromises = SOUND_BASE_SEPOLIA_TRACKLIST.map((contractAddress: `0x${string}`) =>
+  const basePromises = SOUND_TRACKLIST.map((contractAddress: `0x${string}`) =>
     getSoundMintCall(recipient, CHAIN_ID, contractAddress),
   )
 
   const interstellarPromise = getSoundInterstellarMintCall(
     recipient,
     signingAddress,
-    SOUND_SEPOLIA_TRACKLIST,
+    SOUND_INTERSTELLAR_TRACKLIST,
   )
 
   try {
