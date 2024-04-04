@@ -37,7 +37,7 @@ export const SOUND_TRACKLIST = IS_TESTNET
       "0x1dbB8c2064726d56903d1e9B3b907298fb6b716A",
       "0xdbb470d0d695e7d4377873fe3ffba91460bc17af",
       "0x9dc88d492f6b6fb7a380c3314de61509cf8fa30e",
-    ] as `0x${string}`[])
+    ] as `0x${string}`[]) // base sepolia
   : ([
       "0xf57fdef4cbf30f7d47f578d313a181141c91c1e9", // INTRO
       "0xda7e196e3401b385d9e7a3394b5c38751121cb5a", // CHIMBITA
@@ -50,18 +50,18 @@ export const SOUND_TRACKLIST = IS_TESTNET
       "0x2c85701810c79279f70e27d0e6aeae7a5b9e4977", // PLAYA
       "0x508725ed6986bf4b865ff5bfb2735d50a70794a7", // MI NENA
       "0x3a66f8ec26faf81bc76745f52f1c1aa9b945a8c0", // ENE
-    ] as `0x${string}`[])
+    ] as `0x${string}`[]) // base mainnet
 export const SOUND_INTERSTELLAR_TRACKLIST = IS_TESTNET
   ? ([
       "0x7c5eab814ee40e31a5c5d655ef46a855a97d738b",
       "0xf0e6a58d97c7dc72e46121fa9c0c3a001f2c9767",
       "0x5a4bdbc0ff1a605242ddceeb3cdb4158e94fe909",
-    ] as `0x${string}`[])
+    ] as `0x${string}`[]) // sepolia testnet
   : ([
       "0x60dcb74e687357308a54e905118c21f0199ceada", // Cancun FT. Tarot
       "0xd179a77ecf429e2d9f7e65d8b055ac1a40394706", // Las Nike
       "0xd1e31904865c9d38040Cef595677dC127537B296", // Eleven
-    ] as `0x${string}`[])
+    ] as `0x${string}`[]) // optimism mainnet
 
 // Zora
 export const DROP_ADDRESS = IS_TESTNET
@@ -78,8 +78,11 @@ export const COMMENT = "XCELENCIA - ERC6551 smart album 🪄"
 export const MINT_REFERRAL_ADDRESS = process.env.NEXT_PUBLIC_REFERRAL as `0x${string}`
 
 // Catalog
-export const CATALOGCOSIGN_ADDRESS = "0xA9d06704e872C868be343C8DDBb2B412d17dea6c"
-export const CATALOG_ID =
-  "5319329821006713189457368775898122609838495559285808490438434687907532899470"
-export const CATALOG_REFERRAL = "0xcfbf34d385ea2d5eb947063b67ea226dcda3dc38"
+export const CATALOGCOSIGN_ADDRESS = IS_TESTNET
+  ? "0xA9d06704e872C868be343C8DDBb2B412d17dea6c" // base sepolia
+  : "0x15e57847c5eee553e0eaa247de0dffef28dd68eb" // base
+export const CATALOG_ID = IS_TESTNET
+  ? "5319329821006713189457368775898122609838495559285808490438434687907532899470" // base sepolia
+  : "5319329821006713189457368775898122609838495559285808490438434687907532899375" // base mainnet
+export const CATALOG_REFERRAL = process.env.NEXT_PUBLIC_REFERRAL as `0x${string}`
 export const CATALOG_PRICE = "1000000000000000"
