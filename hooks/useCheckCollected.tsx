@@ -13,7 +13,6 @@ const useCheckCollected = () => {
       return
     }
     const zoraTotalOwned = (await getBalanceOf(DROP_ADDRESS, connectedWallet)) as any
-    console.log("SWEETS zoraTotalOwned", zoraTotalOwned)
     const { error: zoraError } = zoraTotalOwned
     if (!zoraError && zoraTotalOwned >= 1) setIsCollectedZora(true)
   }, [connectedWallet])
