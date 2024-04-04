@@ -9,7 +9,7 @@ const BaseLayout = ({
   <div
     className={`w-full overflow-hidden min-h-screen 
       flex flex-col items-center
-      bg-cover bg-center ${backgroundImage}`}
+      bg-cover bg-fixed bg-center ${backgroundImage}`}
   >
     <Header />
     <div className="flex flex-grow mt-[150px]">{children}</div>
