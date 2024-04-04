@@ -9,7 +9,7 @@ export const SEO_IMAGE = "/images/logo.png"
 export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
 export const CHAIN = IS_TESTNET ? baseSepolia : base
 export const CHAIN_ID = CHAIN.id
-export const INTERSTELLAR_CHAIN = IS_TESTNET ? optimism : sepolia
+export const INTERSTELLAR_CHAIN = IS_TESTNET ? sepolia : optimism
 export const INTERSTELLAR_CHAIN_ID = INTERSTELLAR_CHAIN.id
 
 // Tokenbound
@@ -65,7 +65,7 @@ export const SOUND_INTERSTELLAR_TRACKLIST = IS_TESTNET
 
 // Zora
 export const DROP_ADDRESS = IS_TESTNET
-  ? "0xe8c75096Bd4FAdDA94C9e2E444eA29Fe31cCf3ad" // base sepolia
+  ? "0x0b93a56db47797142076e24c520c846c9bd0d6fa" // base sepolia
   : "0x16F1FC98282AFDA367999012027b5A3fA656a713" // base mainnet
 
 export const ZORA_VIDEO = IS_TESTNET
