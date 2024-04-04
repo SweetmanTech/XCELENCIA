@@ -19,7 +19,7 @@ const useTBAPurchase = () => {
 
   const purchase = async () => {
     try {
-      if (!prepare()) return false
+      if (!(await prepare())) return false
       if (!connectedWallet) return false
 
       setLoading(true)
