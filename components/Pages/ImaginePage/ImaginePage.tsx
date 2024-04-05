@@ -3,8 +3,8 @@ import Content from "@/components/Layout/Content"
 import SeoHead from "@/components/SeoHead"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
-import SmartAlbum from "./SmartAlbum"
 import MusicPlayer from "../LandingPage/MusicPlayer"
+import DownloadButton from "./DownloadButton"
 
 const ImaginePage = () => {
   const { isCollectedZora } = useCollectionProvider()
@@ -28,8 +28,8 @@ const ImaginePage = () => {
               <div className="flex justify-center lg:justify-start mt-[10px] lg:pl-[150px]">
                 <MusicPlayer />
               </div>
-              <div className="w-full flex justify-center lg:justify-start">
-                <SmartAlbum />
+              <div className="w-full flex justify-center items-center">
+                <DownloadButton />
               </div>
             </div>
           </div>
