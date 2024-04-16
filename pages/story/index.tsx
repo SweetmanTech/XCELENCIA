@@ -1,4 +1,4 @@
-import StoryPage from "@/components/Pages/StoryPage";
+import StoryPage from "@/components/Pages/StoryPage"
 
 const Story = () => <StoryPage />
 

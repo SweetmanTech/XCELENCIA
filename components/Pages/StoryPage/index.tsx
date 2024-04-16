@@ -1,3 +1,3 @@
-import StoryPage from "./StoryPage";
+import StoryPage from "./StoryPage"
 
 export default StoryPage
