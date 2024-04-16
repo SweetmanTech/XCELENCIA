@@ -1,3 +1,5 @@
+import Media from "@/shared/Media"
+
 /* eslint-disable jsx-a11y/control-has-associated-label */
 const Footer = () => {
   const itemClasses = `w-[36px] aspect-[1/1] rounded-full flex justify-center items-center p-[6px]
@@ -96,7 +98,19 @@ const Footer = () => {
           </svg>
         </a>
         <a
-          href="https://beta.catalog.works/xcelencia"
+          href="https://zora.co/xcelencia.eth"
+          target="_blank"
+          className={itemClasses}
+          rel="noreferrer"
+        >
+          <Media
+            link="/images/zorb.png"
+            blurLink="/images/zorb.png"
+            containerClasses="w-[25px] aspect-[1/1]"
+          />
+        </a>
+        <a
+          href="https://catalog.works/0x089036a0835C6cF82e7fC42e9e95DfE05e110c81"
           target="_blank"
           className={itemClasses}
           rel="noreferrer"
