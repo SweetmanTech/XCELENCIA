@@ -1,19 +1,14 @@
 import CollectAllButton from "@/components/CollectAllButton"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import useBalance from "@/hooks/useBalance"
-import CreditCardCheckout from "./CreditCardCheckout"
 import useConnectedWallet from "@/hooks/useConnectedWallet"
 import { ZORA_PRICE } from "@/lib/consts"
-import { parseEther } from "viem"
-import { bigint } from "zod"
+import CreditCardCheckout from "./CreditCardCheckout"
 
 const CollectButtons = () => {
   const { balance } = useBalance()
   const { connectedWallet } = useConnectedWallet()
-
-  console.log("SWEETS BALANCE", balance)
   const totalPrice = BigInt(ZORA_PRICE)
-
   const showCreditCard = connectedWallet && balance < totalPrice
 
   return (
