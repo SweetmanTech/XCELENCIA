@@ -1,9 +1,13 @@
 import Layout from "@/components/Layout"
 import Journey from "./Journey"
+import Started from "./Started"
 
 const StoryPage = () => (
   <Layout type="base">
-    <Journey />
+    <div className="flex flex-col w-screen">
+      <Journey />
+      <Started />
+    </div>
   </Layout>
 )
 
