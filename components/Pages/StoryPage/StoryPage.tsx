@@ -2,6 +2,7 @@ import Layout from "@/components/Layout"
 import Journey from "./Journey"
 import Started from "./Started"
 import Spark from "./Spark"
+import Dynamic from "./Dynamic"
 
 const StoryPage = () => (
   <Layout type="base">
@@ -9,6 +10,7 @@ const StoryPage = () => (
       <Journey />
       <Started />
       <Spark />
+      <Dynamic />
     </div>
   </Layout>
 )
