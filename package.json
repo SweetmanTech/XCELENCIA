@@ -19,6 +19,7 @@
     "@soundxyz/sdk": "^7.1.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tanstack/react-table": "^8.9.8",
+    "@thirdweb-dev/react": "^4.6.2",
     "@tokenbound/sdk": "^0.5.1",
     "@zoralabs/protocol-sdk": "^0.5.7",
     "aos": "^2.3.4",
