@@ -4,6 +4,7 @@ import Started from "./Started"
 import Spark from "./Spark"
 import Dynamic from "./Dynamic"
 import Evolving from "./Evolving"
+import Stay from "./Stay"
 
 const StoryPage = () => (
   <Layout type="base">
@@ -13,6 +14,7 @@ const StoryPage = () => (
       <Spark />
       <Dynamic />
       <Evolving />
+      <Stay />
     </div>
   </Layout>
 )
