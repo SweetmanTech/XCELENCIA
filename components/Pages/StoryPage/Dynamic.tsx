@@ -1,7 +1,8 @@
+import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import Media from "@/shared/Media"
 
 const Dynamic = () => (
-  <div className="flex flex-col items-center text-white mt-8 gap-4">
+  <FadeInWhenVisible className="flex flex-col items-center text-white mt-8 gap-4">
     <p className="text-[32px] font-madeoutersans_bold">El Niño Estrella (Dynamic)</p>
     <Media
       link="/images/1713199216.gif"
@@ -18,7 +19,7 @@ const Dynamic = () => (
       <br />
       secondary.
     </p>
-  </div>
+  </FadeInWhenVisible>
 )
 
 export default Dynamic

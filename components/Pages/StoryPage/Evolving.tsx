@@ -4,15 +4,15 @@ import Media from "@/shared/Media"
 import Slider from "@/shared/Slider"
 import { useState } from "react"
 
-const Started = () => {
+const Evolving = () => {
   const [swiper, setSwiper] = useState<any>(null)
   const [selectedIndex, setSelectedIndex] = useState(1)
 
   const images = [
-    "/images/1713198411.webp",
-    "/images/1713198220.webp",
-    "/images/1713198254.webp",
-    "/images/1713198265.webp",
+    "/images/1713199309.webp",
+    "/images/1713199323.webp",
+    "/images/1713199350.webp",
+    "/images/1713199368.webp",
   ]
 
   const nextSlide = () => {
@@ -36,7 +36,7 @@ const Started = () => {
   return (
     <FadeInWhenVisible className="mt-8 w-full flex flex-col items-center">
       <p className="font-madeoutersans_bold text-[32px] text-white flex flex-col items-center">
-        How it all started...
+        Ever evolving.
       </p>
       <div className="flex justify-center w-[1024px] relative">
         <Slider
@@ -86,8 +86,31 @@ const Started = () => {
           )}
         </div>
       </div>
+      <p className="text-white text-center mt-8">
+        <span>
+          {`I've described El Niño`} as a <em>trilogy</em>, with two more albums coming (some side
+          quests ;)
+          <br />
+          <br />
+          The project is ever-evolving...
+          <br />
+          <br />
+          The smart album is limited edition until July 4th. Over time there will be metadata
+          updates and improvements to the experience as well as product and brand experiences.
+          <br />
+          <br /> In the future, you can collect the next projects using the smart album (6551) tech
+          to continue adding to your collection, completing an ultimate set. <br />
+          <br />
+          We believe this could potentially give the smart wallet album - rarity and scarcity,
+          making it a unique digital box set to own in your collection.
+          <br />
+          <br />
+          We will continue adding more to the story of el niño until then...
+          <br />
+        </span>
+      </p>
     </FadeInWhenVisible>
   )
 }
 
-export default Started
+export default Evolving
