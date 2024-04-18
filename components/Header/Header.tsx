@@ -24,6 +24,9 @@ const Header = () => {
             Imagination
           </button>
         )}
+        <button className={itemClasses} onClick={() => push("/story")} type="button">
+          Story
+        </button>
       </div>
       {ready && <SignButton />}
     </nav>
