@@ -1,7 +1,7 @@
 import CollectAllButton from "@/components/CollectAllButton"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import useEthPrice from "@/hooks/useEthPrice"
-import getUsdConversion from "@/lib/getUSDConversion"
+import getUsdConversion from "@/lib/getUsdConversion"
 
 const CollectButtons = () => {
   const { ethPrice } = useEthPrice()
