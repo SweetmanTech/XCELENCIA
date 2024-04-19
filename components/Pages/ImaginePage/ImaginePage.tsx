@@ -4,7 +4,7 @@ import SeoHead from "@/components/SeoHead"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
 import DownloadButton from "./DownloadButton"
-import SmartAlbum from "../LandingPage/SmartAlbum"
+import SmartAlbum from "./SmartAlbum"
 
 const ImaginePage = () => {
   const { isCollectedZora } = useCollectionProvider()
