@@ -6,6 +6,7 @@ import { useCollectionProvider } from "@/providers/CollectionProvider"
 import Script from "next/script"
 import MusicPlayer from "../LandingPage/MusicPlayer"
 import DownloadButton from "./DownloadButton"
+import SocialShare from "./SocialShare"
 
 const ImaginePage = () => {
   const { isCollectedZora } = useCollectionProvider()
@@ -32,6 +33,7 @@ const ImaginePage = () => {
               >
                 <MusicPlayer />
                 <DownloadButton />
+                <SocialShare />
               </div>
               <div className="w-full justify-center flex">
                 <Script src="https://assets.calendly.com/assets/external/widget.js" async />
