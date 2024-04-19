@@ -25,8 +25,9 @@ const UserProvider = ({ children }) => {
   const { data } = useQuery(pfpQuery, { userAddress: connectedWallet }, { cache: true })
 
   const profileImage = useMemo(() => {
-    if (!data) return
+    if (!data?.Socials?.Social) return
     const pfpLinks = data.Socials.Social.filter((item) => item?.profileImage)
+    if (!pfpLinks?.length)  return
     return pfpLinks[0].profileImage
   }, [data])
 
