@@ -5,7 +5,7 @@ import { useState } from "react"
 
 const Started = () => {
   const [swiper, setSwiper] = useState<any>(null)
-  const [selectedIndex, setSelectedIndex] = useState(1)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const images = [
     "/images/1713198411.webp",
