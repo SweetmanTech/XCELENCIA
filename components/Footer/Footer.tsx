@@ -2,12 +2,14 @@ import Media from "@/shared/Media"
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
 const Footer = () => {
-  const itemClasses = `w-[36px] aspect-[1/1] rounded-full flex justify-center items-center p-[6px]
+  const itemClasses = `w-[28px] md:w-[36px] aspect-[1/1] rounded-full flex justify-center items-center p-[6px]
   mt-[5px] text-black bg-white`
 
   return (
     <>
-      <p className="text-[32px] text-white font-madeoutersans_bold mt-5">Connect with me</p>
+      <p className="text-[26px] md:text-[32px] text-white font-madeoutersans_bold mt-5">
+        Connect with me
+      </p>
       <div className="w-full flex gap-2 justify-center my-3">
         <a
           href="https://www.youtube.com/xcelencia"
