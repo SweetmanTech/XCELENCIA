@@ -1,4 +1,5 @@
 import useConnectedWallet from "@/hooks/useConnectedWallet"
+import getIpfsLink from "@/lib/getIpfsLink"
 import { useQuery } from "@airstack/airstack-react"
 import { usePrivy } from "@privy-io/react-auth"
 import { createContext, useMemo, useEffect, useContext, useState } from "react"
@@ -28,7 +29,7 @@ const UserProvider = ({ children }) => {
     if (!data?.Socials?.Social) return
     const pfpLinks = data.Socials.Social.filter((item) => item?.profileImage)
     if (!pfpLinks?.length)  return
-    return pfpLinks[0].profileImage
+    return getIpfsLink(pfpLinks[0]?.profileImage)
   }, [data])
 
   useEffect(() => {
