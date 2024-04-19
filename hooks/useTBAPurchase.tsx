@@ -36,7 +36,7 @@ const useTBAPurchase = () => {
           CHAIN_ID,
           multicallAbi,
           "aggregate3Value",
-          calls,
+          [calls],
           hexValue,
           "Collect the Album",
           "El Nino Estrello",
