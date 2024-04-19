@@ -1,12 +1,23 @@
 import Media from "@/shared/Media"
+import { useUserProvider } from "@/providers/UserProvider"
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
 const Footer = () => {
   const itemClasses = `w-[28px] md:w-[36px] aspect-[1/1] rounded-full flex justify-center items-center p-[6px]
   mt-[5px] text-black bg-white`
+  const { profileImage } = useUserProvider()
 
   return (
     <>
+      {profileImage && (
+        <div>
+          <Media
+            link={profileImage}
+            blurLink={profileImage}
+            containerClasses="w-[40px] aspect-[1/1] rounded-full !overflow-hidden"
+          />
+        </div>
+      )}
       <p className="text-[26px] md:text-[32px] text-white font-madeoutersans_bold mt-5">
         Connect with me
       </p>
