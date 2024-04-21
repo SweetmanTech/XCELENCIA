@@ -5,10 +5,15 @@ import Collectors from "../Collectors"
 const Footer = () => {
   const itemClasses = `w-[28px] md:w-[36px] aspect-[1/1] rounded-full flex justify-center items-center p-[6px]
   mt-[5px] text-black bg-white`
-  
+
   return (
     <>
-      <Collectors />
+      <div
+        className="justify-center flex gap-2 mt-8
+      flex-wrap w-full xl:w-[1280px] lg:w-[1024px] md:w-[768px]"
+      >
+        <Collectors />
+      </div>
       <p className="text-[26px] md:text-[32px] text-white font-madeoutersans_bold mt-5">
         Connect with me
       </p>

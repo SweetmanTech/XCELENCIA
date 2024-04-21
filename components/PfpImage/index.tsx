@@ -1,3 +1,3 @@
-import PfpImage from './PfpImage'
+import PfpImage from "./PfpImage"
 
 export default PfpImage

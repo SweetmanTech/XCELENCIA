@@ -1,3 +1,3 @@
-import Collectors from "./Collectors";
+import Collectors from "./Collectors"
 
 export default Collectors
