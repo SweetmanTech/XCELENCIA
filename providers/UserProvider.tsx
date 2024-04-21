@@ -22,7 +22,7 @@ const UserProvider = ({ children }) => {
     () => ({
       privyEmail,
       isLoggedByEmail,
-      isAuthenticated
+      isAuthenticated,
     }),
     [privyEmail, isLoggedByEmail, isAuthenticated],
   )
