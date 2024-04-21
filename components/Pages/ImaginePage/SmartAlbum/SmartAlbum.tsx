@@ -4,9 +4,10 @@ import Icon from "@/shared/Icon"
 import Slider from "@/shared/Slider"
 import ZoraVideo from "./ZoraVideo"
 import IframePlayer from "./IframePlayer"
+import PdfDocument from "./PdfDocument"
 
 const SmartAlbum = () => {
-  const { setSwiper, nextSlide, prevSlide, selectedIndex } = useSwiperSlide({ size: 2 })
+  const { setSwiper, nextSlide, prevSlide, selectedIndex } = useSwiperSlide({ size: 3 })
 
   return (
     <FadeInWhenVisible className="w-fit flex gap-2 items-center">
@@ -30,10 +31,11 @@ const SmartAlbum = () => {
         }}
         className="relative z-[1] !w-[460px] !px-0"
       >
-        <ZoraVideo />
         <IframePlayer />
+        <ZoraVideo />
+        <PdfDocument />
       </Slider>
-      {selectedIndex !== 1 && (
+      {selectedIndex !== 2 && (
         // eslint-disable-next-line jsx-a11y/control-has-associated-label
         <button
           type="button"
