@@ -4,9 +4,9 @@ import SeoHead from "@/components/SeoHead"
 import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
 import Script from "next/script"
-import MusicPlayer from "../LandingPage/MusicPlayer"
 import DownloadButton from "./DownloadButton"
 import SocialShare from "./SocialShare"
+import SmartAlbum from "./SmartAlbum"
 
 const ImaginePage = () => {
   const { isCollectedZora } = useCollectionProvider()
@@ -31,7 +31,7 @@ const ImaginePage = () => {
                 className="flex items-center mt-[10px] lg:pl-[150px]
               flex-col gap-4"
               >
-                <MusicPlayer />
+                <SmartAlbum />
                 <DownloadButton />
                 <SocialShare />
               </div>
