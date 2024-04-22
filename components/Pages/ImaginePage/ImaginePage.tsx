@@ -5,6 +5,7 @@ import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
 import Script from "next/script"
 import DownloadButton from "./DownloadButton"
+import SocialShare from "./SocialShare"
 import SmartAlbum from "./SmartAlbum"
 
 const ImaginePage = () => {
@@ -32,6 +33,7 @@ const ImaginePage = () => {
               >
                 <SmartAlbum />
                 <DownloadButton />
+                <SocialShare />
               </div>
               <div className="w-full justify-center flex">
                 <Script src="https://assets.calendly.com/assets/external/widget.js" async />
