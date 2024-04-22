@@ -4,7 +4,7 @@ import getTotalSupply from "@/lib/viem/getTotalSupply"
 import { useEffect, useState } from "react"
 import useMulticall3Read from "./useMulticall3Read"
 import getOwnerOfCall from "@/lib/getOwnerOfCall"
-import hexToEthAddress from "@/lib/hextToEthAddress"
+import hexToEthAddress from "@/lib/hexToEthAddress"
 
 const useCollectorsData = () => {
   const [collectors, setCollectors] = useState([])

@@ -6,7 +6,7 @@ export const SEO_DESCRIPTION = "album by Xcelencia"
 export const SEO_IMAGE = "/images/logo.png"
 
 // Networks
-export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET
+export const IS_TESTNET = process.env.NEXT_PUBLIC_TESTNET === "true"
 export const CHAIN = IS_TESTNET ? baseSepolia : base
 export const CHAIN_ID = CHAIN.id
 export const INTERSTELLAR_CHAIN = IS_TESTNET ? sepolia : optimism
