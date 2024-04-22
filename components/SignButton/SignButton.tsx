@@ -1,7 +1,7 @@
 import { usePrivy } from "@privy-io/react-auth"
 
 const SignButton = ({ className = "" }) => {
-  const { authenticated, logout, login } = usePrivy()
+  const { authenticated, logout, login, ready } = usePrivy()
 
   const handleClick = () => {
     if (authenticated) {
@@ -20,7 +20,7 @@ const SignButton = ({ className = "" }) => {
       text-uppercase
       px-[20px] py-[10px] ${className}`}
     >
-      {authenticated ? "Sign Out" : "Sign In"}
+      {ready && !authenticated ? "Sign In" : "Sign Out"}
     </button>
   )
 }

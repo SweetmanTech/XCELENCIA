@@ -2,7 +2,7 @@ import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import DescriptionItem from "./DescriptionItem"
 
 const WhyCollect = () => (
-  <FadeInWhenVisible className="mt-[24px] text-[white] text-[26px]">
+  <FadeInWhenVisible className="mt-[24px] text-[white] text-[18px] md:text-[26px]">
     Why Collect?
     <div>
       <DescriptionItem>Support indie music</DescriptionItem>

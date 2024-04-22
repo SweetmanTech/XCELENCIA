@@ -1,11 +1,13 @@
 import { useRouter } from "next/router"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
+import { usePrivy } from "@privy-io/react-auth"
 import SignButton from "../SignButton"
 
 const Header = () => {
   const itemClasses = "text-white text-[24px] font-semibold"
   const { push } = useRouter()
   const { isCollectedZora } = useCollectionProvider()
+  const { ready } = usePrivy()
 
   return (
     <nav
@@ -22,8 +24,11 @@ const Header = () => {
             Imagination
           </button>
         )}
+        <button className={itemClasses} onClick={() => push("/story")} type="button">
+          Story
+        </button>
       </div>
-      <SignButton />
+      {ready && <SignButton />}
     </nav>
   )
 }
