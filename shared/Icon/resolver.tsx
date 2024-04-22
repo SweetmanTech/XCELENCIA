@@ -3,7 +3,7 @@ import { FaXTwitter } from "react-icons/fa6"
 import { TfiWallet } from "react-icons/tfi"
 import { FaArrowRight } from "react-icons/fa"
 import { FaArrowLeft } from "react-icons/fa"
-import { MdCastConnected } from "react-icons/md";
+import { MdCastConnected } from "react-icons/md"
 
 export const Icons = {
   instagram: FaInstagram,
@@ -11,5 +11,5 @@ export const Icons = {
   wallet: TfiWallet,
   arrowLeft: FaArrowLeft,
   arrowRight: FaArrowRight,
-  cast: MdCastConnected
+  cast: MdCastConnected,
 }
