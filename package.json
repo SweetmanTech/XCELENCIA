@@ -15,7 +15,6 @@
   "dependencies": {
     "@airstack/airstack-react": "^0.6.3",
     "@crossmint/client-sdk-react-ui": "^1.1.3",
-    "@farcaster/hub-nodejs": "^0.11.9",
     "@hookform/resolvers": "^3.3.2",
     "@privy-io/react-auth": "^1.44.0",
     "@soundxyz/sdk": "^7.1.0",

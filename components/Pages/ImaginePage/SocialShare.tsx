@@ -1,6 +1,7 @@
 import createTweet from "@/lib/createTweet"
 import createWarpCast from "@/lib/createWarpCast"
 import Icon from "@/shared/Icon"
+import Media from "@/shared/Media"
 
 const SocialShare = () => {
   const handleTweetClick = () => {
@@ -26,10 +27,14 @@ const SocialShare = () => {
       <button
         type="button"
         className="w-[40px] aspect-[1/1] rounded-full
-                bg-black flex justify-center items-center"
+                bg-pink_1 flex justify-center items-center"
         onClick={handleWarpCastClick}
       >
-        <Icon name="cast" color="white" size={20} raw />
+        <Media
+          link="/images/warpcast.svg"
+          blurLink="/images/warpcast.png"
+          containerClasses="w-[20px] aspect-[1/1]"
+        />
       </button>
     </div>
   )
