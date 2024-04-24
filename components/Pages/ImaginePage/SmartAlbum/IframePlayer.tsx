@@ -1,12 +1,25 @@
-const IframePlayer = () => (
-  <iframe
-    src="https://nftstorage.link/ipfs/QmVYW5vHaV322Kvp2So5ErngP1PrDUneYqo4e9TNygAGSn?playlist-url=https://ipfs.io/ipfs/QmQEZbGNw4XZL78x2a6mKYzS7YhqnzwVo4VKpxDtpuxmmF"
-    width="444"
-    height="444"
-    frameBorder="0"
-    allow="autoplay"
-    title="Xcelencia"
-  />
-)
+import _ from "lodash"
+import useCollectorsData from "@/hooks/useCollectorsData"
+import useConnectedWallet from "@/hooks/useConnectedWallet"
+import { CHAIN_ID, DROP_ADDRESS } from "@/lib/consts"
+
+const IframePlayer = () => {
+  const { owners } = useCollectorsData()
+  const { connectedWallet } = useConnectedWallet()
+  const lastCollectInfo = _.findLast(owners, { address: connectedWallet.toLowerCase() })
+
+  return (
+    <>
+      {/* eslint-disable-next-line react/jsx-no-useless-fragment */}
+      {lastCollectInfo && (
+        <iframe
+          src={`https://iframe-tokenbound.vercel.app/${DROP_ADDRESS}/${lastCollectInfo?.tokenId}/${CHAIN_ID}`}
+          className="aspect-[1/1] w-[444px]"
+          title="Xcelencia"
+        />
+      )}
+    </>
+  )
+}
 
 export default IframePlayer
