@@ -9,6 +9,7 @@ import hexToEthAddress from "@/lib/hexToEthAddress"
 const useCollectorsData = () => {
   const [collectors, setCollectors] = useState([])
   const { aggregate3Value } = useMulticall3Read()
+  const [owners, setOwners] = useState([])
 
   useEffect(() => {
     const init = async () => {
@@ -18,8 +19,12 @@ const useCollectorsData = () => {
       )
 
       const response = (await aggregate3Value(ownerOfCalls)) as any
-      const owners = response.map((owner) => hexToEthAddress(owner.returnData))
-      const uniqueOwners = _.uniq(owners)
+      const ownersOfDrop = response.map((owner, i) => ({
+        tokenId: i + 1,
+        address: hexToEthAddress(owner.returnData),
+      }))
+      setOwners(ownersOfDrop)
+      const uniqueOwners = _.uniqBy(owners, "address")
       setCollectors(uniqueOwners)
     }
 
@@ -28,6 +33,7 @@ const useCollectorsData = () => {
 
   return {
     collectors,
+    owners,
   }
 }
 

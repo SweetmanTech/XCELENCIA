@@ -7,7 +7,7 @@ const Collectors = () => {
   return (
     <>
       {collectors.map((collector) => (
-        <PfpImage key={collector} collector={collector} />
+        <PfpImage key={collector.address} collector={collector.address} />
       ))}
     </>
   )
