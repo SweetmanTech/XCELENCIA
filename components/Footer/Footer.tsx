@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <>
       <div
-        className="justify-center flex gap-2 mt-8
+        className="justify-center flex gap-2 mt-20
       flex-wrap w-full xl:w-[1280px] lg:w-[1024px] md:w-[768px]"
       >
         <Collectors />

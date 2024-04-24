@@ -5,7 +5,9 @@ const Included = () => (
   <FadeInWhenVisible className="text-[white] text-[18px] md:text-[26px]">
     Included
     <div>
-      <DescriptionItem>15 songs as collectibles</DescriptionItem>
+      <DescriptionItem>
+        Concept booklet, video call, 14 songs <br /> as collectibles
+      </DescriptionItem>
       <DescriptionItem>Each with their own unique cover art</DescriptionItem>
       <DescriptionItem>Interactive music player</DescriptionItem>
       <DescriptionItem>Liner notes</DescriptionItem>

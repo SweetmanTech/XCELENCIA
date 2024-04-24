@@ -1,7 +1,6 @@
 import Content from "@/components/Layout/Content"
 import CollectButtons from "./CollectButtons"
 import DetailSection from "./DetailSection/DetailSection"
-import WhatNext from "./WhatNext"
 import AlbumImage from "./AlbumImage"
 
 const LiveHome = () => (
@@ -14,7 +13,6 @@ const LiveHome = () => (
         <AlbumImage />
         <CollectButtons />
         <DetailSection />
-        <WhatNext />
       </div>
     </div>
   </Content>
