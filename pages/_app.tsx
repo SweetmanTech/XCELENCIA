@@ -10,6 +10,7 @@ import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import UserProvider from "@/providers/UserProvider"
 import CollectionProvider from "@/providers/CollectionProvider"
 import { AirstackProvider } from "@airstack/airstack-react"
+import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "../providers/ThemeProvider"
 
 const privyConfig: PrivyClientConfig = {
@@ -34,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <SessionProvider>
                 <Component {...pageProps} />
                 <ToastContainer />
+                <Analytics />
               </SessionProvider>
             </ThemeProvider>
           </CollectionProvider>
