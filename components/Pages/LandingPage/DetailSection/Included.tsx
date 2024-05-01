@@ -11,7 +11,6 @@ const Included = () => (
       <DescriptionItem>14 Songs</DescriptionItem>
       <DescriptionItem>Interactive music player</DescriptionItem>
       <DescriptionItem>Liner notes graphic</DescriptionItem>
-      <DescriptionItem>Liner notes</DescriptionItem>
       <DescriptionItem>Journey video</DescriptionItem>
       <DescriptionItem>Concept Art Booklet</DescriptionItem>
       <DescriptionItem>High Q downloads</DescriptionItem>
