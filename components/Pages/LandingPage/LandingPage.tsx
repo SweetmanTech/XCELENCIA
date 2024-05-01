@@ -3,7 +3,7 @@ import SeoHead from "../../SeoHead"
 import LiveHome from "./LiveHome"
 
 const LandingPage = () => (
-  <Layout type="base">
+  <Layout type="base" backgroundImage="bg-[url('/images/home-bg.jpg')]">
     <SeoHead />
     <LiveHome />
   </Layout>
