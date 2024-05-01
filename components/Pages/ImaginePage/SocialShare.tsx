@@ -5,10 +5,8 @@ import Media from "@/shared/Media"
 
 const SocialShare = () => {
   const handleTweetClick = () => {
-    createTweet(`I just collected El Niño Estrella by @xcelencia
-https://estrella.city
-
-#ElNiñoEstrella`)
+    createTweet(`I just collected El Niño Estrella by @xcelencia #ElNiñoEstrella
+https://estrella.city`)
   }
 
   const handleWarpCastClick = () => {
