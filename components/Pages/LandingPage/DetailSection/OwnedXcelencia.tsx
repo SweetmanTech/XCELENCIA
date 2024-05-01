@@ -13,8 +13,8 @@ const OwnedXcelencia = () => (
     <div className="mt-[30px] flex flex-col items-center gap-[15px] md:flex-row">
       <div>
         <Media
-          link="/images/1713199350.webp"
-          blurLink="/images/album.png"
+          link="/images/album.jpg"
+          blurLink="/images/bunldes.png"
           containerClasses="aspect-[1/1] w-[300px]"
         />
         <p className="text-white font-madeoutersans_bold text-[30px]">ENE #420</p>
