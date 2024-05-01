@@ -24,10 +24,7 @@ const ImaginePage = () => {
               your smart album contains:
             </FadeInWhenVisible>
             <div className="w-full mt-[50px] gap-[50px]">
-              <div
-                className="flex items-center mt-[10px] lg:pl-[150px]
-              flex-col gap-4"
-              >
+              <div className="flex items-center mt-[10px] flex-col gap-4">
                 <SmartAlbum />
                 <DownloadButton />
                 <SocialShare />
