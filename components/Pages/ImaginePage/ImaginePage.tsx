@@ -30,6 +30,16 @@ const ImaginePage = () => {
               </div>
               <div className="w-full flex justify-center items-center">
                 <DownloadButton />
+                {/* <div
+                  className="calendly-inline-widget"
+                  data-url="https://calendly.com/xcelencia/30min"
+                  // style={{"min-width:320px;height:700px;"}}
+                />
+                <script
+                  type="text/javascript"
+                  src="https://assets.calendly.com/assets/external/widget.js"
+                  async
+                /> */}
               </div>
             </div>
           </div>
