@@ -6,9 +6,10 @@ import ZoraVideo from "./ZoraVideo"
 import TBAViewer from "./TBAViewer"
 import PdfDocument from "./PdfDocument"
 import IframePlayer from "./IframePlayer"
+import ZoraImage from "./ZoraImage"
 
 const SmartAlbum = () => {
-  const { setSwiper, nextSlide, prevSlide, selectedIndex } = useSwiperSlide({ size: 4 })
+  const { setSwiper, nextSlide, prevSlide, selectedIndex } = useSwiperSlide({ size: 5 })
 
   return (
     <FadeInWhenVisible className="w-fit flex gap-2 items-center">
@@ -35,13 +36,14 @@ const SmartAlbum = () => {
         <TBAViewer />
         <ZoraVideo />
         <PdfDocument />
+        <ZoraImage />
       </Slider>
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <button
         type="button"
         onClick={nextSlide}
         className="w-[40px] aspect-[1/1] rounded-full flex bg-black_1 justify-center items-center"
-        disabled={selectedIndex === 3}
+        disabled={selectedIndex === 4}
       >
         <Icon name="arrowRight" color="white" raw size={20} />
       </button>
