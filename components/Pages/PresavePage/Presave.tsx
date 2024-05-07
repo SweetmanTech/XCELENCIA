@@ -4,7 +4,7 @@ import { useState } from "react"
 const Presave = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   return (
-    <div className="w-[600px]">
+    <div className="w-full md:w-[600px]">
       <Script
         src="https://embed.laylo.com/laylo-sdk.js"
         strategy="afterInteractive"

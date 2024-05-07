@@ -13,6 +13,7 @@
     "format": "yarn run prettier:fix && yarn run lint:fix"
   },
   "dependencies": {
+    "@airstack/airstack-react": "^0.6.3",
     "@crossmint/client-sdk-react-ui": "^1.1.3",
     "@hookform/resolvers": "^3.3.2",
     "@privy-io/react-auth": "^1.44.0",
@@ -24,6 +25,7 @@
     "@zoralabs/protocol-sdk": "^0.5.7",
     "aos": "^2.3.4",
     "axios": "^1.5.0",
+    "@vercel/analytics": "^1.2.2",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-prettier": "^4.2.1",
     "ethereum-multicall": "^2.21.0",
@@ -31,6 +33,7 @@
     "express": "^4.18.2",
     "framer-motion": "^10.16.4",
     "joi": "^17.11.0",
+    "lodash": "^4.17.21",
     "next": "^12.2.2",
     "next-api-decorators": "^2.0.2",
     "next-auth": "^4.20.1",
@@ -41,7 +44,9 @@
     "react-icons": "^4.11.0",
     "react-intersection-observer": "^9.5.2",
     "react-loading": "^2.0.3",
+    "react-player": "^2.14.1",
     "react-toastify": "^9.1.1",
+    "swiper": "^9.4.1",
     "usehooks-ts": "^2.9.1",
     "viem": "^2.8.18",
     "zod": "^3.22.4"

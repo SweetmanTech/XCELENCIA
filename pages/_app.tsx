@@ -9,6 +9,8 @@ import React from "react"
 import { type PrivyClientConfig, PrivyProvider } from "@privy-io/react-auth"
 import UserProvider from "@/providers/UserProvider"
 import CollectionProvider from "@/providers/CollectionProvider"
+import { AirstackProvider } from "@airstack/airstack-react"
+import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "../providers/ThemeProvider"
 
 const privyConfig: PrivyClientConfig = {
@@ -25,18 +27,21 @@ const privyConfig: PrivyClientConfig = {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
-      <UserProvider>
-        <CollectionProvider>
-          <ThemeProvider>
-            <SessionProvider>
-              <Component {...pageProps} />
-              <ToastContainer />
-            </SessionProvider>
-          </ThemeProvider>
-        </CollectionProvider>
-      </UserProvider>
-    </PrivyProvider>
+    <AirstackProvider apiKey={process.env.NEXT_PUBLIC_AIRSTACK_API_KEY ?? ""}>
+      <PrivyProvider appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID} config={privyConfig}>
+        <UserProvider>
+          <CollectionProvider>
+            <ThemeProvider>
+              <SessionProvider>
+                <Component {...pageProps} />
+                <ToastContainer />
+                <Analytics />
+              </SessionProvider>
+            </ThemeProvider>
+          </CollectionProvider>
+        </UserProvider>
+      </PrivyProvider>
+    </AirstackProvider>
   )
 }
 export default MyApp

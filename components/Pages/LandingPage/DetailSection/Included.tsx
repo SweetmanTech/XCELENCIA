@@ -2,15 +2,17 @@ import FadeInWhenVisible from "@/components/FadeInWhenVisible"
 import DescriptionItem from "./DescriptionItem"
 
 const Included = () => (
-  <FadeInWhenVisible className="text-[white] text-[26px]">
-    Included
+  <FadeInWhenVisible className="text-[white] text-[18px] md:text-[26px]">
+    El Niño Estrella is a multimedia experience
+    <br />
+    <br />
+    The smart album is a limited edition digital box set that contains:
     <div>
-      <DescriptionItem>15 songs as collectibles</DescriptionItem>
-      <DescriptionItem>Each with their own unique cover art</DescriptionItem>
+      <DescriptionItem>14 Songs</DescriptionItem>
       <DescriptionItem>Interactive music player</DescriptionItem>
-      <DescriptionItem>Liner notes</DescriptionItem>
+      <DescriptionItem>Liner notes graphic</DescriptionItem>
       <DescriptionItem>Journey video</DescriptionItem>
-      <DescriptionItem>Claim 1 unique experience</DescriptionItem>
+      <DescriptionItem>Concept Art Booklet</DescriptionItem>
       <DescriptionItem>High Q downloads</DescriptionItem>
       <DescriptionItem>Discount code for merch store</DescriptionItem>
     </div>
