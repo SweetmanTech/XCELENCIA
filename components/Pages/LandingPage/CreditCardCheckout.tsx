@@ -21,10 +21,11 @@ const CreditCardCheckout = () => {
         configs={{
           contractId: process.env.NEXT_PUBLIC_THIRDWEB_CONTRACT_ID,
           walletAddress,
-          // Mint method (for custom contracts only)
           mintMethod: {
             name: "purchase",
-            args: {},
+            args: {
+              recipient: walletAddress,
+            },
             payment: {
               value: "0.000777 * $QUANTITY",
               currency: "ETH",

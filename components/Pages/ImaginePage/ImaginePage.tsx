@@ -27,20 +27,7 @@ const ImaginePage = () => {
               <div className="flex items-center mt-[10px] flex-col gap-4">
                 <SmartAlbum />
                 <DownloadButton />
-<<<<<<< HEAD
-                {/* <div
-                  className="calendly-inline-widget"
-                  data-url="https://calendly.com/xcelencia/30min"
-                  // style={{"min-width:320px;height:700px;"}}
-                />
-                <script
-                  type="text/javascript"
-                  src="https://assets.calendly.com/assets/external/widget.js"
-                  async
-                /> */}
-=======
                 <SocialShare />
->>>>>>> 03c2d947fe64f646fe7a4a8f7de89a87860d554a
               </div>
             </div>
           </div>
