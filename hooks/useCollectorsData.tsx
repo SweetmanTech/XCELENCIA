@@ -24,7 +24,7 @@ const useCollectorsData = () => {
         address: hexToEthAddress(owner.returnData),
       }))
       setOwners(ownersOfDrop)
-      const uniqueOwners = _.uniqBy(owners, "address")
+      const uniqueOwners = _.uniqBy(ownersOfDrop, "address")
       setCollectors(uniqueOwners)
     }
 
