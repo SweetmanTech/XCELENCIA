@@ -1,5 +1,5 @@
 import { BigNumber } from "ethers"
-import { CATALOG_PRICE, ZORA_PRICE } from "./consts"
+import { CATALOG_PRICE, DROP_ADDRESS, ZORA_PRICE } from "./consts"
 import getCosignMintCall from "./getCosignMintCall"
 import getAccount from "./tokenbound/getAccount"
 import getTBAInitializeCall from "./getTBAInitializeCall"
@@ -7,19 +7,21 @@ import getZoraNextTokenId from "./getZoraNextTokenId"
 import getMintMulticallCalls from "./getMintMulticallCalls"
 import getZoraMintVideoCall from "./getZoraMintVideoCall"
 import getAllSoundCalls from "./sound/getAllSoundCalls"
+import getZoraMintCollageCall from "./getZoraMintCollageCall"
 
 const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
-  const zoraTotalPrice = BigNumber.from(ZORA_PRICE)
-  const zoraNextTokenId = await getZoraNextTokenId()
+  const zoraPrice = BigNumber.from(ZORA_PRICE)
+  const zoraNextTokenId = await getZoraNextTokenId(DROP_ADDRESS)
   const zoraQuantity = 1
   const tbaCalls = getMintMulticallCalls(
     signingAddress,
     zoraNextTokenId,
     zoraQuantity,
-    zoraTotalPrice.toString(),
+    zoraPrice.toString(),
   ) as any
 
   const tba = getAccount(zoraNextTokenId)
+
   const tbaInitializationCall = getTBAInitializeCall(tba)
   const soundRaw = await getAllSoundCalls(tba, signingAddress)
   if (!soundRaw) {
@@ -29,11 +31,14 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const soundMintCallValue = BigNumber.from(soundValue)
   const cosignMintCall = getCosignMintCall(tba)
   const zoraMintVideoCall = getZoraMintVideoCall(tba)
+  const zoraMintCollageCall = getZoraMintCollageCall(tba)
   const cosignMintValue = BigNumber.from(CATALOG_PRICE)
   const zoraMintVideoValue = BigNumber.from(zoraMintVideoCall.value)
-  const totalPrice = zoraTotalPrice
+  const zoraMintCollageValue = BigNumber.from(zoraMintCollageCall.value)
+  const totalPrice = zoraPrice
     .add(cosignMintValue)
     .add(zoraMintVideoValue)
+    .add(zoraMintCollageValue)
     .add(soundMintCallValue)
   const hexValue = totalPrice.toHexString()
   const calls = [
@@ -41,6 +46,7 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
     tbaInitializationCall,
     ...soundCalls,
     cosignMintCall,
+    zoraMintCollageCall,
     zoraMintVideoCall,
   ]
   const response = { hexValue, calls }

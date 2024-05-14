@@ -13,11 +13,14 @@ const getSoundInterstellarMintCall = async (
 
   const soundInterstellarMintCalls = await Promise.all(mintCallsPromises)
 
+  const allCalls = await Promise.all([...soundInterstellarMintCalls])
+  const validCalls = allCalls.filter((call) => call)
+
   const bridgeCalls = await getSoundBridgeTx({
     destinationChainId: INTERSTELLAR_CHAIN_ID,
     originChainId: CHAIN_ID,
     user: signingAddress,
-    txs: soundInterstellarMintCalls.map((mintCall: any) => ({
+    txs: validCalls.map((mintCall: any) => ({
       to: mintCall.target,
       data: mintCall.callData,
       value: mintCall.value.toString(),
