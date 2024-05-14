@@ -7,7 +7,7 @@ import getZoraNextTokenId from "./getZoraNextTokenId"
 import getMintMulticallCalls from "./getMintMulticallCalls"
 import getZoraMintVideoCall from "./getZoraMintVideoCall"
 import getAllSoundCalls from "./sound/getAllSoundCalls"
-import getCollageMintCall from "./getCollageMintCall"
+import getZoraMintCollageCall from "./getZoraMintCollageCall"
 
 const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const zoraPrice = BigNumber.from(ZORA_PRICE)
@@ -22,8 +22,6 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
 
   const tba = getAccount(zoraNextTokenId)
 
-  const collageCall = getCollageMintCall(tba, zoraQuantity, zoraPrice.toString())
-
   const tbaInitializationCall = getTBAInitializeCall(tba)
   const soundRaw = await getAllSoundCalls(tba, signingAddress)
   if (!soundRaw) {
@@ -33,20 +31,22 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const soundMintCallValue = BigNumber.from(soundValue)
   const cosignMintCall = getCosignMintCall(tba)
   const zoraMintVideoCall = getZoraMintVideoCall(tba)
+  const zoraMintCollageCall = getZoraMintCollageCall(tba)
   const cosignMintValue = BigNumber.from(CATALOG_PRICE)
   const zoraMintVideoValue = BigNumber.from(zoraMintVideoCall.value)
+  const zoraMintCollageValue = BigNumber.from(zoraMintCollageCall.value)
   const totalPrice = zoraPrice
-    .add(zoraPrice)
     .add(cosignMintValue)
     .add(zoraMintVideoValue)
+    .add(zoraMintCollageValue)
     .add(soundMintCallValue)
   const hexValue = totalPrice.toHexString()
   const calls = [
     ...tbaCalls,
     tbaInitializationCall,
-    collageCall,
     ...soundCalls,
     cosignMintCall,
+    zoraMintCollageCall,
     zoraMintVideoCall,
   ]
   const response = { hexValue, calls }
