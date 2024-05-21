@@ -8,7 +8,7 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
-import { zeroAddress } from "viem"
+import { Address, zeroAddress } from "viem"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -21,9 +21,7 @@ const useTBAPurchase = () => {
 
   useEffect(() => {
     const init = async () => {
-      const prepared = await getPreparedMulticalls(
-        (connectedWallet as `0x${string}`) || zeroAddress,
-      )
+      const prepared = await getPreparedMulticalls((connectedWallet as Address) || zeroAddress)
       setPreparedMulticalls(prepared)
     }
 
@@ -36,7 +34,7 @@ const useTBAPurchase = () => {
       if (!connectedWallet) return false
 
       setLoading(true)
-      const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
+      const prepared = await getPreparedMulticalls(connectedWallet as Address)
       const { hexValue, calls } = prepared as any
 
       if (isLoggedByEmail) {
