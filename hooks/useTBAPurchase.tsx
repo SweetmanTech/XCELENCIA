@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import { CHAIN_ID, MULTICALL3_ADDRESS } from "@/lib/consts"
 import handleTxError from "@/lib/handleTxError"
@@ -16,19 +16,26 @@ const useTBAPurchase = () => {
   const [loading, setLoading] = useState(false)
   const { isLoggedByEmail } = useUserProvider()
   const { prepare } = usePreparePrivyWallet()
+  const [preparedMulticalls, setPreparedMulticalls] = useState(null)
+
+  useEffect(() => {
+    const init = async () => {
+      const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
+      setPreparedMulticalls(prepared)
+    }
+
+    if (!connectedWallet) return
+    init()
+  }, [connectedWallet])
 
   const purchase = async () => {
     try {
       if (!(await prepare())) return false
       if (!connectedWallet) return false
+      if (!preparedMulticalls) return false
 
       setLoading(true)
-      const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
-      if (!prepared) {
-        setLoading(false)
-        return false
-      }
-      const { calls, hexValue } = prepared
+      const { calls, hexValue } = preparedMulticalls
 
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
@@ -62,7 +69,7 @@ const useTBAPurchase = () => {
     }
   }
 
-  return { purchase, loading }
+  return { purchase, loading, preparedMulticalls }
 }
 
 export default useTBAPurchase
