@@ -1,15 +1,15 @@
 import { zoraCreator1155ImplABI as abi } from "@zoralabs/protocol-deployments"
 import { encodeAbiParameters, encodeFunctionData, parseAbiParameters } from "viem"
 import {
-  COLLAGE_ADDRESS,
+  EXPERIENCE_COLLECTION_ADDRESS,
   COMMENT,
   MINT_REFERRAL_ADDRESS,
   ZORA_FIXED_PRICE_SALE_STRATEGY,
   ZORA_PRICE,
 } from "./consts"
 
-const getZoraMintCollageCall = (mintRecipient) => {
-  const tokenId = BigInt(2)
+const getZoraMintENEExperienceCall = (mintRecipient, id) => {
+  const tokenId = BigInt(id)
   const quantity = BigInt(1)
   const minterArguments = encodeAbiParameters(parseAbiParameters("address x, string y"), [
     mintRecipient,
@@ -28,11 +28,11 @@ const getZoraMintCollageCall = (mintRecipient) => {
   })
 
   return {
-    target: COLLAGE_ADDRESS,
+    target: EXPERIENCE_COLLECTION_ADDRESS,
     value: ZORA_PRICE,
     allowFailure: false,
     callData: mintData,
   }
 }
 
-export default getZoraMintCollageCall
+export default getZoraMintENEExperienceCall
