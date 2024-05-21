@@ -20,7 +20,9 @@ const useTBAPurchase = () => {
 
   useEffect(() => {
     const init = async () => {
-      const prepared = await getPreparedMulticalls("0x0000000000000000000000000000000000000000")
+      const prepared = await getPreparedMulticalls(
+        (connectedWallet as `0x${string}`) || "0x0000000000000000000000000000000000000000",
+      )
       setPreparedMulticalls(prepared)
     }
 
