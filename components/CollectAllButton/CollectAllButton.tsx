@@ -32,9 +32,9 @@ const CollectAllButton = ({ className = "" }) => {
       >
         {loading ? `Collecting...` : "Collect Album"}
       </button>
-      <div className="text-white">
+      {preparedMulticalls && <div className="text-white">
         {ethAmount} ETH (${getUsdConversion(parseFloat(ethAmount), ethPrice)})
-      </div>
+      </div>}
     </>
   )
 }

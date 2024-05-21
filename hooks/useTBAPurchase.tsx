@@ -20,11 +20,10 @@ const useTBAPurchase = () => {
 
   useEffect(() => {
     const init = async () => {
-      const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
+      const prepared = await getPreparedMulticalls("0x0000000000000000000000000000000000000000")
       setPreparedMulticalls(prepared)
     }
 
-    if (!connectedWallet) return
     init()
   }, [connectedWallet])
 
@@ -32,10 +31,10 @@ const useTBAPurchase = () => {
     try {
       if (!(await prepare())) return false
       if (!connectedWallet) return false
-      if (!preparedMulticalls) return false
 
       setLoading(true)
-      const { calls, hexValue } = preparedMulticalls
+      const prepared = await getPreparedMulticalls(connectedWallet as `0x${string}`)
+      const { hexValue, calls } = prepared as any
 
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
