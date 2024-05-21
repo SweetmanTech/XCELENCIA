@@ -8,6 +8,7 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
+import { zeroAddress } from "viem"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -21,7 +22,7 @@ const useTBAPurchase = () => {
   useEffect(() => {
     const init = async () => {
       const prepared = await getPreparedMulticalls(
-        (connectedWallet as `0x${string}`) || "0x0000000000000000000000000000000000000000",
+        (connectedWallet as `0x${string}`) || zeroAddress,
       )
       setPreparedMulticalls(prepared)
     }
