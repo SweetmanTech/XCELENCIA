@@ -8,6 +8,7 @@ import getMintMulticallCalls from "./getMintMulticallCalls"
 import getZoraMintVideoCall from "./getZoraMintVideoCall"
 import getAllSoundCalls from "./sound/getAllSoundCalls"
 import getZoraMintCollageCall from "./getZoraMintCollageCall"
+import getZoraMintBookletCall from "./getZoraMintBookletCall"
 
 const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const zoraPrice = BigNumber.from(ZORA_PRICE)
@@ -32,13 +33,18 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
   const cosignMintCall = getCosignMintCall(tba)
   const zoraMintVideoCall = getZoraMintVideoCall(tba)
   const zoraMintCollageCall = getZoraMintCollageCall(tba)
+  const zoraMintBookletCall = getZoraMintBookletCall(tba)
+
   const cosignMintValue = BigNumber.from(CATALOG_PRICE)
   const zoraMintVideoValue = BigNumber.from(zoraMintVideoCall.value)
   const zoraMintCollageValue = BigNumber.from(zoraMintCollageCall.value)
+  const zoraMintBookletValue = BigNumber.from(zoraMintBookletCall.value)
+
   const totalPrice = zoraPrice
     .add(cosignMintValue)
     .add(zoraMintVideoValue)
     .add(zoraMintCollageValue)
+    .add(zoraMintBookletValue)
     .add(soundMintCallValue)
   const hexValue = totalPrice.toHexString()
   const calls = [
@@ -47,6 +53,7 @@ const getPreparedMulticalls = async (signingAddress: `0x${string}`) => {
     ...soundCalls,
     cosignMintCall,
     zoraMintCollageCall,
+    zoraMintBookletCall,
     zoraMintVideoCall,
   ]
   const response = { hexValue, calls }
