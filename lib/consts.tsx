@@ -69,8 +69,12 @@ export const DROP_ADDRESS = IS_TESTNET
   : "0x16F1FC98282AFDA367999012027b5A3fA656a713" // base mainnet
 
 export const COLLAGE_ADDRESS = IS_TESTNET
-  ? "0x17e30261c920943ad556e26b48accbfdcaddf62c"
-  : "0xb32f9313f856c8f48f37e4ed665230e5b022233e"
+  ? "0x17e30261c920943ad556e26b48accbfdcaddf62c" // base sepolia
+  : "0xb32f9313f856c8f48f37e4ed665230e5b022233e" // base mainnet
+
+export const BOOKLET_ADDRESS = IS_TESTNET
+  ? "0x1aafbd075da22858cd9e2c2b1192fe5b2a06ae17" // base sepolia
+  : "0xb32f9313f856c8f48f37e4ed665230e5b022233e" // base mainnet
 export const ZORA_VIDEO = IS_TESTNET
   ? "0x78aeF8d0bdbA272F34d86bF6B8ba96aa54584932" // base sepolia testnet
   : "0x5ed5214bad1ed909a13cbc8fd5539e2e09c21b48" // base mainnet
