@@ -26,7 +26,6 @@ const useTBAPurchase = () => {
       setLoading(true)
       const prepared = await getPreparedMulticalls(connectedWallet as Address)
       const { hexValue, calls } = prepared as any
-      alert(hexValue)
 
       if (isLoggedByEmail) {
         const response = await sendTxByPrivy(
