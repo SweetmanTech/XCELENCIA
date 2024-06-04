@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import multicallAbi from "@/lib/abi/multicall3.json"
 import { CHAIN_ID, MULTICALL3_ADDRESS } from "@/lib/consts"
 import handleTxError from "@/lib/handleTxError"
@@ -20,8 +20,8 @@ const useTBAPurchase = () => {
 
   const purchase = async () => {
     try {
-      if (!connectedWallet) return false
       if (!(await prepare())) return false
+      if (!connectedWallet) return false
 
       setLoading(true)
       const prepared = await getPreparedMulticalls(connectedWallet as Address)
