@@ -1,7 +1,9 @@
+import useConnectedWallet from "@/hooks/useConnectedWallet"
 import { usePrivy } from "@privy-io/react-auth"
 
 const SignButton = ({ className = "" }) => {
   const { authenticated, logout, login, ready } = usePrivy()
+  const { connectedWallet } = useConnectedWallet()
 
   const handleClick = () => {
     if (authenticated) {
@@ -20,7 +22,7 @@ const SignButton = ({ className = "" }) => {
       text-uppercase
       px-[20px] py-[10px] ${className}`}
     >
-      {ready && !authenticated ? "Sign In" : "Sign Out"}
+      {ready && !connectedWallet ? "Sign In" : "Sign Out"}
     </button>
   )
 }
