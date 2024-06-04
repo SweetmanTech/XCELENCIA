@@ -3,11 +3,12 @@ import { CHAIN_ID } from "@/lib/consts"
 import useConnectedWallet from "./useConnectedWallet"
 
 const usePreparePrivyWallet = () => {
-  const { ready, login } = usePrivy()
+  const { ready, login, authenticated, logout } = usePrivy()
   const { wallet, connectedWallet } = useConnectedWallet()
 
   const prepare = async () => {
     if (ready && !connectedWallet) {
+      if (authenticated) await logout()
       login()
       return false
     }
