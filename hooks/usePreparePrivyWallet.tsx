@@ -7,7 +7,7 @@ const usePreparePrivyWallet = () => {
   const { wallet } = useConnectedWallet()
 
   const prepare = async () => {
-    if (!user && ready && !authenticated) {
+    if ((!user && ready && !authenticated) || !wallet) {
       login()
       return false
     }
