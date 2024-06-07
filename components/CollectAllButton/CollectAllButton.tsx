@@ -2,17 +2,14 @@ import useEthPrice from "@/hooks/useEthPrice"
 import useTBAPurchase from "@/hooks/useTBAPurchase"
 import getUsdConversion from "@/lib/getUsdConversion"
 import { useCollectionProvider } from "@/providers/CollectionProvider"
-import { utils } from "ethers"
 import { useRouter } from "next/router"
 
 const CollectAllButton = ({ className = "" }) => {
   const { ethPrice } = useEthPrice()
-  const { purchase, loading, preparedMulticalls } = useTBAPurchase()
+  const { purchase, loading } = useTBAPurchase()
   const { checkCollected } = useCollectionProvider()
   const { push } = useRouter()
-  const ethAmount = Number(
-    utils.formatEther(preparedMulticalls?.hexValue || "0").toString(),
-  ).toFixed(5)
+  const ethAmount = "0.01425"
 
   const handleClick = async () => {
     const response = await purchase()
@@ -32,11 +29,9 @@ const CollectAllButton = ({ className = "" }) => {
       >
         {loading ? `Collecting...` : "Collect Album"}
       </button>
-      {preparedMulticalls && (
-        <div className="text-white">
-          {ethAmount} ETH (${getUsdConversion(parseFloat(ethAmount), ethPrice)})
-        </div>
-      )}
+      <div className="text-white">
+        {ethAmount} ETH (${getUsdConversion(parseFloat(ethAmount), ethPrice)})
+      </div>
     </>
   )
 }

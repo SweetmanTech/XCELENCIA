@@ -8,7 +8,7 @@ import useConnectedWallet from "./useConnectedWallet"
 import usePrivySendTransaction from "./usePrivySendTransaction"
 import useWalletTransaction from "./useWalletTransaction"
 import usePreparePrivyWallet from "./usePreparePrivyWallet"
-import { Address, zeroAddress } from "viem"
+import { Address } from "viem"
 
 const useTBAPurchase = () => {
   const { connectedWallet } = useConnectedWallet()
@@ -17,16 +17,6 @@ const useTBAPurchase = () => {
   const [loading, setLoading] = useState(false)
   const { isLoggedByEmail } = useUserProvider()
   const { prepare } = usePreparePrivyWallet()
-  const [preparedMulticalls, setPreparedMulticalls] = useState(null)
-
-  useEffect(() => {
-    const init = async () => {
-      const prepared = await getPreparedMulticalls((connectedWallet as Address) || zeroAddress)
-      setPreparedMulticalls(prepared)
-    }
-
-    init()
-  }, [connectedWallet])
 
   const purchase = async () => {
     try {
@@ -69,7 +59,7 @@ const useTBAPurchase = () => {
     }
   }
 
-  return { purchase, loading, preparedMulticalls }
+  return { purchase, loading }
 }
 
 export default useTBAPurchase
