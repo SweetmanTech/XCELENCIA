@@ -1,5 +1,4 @@
 import Content from "@/components/Layout/Content"
-import CollectButtons from "./CollectButtons"
 import DetailSection from "./DetailSection/DetailSection"
 import AlbumImage from "./AlbumImage"
 
@@ -11,7 +10,6 @@ const LiveHome = () => (
         items-center justify-center gap-[20px]"
       >
         <AlbumImage />
-        <CollectButtons />
         <DetailSection />
       </div>
     </div>
