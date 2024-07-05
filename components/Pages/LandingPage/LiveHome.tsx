@@ -10,6 +10,7 @@ const LiveHome = () => (
         items-center justify-center gap-[20px]"
       >
         <AlbumImage />
+        <p className="text-white">Mint Closed</p>
         <DetailSection />
       </div>
     </div>
